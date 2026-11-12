@@ -14,7 +14,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="robots" content="noindex,nofollow">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Source+Serif+4:opsz,wght@8..60,400&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap">
 <link rel="stylesheet" href="portada.css">
 <link rel="stylesheet" href="creativos1.css">
 <link rel="stylesheet" href="creativos2.css">
@@ -22,7 +22,7 @@
 :root {
   --color-fg: #1b1f24; --color-fg-muted: #5f6670; --color-bg: #f2f4f7; --color-panel: #ffffff; --color-border-line: #e2e6ec;
   --color-ok: #1f9d55; --color-warn: #c98a00; --color-bad: #d64545;
-  --font-anthropic-sans: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif; --font-anthropic-serif: "Source Serif 4", Georgia, serif;
+  --font-anthropic-sans: "Montserrat", system-ui, -apple-system, "Segoe UI", sans-serif; --font-anthropic-serif: "Montserrat", system-ui, -apple-system, "Segoe UI", sans-serif;
   --cds-font-size-caption: 12px; --cds-font-size-body: 14px; --cds-font-size-heading: 16px; --cds-font-size-title: 30px; --cds-font-weight-medium: 600;
   --cds-gap-xs: 4px; --cds-gap-sm: 8px; --cds-gap-md: 14px; --cds-gap-lg: 22px; --cds-gap-xl: 32px;
   --cds-pad-xs: 4px; --cds-pad-sm: 8px; --cds-pad-md: 14px; --cds-pad-lg: 18px; --cds-pad-xl: 28px; --cds-radius: 10px;
@@ -45,13 +45,14 @@ html, body { margin: 0; background: var(--color-bg); color: var(--color-fg); fon
 .lit-footer { margin-top: 24px; font-size: 12px; color: var(--color-fg-muted); text-align: center; }
 </style>
 <style>
-.lit { --lit-blue: #2f6fdb; --lit-green: #1f9d6b; --lit-amber: #d99a00; --lit-orange: #ee6a2c; --lit-purple: #7356d1; --lit-fb: #1877f2; --lit-ig: #d62976; --lit-wa: #1fae55; --lit-th: #8a8f98;
+.lit { --font-anthropic-sans: "Montserrat", system-ui, -apple-system, "Segoe UI", sans-serif; --font-anthropic-serif: "Montserrat", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --lit-blue: #2f6fdb; --lit-green: #1f9d6b; --lit-amber: #d99a00; --lit-orange: #ee6a2c; --lit-purple: #7356d1; --lit-fb: #1877f2; --lit-ig: #d62976; --lit-wa: #1fae55; --lit-th: #8a8f98;
   display: flex; flex-direction: column; gap: var(--cds-gap-lg); font-family: var(--font-anthropic-sans); color: var(--color-fg); }
 .lit-cover { position: relative; width: 100%; aspect-ratio: 3320 / 1263; max-width: 100%; background-color: #1d56b0; background-size: cover; background-position: center; border-radius: var(--cds-radius); overflow: hidden; }
 .lit-cover-logo { position: absolute; top: 4%; right: 2.2%; width: clamp(84px, 15%, 200px); aspect-ratio: 2017 / 477; background-size: contain; background-repeat: no-repeat; background-position: center; filter: drop-shadow(0 1px 3px rgba(0, 0, 0, .45)); }
 .lit-head { display: flex; flex-direction: column; gap: var(--cds-gap-xs); }
 .lit-eyebrow { font-size: var(--cds-font-size-caption); text-transform: uppercase; letter-spacing: .08em; color: var(--color-fg-muted); font-weight: var(--cds-font-weight-medium); }
-.lit-title { font-family: var(--font-anthropic-serif); font-weight: 400; font-size: var(--cds-font-size-title); margin: 0; text-wrap: balance; }
+.lit-title { font-family: var(--font-anthropic-serif); font-weight: 700; font-size: var(--cds-font-size-title); margin: 0; text-wrap: balance; }
 .lit-take { margin: 0; max-width: 72ch; line-height: 1.5; }
 .lit-take b, .lit-list b { font-weight: var(--cds-font-weight-medium); font-variant-numeric: tabular-nums; }
 .lit-kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 165px), 1fr)); gap: var(--cds-gap-sm); }
@@ -60,7 +61,7 @@ html, body { margin: 0; background: var(--color-bg); color: var(--color-fg); fon
 .lit-kpi-ico { width: 30px; height: 30px; border-radius: 50%; display: grid; place-items: center; background: color-mix(in srgb, var(--c) 16%, transparent); color: var(--c); flex: none; }
 .lit-kpi-ico svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 .lit-kpi-label { font-size: var(--cds-font-size-caption); text-transform: uppercase; letter-spacing: .06em; color: var(--color-fg-muted); font-weight: var(--cds-font-weight-medium); }
-.lit-kpi-value { font-family: var(--font-anthropic-serif); font-weight: 400; font-size: 1.75rem; line-height: 1.15; font-variant-numeric: tabular-nums; }
+.lit-kpi-value { font-family: var(--font-anthropic-serif); font-weight: 600; font-size: 1.75rem; line-height: 1.15; font-variant-numeric: tabular-nums; }
 .lit-kpi-sub { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); font-variant-numeric: tabular-nums; }
 .lit-c-blue { --c: var(--lit-blue); } .lit-c-green { --c: var(--lit-green); } .lit-c-amber { --c: var(--lit-amber); } .lit-c-orange { --c: var(--lit-orange); } .lit-c-purple { --c: var(--lit-purple); } .lit-c-ig { --c: var(--lit-ig); }
 .lit-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: var(--cds-gap-md); align-items: start; }
