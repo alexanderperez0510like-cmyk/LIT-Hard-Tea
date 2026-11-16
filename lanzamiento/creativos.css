@@ -1,0 +1,14 @@
+.lz-thumb[data-c="BOOST_MP_9NOV"]{background-image:url("img/fr/BOOST_MP_9NOV.jpg");}
+.lz-thumb[data-c="BOOST_MP_10NOV"]{background-image:url("img/fr/BOOST_MP_10NOV.jpg");}
+.lz-thumb[data-c="BOOST_MP_11NOV"]{background-image:url("img/fr/BOOST_MP_11NOV.jpg");}
+.lz-thumb[data-c] .lz-thumb-ph{display:none;}
+.lz-ytthumb[data-v="iW4HUcuY28k"]{background-image:url("img/yt/iW4HUcuY28k.jpg");}
+.lz-ytthumb[data-v="qPOhpaKNSIs"]{background-image:url("img/yt/qPOhpaKNSIs.jpg");}
+.lz-ytthumb[data-v="9XVc6UhjeIw"]{background-image:url("img/yt/9XVc6UhjeIw.jpg");}
+.lz-cover.lit-cover{background-image:url("img/banner_lanz_2x_fill.jpg");aspect-ratio:1337/215;background-color:#0e5fc4;}
+.lz-cover .lit-cover-logo{top:9%;width:clamp(70px,13%,180px);}
+.lz-chorro{display:none;}
+.lz-hero::before{background-image:none;}
+.lz-car-1{background-image:url("img/car_pov.jpg");}
+.lz-car-2{background-image:url("img/car_bien.jpg");}
+.lz-lata{background-image:url("img/lata_sola.jpg");}
