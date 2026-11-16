@@ -33,7 +33,7 @@
   }
 }
 html, body { margin: 0; background: var(--color-bg); color: var(--color-fg); font-family: var(--font-anthropic-sans); font-size: var(--cds-font-size-body); }
-#dash-root { max-width: 1240px; margin: 0 auto; padding: 48px max(16px, env(safe-area-inset-right, 0px)) 40px max(16px, env(safe-area-inset-left, 0px)); }
+#dash-root { max-width: 1480px; margin: 0 auto; padding: 48px max(16px, env(safe-area-inset-right, 0px)) 40px max(16px, env(safe-area-inset-left, 0px)); }
 .dash-skeleton { color: transparent !important; background: var(--color-border-line); border-radius: 4px; }
 .lit-footer { margin-top: 24px; font-size: 12px; color: var(--color-fg-muted); text-align: center; }
 </style></head><body><script src="d3.min.js"></script><script>
@@ -103,6 +103,7 @@ html, body { margin: 0; background: var(--color-bg); color: var(--color-fg); fon
 .lz-chart svg { display: block; overflow: visible; }
 .lz-chart text { font-size: 11px; fill: var(--cds-text-secondary); font-family: var(--font-anthropic-sans); }
 .lz-chart .v { fill: var(--color-fg); font-variant-numeric: tabular-nums; font-weight: 600; }
+.lz-chart .lz-halo { paint-order: stroke; stroke: color-mix(in srgb, var(--color-panel) 88%, #2a7de1); stroke-width: 4px; stroke-linejoin: round; }
 .lz-chart .big { fill: var(--color-fg); font-weight: 700; }
 .lz-tip { position: absolute; pointer-events: none; background: var(--cds-surface-popover); border: 1px solid var(--cds-border); box-shadow: var(--cds-shadow-popover); border-radius: var(--cds-radius); padding: 8px 10px; font-size: var(--cds-font-size-caption); line-height: 1.5; white-space: nowrap; font-variant-numeric: tabular-nums; z-index: 3; }
 .lz-tip strong { font-weight: 700; }
@@ -120,6 +121,12 @@ html, body { margin: 0; background: var(--color-bg); color: var(--color-fg); fon
 .chip-ok { --c: var(--color-ok); } .chip-run { --c: var(--lz-amber); } .chip-bad { --c: var(--color-bad); }
 .lz-donut-wrap { display: grid; grid-template-columns: minmax(120px, 170px) 1fr; gap: var(--cds-gap-md); align-items: center; }
 @container (max-width: 380px) { .lz-donut-wrap { grid-template-columns: 1fr; } }
+.lz-fill:has(> .lz-donut-wrap) { container-type: inline-size; }
+@container (max-width: 420px) { .lz-donut-wrap { grid-template-columns: minmax(140px, 180px); justify-content: center; } .lz-donut-wrap > :last-child { justify-self: center; } }
+.lz .lz-sel, .lz .lz-sel option { font-family: "Montserrat", system-ui, -apple-system, "Segoe UI", sans-serif !important; }
+.lz .lz-sel { -webkit-appearance: none; appearance: none; font-size: 14px; font-weight: 600; color: var(--color-fg); line-height: 1.2; padding: 8px 36px 8px 12px; border: 1px solid color-mix(in srgb, var(--color-border-line) 55%, #2a7de1); border-radius: 8px; cursor: pointer;
+  background: var(--color-panel) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5l5 5 5-5' fill='none' stroke='%232a6fdb' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat right 12px center / 12px 8px; }
+.lz .lz-sel:focus-visible { outline: 2px solid #2a7de1; outline-offset: 1px; }
 .lz-dl { display: flex; flex-direction: column; gap: 8px; font-size: var(--cds-font-size-caption); font-variant-numeric: tabular-nums; min-width: 0; }
 .lz-dl-row { display: grid; grid-template-columns: auto 1fr auto; gap: 8px; align-items: baseline; }
 .lz-dl-row b { font-weight: 700; }
@@ -924,7 +931,7 @@ dash.draw('chart-diario', (el) => {
   const W = Math.max(el.clientWidth || 600, 280), H = 280, m = { t: 22, r: 44, b: 26, l: 46 };
   const x = d3.scaleBand().domain(rows.map((r) => r.fecha)).range([m.l, W - m.r]).padding(agrupado ? 0.22 : 0.35);
   const top = agrupado ? d3.max(rows, (r) => d3.max(keys, (k) => r[col(k)] || 0)) : d3.max(rows, (r) => r.total);
-  const y = d3.scaleLinear().domain([0, (top || 1) * 1.15]).nice(4).range([H - m.b, m.t]);
+  const y = d3.scaleLinear().domain([0, (top || 1) * 1.22]).nice(4).range([H - m.b, m.t]);
   const y2 = d3.scaleLinear().domain([0, d3.max(rows, (r) => r.inversion) * 1.15]).nice(4).range([H - m.b, m.t]);
   const nombre = { impresiones: 'Impresiones', inversion: 'Inversión', alcance: 'Alcance del día', interacciones: 'Interacciones' }[met];
   const svg = d3.select(el).append('svg').attr('width', '100%').attr('viewBox', `0 0 ${W} ${H}`).attr('role', 'img').attr('aria-label', nombre + ' por día y canal, con la inversión diaria');
@@ -943,12 +950,14 @@ dash.draw('chart-diario', (el) => {
       .selectAll('rect').data((s) => s.map((p) => Object.assign(p, { key: s.key }))).join('rect')
       .attr('x', (p) => x(p.data.fecha)).attr('width', x.bandwidth()).attr('y', (p) => y(p[1])).attr('height', (p) => Math.max(0, y(p[0]) - y(p[1])))
       .style('stroke', 'var(--color-panel)').style('stroke-width', 1);
-    svg.append('g').selectAll('text').data(rows).join('text').attr('class', 'v').attr('x', (r) => x(r.fecha) + x.bandwidth() / 2).attr('y', (r) => y(r.total) - 6).attr('text-anchor', 'middle').text((r) => vf(r.total));
+    const ly = (r) => { const a = y(r.total) - 7, d = y2(r.inversion); return Math.abs(a - d) < 16 ? Math.min(a, d - 12) : a; };
+    svg.append('g').attr('class', 'lz-lbls').selectAll('text').data(rows).join('text').attr('class', 'v lz-halo').attr('x', (r) => x(r.fecha) + x.bandwidth() / 2).attr('y', ly).attr('text-anchor', 'middle').text((r) => vf(r.total));
   }
   const cx = (r) => x(r.fecha) + x.bandwidth() / 2;
   svg.append('path').datum(rows).attr('d', d3.line().x(cx).y((r) => y2(r.inversion))).style('fill', 'none').style('stroke', 'var(--lz-amber)').style('stroke-width', 2.5).style('stroke-dasharray', '6 4');
   svg.append('g').selectAll('circle').data(rows).join('circle').attr('cx', cx).attr('cy', (r) => y2(r.inversion)).attr('r', 4.5).style('fill', 'var(--lz-amber)').style('stroke', 'var(--color-panel)').style('stroke-width', 1.5);
   svg.append('g').selectAll('text').data(rows).join('text').attr('x', cx).attr('y', H - 6).attr('text-anchor', 'middle').text((r) => lz.fecha(r.fecha));
+  svg.select('.lz-lbls').raise();
   const t = lz.tip(el);
   const lineas = (r) => [lz.fecha(r.fecha), ...keys.filter((k) => r[col(k)]).map((k) => k + ': ' + vi(r[col(k)])), ...(agrupado ? [] : ['Total: ' + vi(r.total)]), 'Inversión: ' + lz.fmt.usd2(r.inversion)];
   svg.append('g').selectAll('rect').data(rows).join('rect').attr('x', (r) => x(r.fecha) - x.step() * x.paddingInner() / 2).attr('width', x.step()).attr('y', m.t).attr('height', H - m.t - m.b).style('fill', 'transparent').style('cursor', 'pointer')
