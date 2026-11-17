@@ -216,6 +216,10 @@ html, body { margin: 0; background: var(--color-bg); color: var(--color-fg); fon
 .dg-stat { background: var(--dg-track); border-radius: 12px; padding: 10px 12px; display: flex; flex-direction: column; gap: 2px; }
 .dg-stat small { font-size: 11px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; color: var(--color-fg-muted); }
 .dg-stat b { font-size: 18px; font-weight: 800; font-variant-numeric: tabular-nums; }
+.dg-stats-6 { flex: 1; grid-auto-rows: 1fr; }
+.dg-stats-6 .dg-stat { justify-content: center; padding: 14px 16px; }
+.dg-stats-6 .dg-stat b { font-size: 26px; }
+@container (max-width: 560px) { .dg-stats-6 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 .dg-table-wrap { overflow-x: auto; }
 .dg-table { width: 100%; border-collapse: collapse; font-size: 13px; font-variant-numeric: tabular-nums; }
 .dg-table th { text-align: right; font-size: 11px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; color: var(--color-fg-muted); padding: 8px 10px; border-bottom: 2px solid var(--dg-track); white-space: nowrap; }
@@ -351,12 +355,15 @@ html, body { margin: 0; background: var(--color-bg); color: var(--color-fg); fon
     </section>
     <section class="dg-card g7" id="card-cre-num">
       <h3>Resultados del anuncio</h3>
-      <div class="dg-stats">
-        <div class="dg-stat"><small>Impresiones</small><b data-draw="num" data-source="anuncios" data-field="impresiones" data-row="0" data-fmt="int">—</b></div>
-        <div class="dg-stat"><small>Interacciones</small><b data-draw="num" data-source="anuncios" data-field="interacciones" data-row="0" data-fmt="int">—</b></div>
-        <div class="dg-stat"><small>Tasa de interacción</small><b data-draw="num" data-source="anuncios" data-field="tasa" data-row="0" data-fmt="pct2">—</b></div>
+      <p class="dg-sub">MP_DEGUSTACIÓN es el único anuncio de la campaña, así que sus resultados son los de toda la campaña.</p>
+      <div class="dg-stats dg-stats-6">
+        <div class="dg-stat"><small>Impresiones</small><b data-draw="num" data-source="totales" data-field="impresiones" data-row="0" data-fmt="int">—</b></div>
+        <div class="dg-stat"><small>Interacciones</small><b data-draw="num" data-source="totales" data-field="interacciones" data-row="0" data-fmt="int">—</b></div>
+        <div class="dg-stat"><small>Tasa de interacción</small><b data-draw="num" data-source="totales" data-field="tasa_int" data-row="0" data-fmt="pct2">—</b></div>
+        <div class="dg-stat"><small>Clics en el enlace</small><b data-draw="num" data-source="totales" data-field="clics" data-row="0" data-fmt="int">—</b></div>
+        <div class="dg-stat"><small>Visitas a la página</small><b data-draw="num" data-source="totales" data-field="visitas" data-row="0" data-fmt="int">—</b></div>
+        <div class="dg-stat"><small>CTR</small><b data-draw="num" data-source="totales" data-field="ctr" data-row="0" data-fmt="pct2">—</b></div>
       </div>
-      <div class="dg-chart" style="min-height: 150px" data-draw="filas-anuncio" data-source="creativos"></div>
     </section>
   </div>
 
@@ -489,7 +496,7 @@ dash.calc('totales', {
       alcance: Math.max(Number(String(a.alcance_unico || 0).replace(/,/g, '')), d3.max(diario, (r) => Number(r.alcance)) || 0), frecuencia: Number(a.frecuencia), cpm: Number(a.cpm),
       impresiones: imp, clics, visitas, interacciones: s('interacciones'), inversion,
       ctr: imp ? clics / imp : 0, tasa_llegada: clics ? visitas / clics : 0, cpc: clics ? inversion / clics : null, cpv: visitas ? inversion / visitas : null,
-      visitas_100: clics ? visitas / clics * 100 : 0, clics_1000: imp ? clics / imp * 1000 : 0
+      tasa_int: imp ? s('interacciones') / imp : 0, visitas_100: clics ? visitas / clics * 100 : 0, clics_1000: imp ? clics / imp * 1000 : 0
     }];
   }
 });
