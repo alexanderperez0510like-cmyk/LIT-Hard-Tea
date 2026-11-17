@@ -67,7 +67,7 @@ html, body { margin: 0; background: var(--color-bg); color: var(--color-fg); fon
   });
 })();
 </script><div id="dash-root"><link rel="stylesheet" href="portada.css">
-<link rel="stylesheet" href="creativos.css?v=1117">
+<link rel="stylesheet" href="creativos.css?v=1117b">
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
 .lz { --font-anthropic-sans: "Montserrat", system-ui, -apple-system, "Segoe UI", sans-serif; --font-anthropic-serif: "Montserrat", system-ui, -apple-system, "Segoe UI", sans-serif;
@@ -138,7 +138,7 @@ html, body { margin: 0; background: var(--color-bg); color: var(--color-fg); fon
 .lz-hbar span:last-child { text-align: right; font-weight: 600; }
 .lz-minis { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
 .lz-mini { display: flex; flex-direction: column; align-items: center; gap: 4px; text-align: center; font-size: var(--cds-font-size-caption); min-width: 0; }
-.lz-mini svg { width: 100%; max-width: 120px; height: auto; display: block; }
+.lz-mini svg { width: 100%; max-width: 150px; height: auto; display: block; }
 .lz-mini-n { font-weight: 700; }
 .lz-scroll { overflow-x: auto; }
 .lz-table { width: 100%; border-collapse: collapse; font-size: var(--cds-font-size-caption); font-variant-numeric: tabular-nums; }
@@ -172,6 +172,9 @@ html, body { margin: 0; background: var(--color-bg); color: var(--color-fg); fon
 .lz-play::before { content: ""; border-style: solid; border-width: 6px 0 6px 10px; border-color: transparent transparent transparent #fff; margin-left: 3px; }
 .lz-cre-body { padding: var(--cds-pad-sm) var(--cds-pad-md) var(--cds-pad-md); display: flex; flex-direction: column; gap: 6px; font-size: var(--cds-font-size-caption); font-variant-numeric: tabular-nums; }
 .lz-cre-name { font-weight: 700; }
+.lz-fmt { align-self: flex-start; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; padding: 2px 8px; border-radius: 999px; color: #fff; background: var(--c, var(--lz-blue)); }
+.lz-fmts { display: flex; flex-wrap: wrap; gap: 6px 12px; font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
+.lz-fmts span { display: inline-flex; align-items: center; gap: 6px; }
 .lz-cre-split { display: flex; height: 8px; border-radius: 3px; overflow: hidden; background: var(--lz-track); }
 .lz-cre-split-l { display: flex; justify-content: space-between; color: var(--color-fg-muted); font-size: 11px; }
 .lz { --lz-panel: color-mix(in srgb, var(--color-panel) 94%, #2a7de1); --lz-track: color-mix(in srgb, var(--color-panel) 74%, #2a7de1); --lz-r: 14px;
@@ -268,6 +271,19 @@ html, body { margin: 0; background: var(--color-bg); color: var(--color-fg); fon
 .lz-cover-txt { position: absolute; left: 2.4%; top: 0; bottom: 0; width: 25%; z-index: 1; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; }
 .lz-cover-t { color: #fff; font-size: clamp(6px, 2.5cqi, 30px); font-weight: 800; line-height: 1.05; letter-spacing: -.01em; text-shadow: 0 2px 10px rgba(0, 20, 70, .45); white-space: nowrap; }
 .lz-conf-badge { display: inline-block; padding: .5em 1.1em; border-radius: 999px; background: linear-gradient(180deg, #ee3a3a, #c8161d); color: #fff; font-size: clamp(3px, .68cqi, 10px); line-height: 1; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; white-space: nowrap; box-shadow: 0 4px 12px rgba(120, 0, 0, .35); position: absolute; left: 0; bottom: .82cqi; transform: translateY(50%); }
+#hallazgos-clave .lz-list { display: block; column-count: 2; column-gap: 40px; }
+#hallazgos-clave .lz-list li { break-inside: avoid; margin-bottom: 10px; }
+@container (max-width: 760px) { #hallazgos-clave .lz-list { column-count: 1; } }
+#creativos-meta .lz-cres { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+@container (max-width: 1000px) { #creativos-meta .lz-cres { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@container (max-width: 560px) { #creativos-meta .lz-cres { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.lz-cre .lz-vid-stats { grid-template-columns: 1fr; gap: 2px; }
+.lz-cre .lz-vid-stats span { flex-direction: row; justify-content: space-between; align-items: baseline; gap: 6px; font-weight: 600; }
+#eficiencia .lz-hbars { flex: 1 1 auto; justify-content: space-evenly; }
+#region .lz-scroll { flex: 1 1 auto; }
+#region .lz-table { height: 100%; }
+.lz-mini-p { display: flex; flex-direction: column; gap: 2px; font-size: 11px; color: var(--color-fg-muted); font-variant-numeric: tabular-nums; }
+.lz-mini-p b { color: var(--color-fg); font-weight: 700; }
 [data-dash-source-state=refreshing] { opacity: .5; }
 </style>
 
@@ -376,18 +392,19 @@ html, body { margin: 0; background: var(--color-bg); color: var(--color-fg); fon
 
   <div class="lz-sec" id="sec-entrega"><span class="lz-sec-ico" style="--c: var(--lz-green)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 20V11M11 20V5M17 20v-7M3 20h18"></path></svg></span><h2 class="lz-sec-t">Entrega diaria</h2><span class="lz-sec-line" style="--c: var(--lz-green)"></span></div>
   <div class="lz-grid">
-    <section class="lz-card s8" id="entrega-diaria">
+    <section class="lz-card s12" id="entrega-diaria">
       <h2>Entrega diaria por canal</h2>
       <div class="lz-filtro"><label for="sel-diario">Ver</label><select class="dash-select lz-sel" id="sel-diario" data-sel="diario" data-redraw="chart-diario"><option value="impresiones">Impresiones</option><option value="inversion">Inversión</option><option value="alcance">Alcance del día</option><option value="interacciones">Interacciones</option></select></div>
       <div class="lz-legend"><span><span class="lz-sw" data-draw="sw" data-c="--c-fb"></span>Facebook</span><span><span class="lz-sw" data-draw="sw" data-c="--c-ig"></span>Instagram</span><span><span class="lz-sw" data-draw="sw" data-c="--c-yt"></span>YouTube</span><span><span class="lz-sw lz-sw-line" data-draw="sw" data-c="--lz-amber"></span>Inversión del día (eje derecho)</span></div>
       <div class="lz-chart" data-draw="chart-diario" data-source="por_dia" style="min-height: 280px"></div>
     </section>
-    <section class="lz-card s4" id="hallazgos-clave">
+    <section class="lz-card s12" id="hallazgos-clave">
       <h2>Hallazgos clave</h2>
       <ul class="lz-list" data-read lang="es">
         <li><span class="lz-tag" style="--c: var(--lz-green)">Avance</span><b data-draw="num" data-source="hallazgos" data-field="canal_mas" data-row="0" data-fmt="text">—</b> es el canal más avanzado: lleva el <b data-draw="num" data-source="hallazgos" data-field="canal_mas_avance" data-row="0" data-fmt="pct0">—</b> de sus impresiones planificadas; <b data-draw="num" data-source="hallazgos" data-field="canal_menos" data-row="0" data-fmt="text">—</b> va en <b data-draw="num" data-source="hallazgos" data-field="canal_menos_avance" data-row="0" data-fmt="pct0">—</b>.</li>
         <li><span class="lz-tag" style="--c: var(--lz-amber)">Costos</span><b data-draw="num" data-source="hallazgos" data-field="cpm_min_canal" data-row="0" data-fmt="text">—</b> tiene el CPM más bajo (<b data-draw="num" data-source="hallazgos" data-field="cpm_min" data-row="0" data-fmt="usd2">—</b>) y <b data-draw="num" data-source="hallazgos" data-field="cpm_max_canal" data-row="0" data-fmt="text">—</b> el más alto (<b data-draw="num" data-source="hallazgos" data-field="cpm_max" data-row="0" data-fmt="usd2">—</b>).</li>
         <li><span class="lz-tag" style="--c: var(--c-ig)">Interacción</span><b data-draw="num" data-source="hallazgos" data-field="tasa_mejor_canal" data-row="0" data-fmt="text">—</b> interactúa al <b data-draw="num" data-source="hallazgos" data-field="tasa_mejor" data-row="0" data-fmt="pct2">—</b> de sus impresiones, contra <b data-draw="num" data-source="hallazgos" data-field="tasa_otro" data-row="0" data-fmt="pct2">—</b> de <b data-draw="num" data-source="hallazgos" data-field="tasa_otro_canal" data-row="0" data-fmt="text">—</b>.</li>
+        <li><span class="lz-tag" style="--c: var(--lz-orange)">Formato</span>El <b data-draw="num" data-source="formatos" data-field="nombre" data-row="0" data-fmt="text">—</b> logra <b data-draw="num" data-source="formatos" data-field="tasa" data-row="0" data-fmt="pct2">—</b> de interacción, el <b data-draw="num" data-source="formatos" data-field="nombre" data-row="1" data-fmt="text">—</b> <b data-draw="num" data-source="formatos" data-field="tasa" data-row="1" data-fmt="pct2">—</b> y el <b data-draw="num" data-source="formatos" data-field="nombre" data-row="2" data-fmt="text">—</b> <b data-draw="num" data-source="formatos" data-field="tasa" data-row="2" data-fmt="pct2">—</b>. El estático concentra el <b data-draw="num" data-source="formatos" data-field="peso" data-where="tipo=PPL" data-fmt="pct0">—</b> de las impresiones de Meta: alcanza mucho, pero genera poca interacción.</li>
         <li><span class="lz-tag" style="--c: var(--c-yt)">YouTube</span>El video de lanzamiento, <b data-draw="num" data-source="hallazgos" data-field="video_lanz" data-row="0" data-fmt="text">—</b>, suma <b data-draw="num" data-source="hallazgos" data-field="video_lanz_views" data-row="0" data-fmt="int">—</b> views (<b data-draw="num" data-source="hallazgos" data-field="video_lanz_share" data-row="0" data-fmt="pct0">—</b> del total) con una tasa de view de <b data-draw="num" data-source="hallazgos" data-field="video_lanz_vtr" data-row="0" data-fmt="pct1">—</b>; los dos videos de expectativa aportaron <b data-draw="num" data-source="hallazgos" data-field="exp_views" data-row="0" data-fmt="int">—</b> views al inicio de la fase.</li>
         <li><span class="lz-tag" style="--c: var(--lz-purple)">Audiencia</span>Edad principal: Facebook <b data-draw="num" data-source="hallazgos" data-field="edad_fb" data-row="0" data-fmt="text">—</b>, Instagram <b data-draw="num" data-source="hallazgos" data-field="edad_ig" data-row="0" data-fmt="text">—</b> y YouTube <b data-draw="num" data-source="hallazgos" data-field="edad_yt" data-row="0" data-fmt="text">—</b>. Managua pesa <b data-draw="num" data-source="hallazgos" data-field="managua_yt" data-row="0" data-fmt="pct0">—</b> en YouTube y <b data-draw="num" data-source="hallazgos" data-field="managua_fb" data-row="0" data-fmt="pct0">—</b> en Facebook.</li>
       </ul>
@@ -396,13 +413,13 @@ html, body { margin: 0; background: var(--color-bg); color: var(--color-fg); fon
 
   <div class="lz-sec" id="sec-audiencia"><span class="lz-sec-ico" style="--c: var(--lz-purple)"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3.5"></circle><path d="M2.5 20c.8-3.6 3.4-5.5 6.5-5.5s5.7 1.9 6.5 5.5"></path><path d="M16.5 4.6A3 3 0 0 1 17 10.4"></path><path d="M18 14.5c2 .6 3.2 2.4 3.5 5.5"></path></svg></span><h2 class="lz-sec-t">Audiencia</h2><span class="lz-sec-line" style="--c: var(--lz-purple)"></span></div>
   <div class="lz-grid">
-    <section class="lz-card s4" id="genero">
+    <section class="lz-card s5" id="genero">
       <h2>Género</h2>
       <div class="lz-fill"><div class="lz-minis" data-draw="minis-genero" data-source="aud_pct"></div></div>
       <div class="lz-legend"><span><span class="lz-sw" data-draw="sw" data-c="--lz-blue"></span>Hombre</span><span><span class="lz-sw" data-draw="sw" data-c="--lz-orange"></span>Mujer</span><span><span class="lz-sw" data-draw="sw" data-c="--cds-chart-muted"></span>Sin dato</span></div>
       <p class="lz-note">Meta: sobre alcance. YouTube: sobre impresiones.</p>
     </section>
-    <section class="lz-card s8" id="edad">
+    <section class="lz-card s7" id="edad">
       <h2>Edad por canal</h2>
       <div class="lz-filtro"><label for="sel-edad">Canal</label><select class="dash-select lz-sel" id="sel-edad" data-sel="edad" data-redraw="chart-edad"><option value="todos">Todos los canales</option><option value="Facebook">Facebook</option><option value="Instagram">Instagram</option><option value="YouTube">YouTube</option></select></div>
       <div class="lz-legend"><span><span class="lz-sw" data-draw="sw" data-c="--c-fb"></span>Facebook</span><span><span class="lz-sw" data-draw="sw" data-c="--c-ig"></span>Instagram</span><span><span class="lz-sw" data-draw="sw" data-c="--c-yt"></span>YouTube</span></div>
@@ -434,12 +451,13 @@ html, body { margin: 0; background: var(--color-bg); color: var(--color-fg); fon
 
   <div class="lz-sec" id="sec-creativos"><span class="lz-sec-ico" style="--c: var(--lz-orange)"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"></rect><circle cx="9" cy="10" r="2"></circle><path d="m21 16-5-5-9 9"></path></svg></span><h2 class="lz-sec-t">Creativos</h2><span class="lz-sec-line" style="--c: var(--lz-orange)"></span></div>
   <div class="lz-grid">
-    <section class="lz-card s6" id="creativos-meta">
+    <section class="lz-card s12" id="creativos-meta">
       <h2>Creativos de Meta</h2>
       <p class="lz-note">Boosts y anuncios nuevos de lanzamiento (MP_LANZ y PPL_LANZ), ordenados por impresiones, con su reparto entre Facebook e Instagram.</p>
+      <div class="lz-fmts"><span><span class="lz-fmt" style="--c: var(--lz-blue)">PPL</span>page post link (estático)</span><span><span class="lz-fmt" style="--c: var(--lz-orange)">MP</span>carrusel</span><span><span class="lz-fmt" style="--c: var(--lz-purple)">PPV</span>page post video</span></div>
       <div class="lz-fill"><div class="lz-cres" data-draw="cres-meta" data-source="creativos"></div></div>
     </section>
-    <section class="lz-card s6" id="videos-youtube">
+    <section class="lz-card s12" id="videos-youtube">
       <h2>Videos de YouTube</h2>
       <p class="lz-note">Tasa de view (views ÷ impresiones), impresiones y costo por view de cada video.</p>
       <div class="lz-fill"><div class="lz-vids" data-draw="videos" data-source="videos"></div></div>
@@ -715,6 +733,20 @@ dash.calc('creativos', {
   }
 });
 
+dash.calc('formatos', {
+  inputs: ['creativos'],
+  title: 'Resultados por formato de Meta',
+  description: 'Creativos agrupados por formato según su nombre: PPL = page post link estático, MP = carrusel, PPV = page post video. Tasa = interacciones ÷ impresiones; peso = impresiones del formato ÷ impresiones de Meta. Ordenados de mayor a menor tasa.',
+  fn: (creativos) => {
+    const NOMBRE = { PPL: 'estático (PPL)', MP: 'carrusel (MP)', PPV: 'video (PPV)' };
+    const tipo = (n) => /PPV/.test(n) ? 'PPV' : /PPL/.test(n) ? 'PPL' : 'MP';
+    const m = new Map();
+    for (const r of creativos) { const t = tipo(r.creativo), a = m.get(t) || { impresiones: 0, interacciones: 0, piezas: 0 }; a.impresiones += r.impresiones; a.interacciones += r.interacciones; a.piezas += 1; m.set(t, a); }
+    const ti = [...m.values()].reduce((s, a) => s + a.impresiones, 0);
+    return [...m].map(([t, a]) => ({ tipo: t, nombre: NOMBRE[t], ...a, tasa: a.impresiones ? a.interacciones / a.impresiones : 0, peso: ti ? a.impresiones / ti : 0 })).sort((a, b) => b.tasa - a.tasa);
+  }
+});
+
 dash.calc('videos', {
   inputs: ['videos_yt'],
   title: 'Resultados por video de YouTube',
@@ -981,7 +1013,9 @@ dash.draw('minis-genero', (el) => {
     const t = lz.tip(h);
     dn.paths.on('pointermove', (ev, a) => t.show(ev, [c + ' · ' + a.data.k, lz.fmt.pct1(a.data.v / dn.total)])).on('pointerleave', () => t.hide());
     const n = document.createElement('span'); n.className = 'lz-mini-n'; n.style.color = lz.color[c]; n.textContent = c;
-    box.append(h, n); return box;
+    const pp = document.createElement('div'); pp.className = 'lz-mini-p';
+    rows.forEach((r) => { const l = document.createElement('span'); const bb = document.createElement('b'); bb.textContent = lz.fmt.pct0(r.v / dn.total); l.append((r.k === 'Desconocido' ? 'Sin dato' : r.k) + ' ', bb); pp.append(l); });
+    box.append(h, n, pp); return box;
   }));
 });
 
@@ -1115,7 +1149,9 @@ dash.draw('cres-meta', (el) => {
     const sl = document.createElement('div'); sl.className = 'lz-cre-split-l';
     const a = document.createElement('span'); a.textContent = 'FB ' + lz.fmt.pct0(pf); const z = document.createElement('span'); z.textContent = 'IG ' + lz.fmt.pct0(1 - pf);
     sl.append(a, z);
-    b.append(n, st, sp, sl); c.append(th, b); return c;
+    const tp = /PPV/.test(r.creativo) ? ['PPV · video', 'var(--lz-purple)'] : /PPL/.test(r.creativo) ? ['PPL · estático', 'var(--lz-blue)'] : ['MP · carrusel', 'var(--lz-orange)'];
+    const fm = document.createElement('span'); fm.className = 'lz-fmt'; fm.style.setProperty('--c', tp[1]); fm.textContent = tp[0];
+    b.append(fm, n, st, sp, sl); c.append(th, b); return c;
   }));
 });
 
