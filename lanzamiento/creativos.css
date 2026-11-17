@@ -1,7 +1,7 @@
 .lz-thumb[data-c="BOOST_MP_9NOV"]{background-image:url("img/fr/BOOST_MP_9NOV.jpg");}
-.lz-thumb[data-c="BOOST_MP_10NOV"]{background-image:url("img/fr/BOOST_MP_10NOV.jpg");}
-.lz-thumb[data-c="BOOST_MP_11NOV"]{background-image:url("img/fr/BOOST_MP_11NOV.jpg");}
-.lz-thumb[data-c] .lz-thumb-ph{display:none;}
+.lz-thumb[data-c="BOOST_PPV_10NOV"]{background-image:url("img/fr/BOOST_PPV_10NOV.jpg");}
+.lz-thumb[data-c="BOOST_PPL_11NOV"]{background-image:url("img/fr/BOOST_PPL_11NOV.jpg");}
+.lz-thumb[data-c="BOOST_MP_9NOV"] .lz-thumb-ph,.lz-thumb[data-c="BOOST_PPV_10NOV"] .lz-thumb-ph,.lz-thumb[data-c="BOOST_PPL_11NOV"] .lz-thumb-ph{display:none;}
 .lz-ytthumb[data-v="iW4HUcuY28k"]{background-image:url("img/yt/iW4HUcuY28k.jpg");}
 .lz-ytthumb[data-v="qPOhpaKNSIs"]{background-image:url("img/yt/qPOhpaKNSIs.jpg");}
 .lz-ytthumb[data-v="9XVc6UhjeIw"]{background-image:url("img/yt/9XVc6UhjeIw.jpg");}
