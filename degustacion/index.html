@@ -41,7 +41,7 @@ html, body { margin: 0; background: var(--color-bg); color: var(--color-fg); fon
 .lit-footer { margin-top: 24px; font-size: 12px; color: var(--color-fg-muted); text-align: center; }
 </style></head><body><script src="d3.min.js"></script><script>
 (() => {
-  const RAW = {"diario": "fecha,campana,alcance,impresiones,interacciones,cpm,clics,visitas,costo_por_visita,costo\n2026-11-16,CCN_LIT_TRF_DEGUSTACION_NOV_2026,93339,116624,1884,0.55,1708,649,0.1,64.12", "acumulado": "alcance_unico,frecuencia,cpm\n45357,1.2,0.5", "creativos": "fecha,anuncio,alcance,impresiones,interacciones\n2026-11-16,MP_DEGUSTACIÓN,47659,55986,428\n2026-11-16,MP_DEGUSTACIÓN,26187,29303,688\n2026-11-16,PPL_DEGUSTACION,25329,31335,761", "audiencia": "dimension,segmento,alcance,clics,visitas\nGénero,Mujer,56931,943,346\nGénero,Hombre,37371,753,300\nGénero,Desconocido,459,7,3\nEdad,18-24,48069,660,224\nEdad,25-34,25351,552,216\nEdad,35-44,11181,273,128\nEdad,45-54,7755,158,57\nEdad,55-64,2000,29,10\nEdad,65+,1357,31,14\nRegión,Managua,31364,704,0\nRegión,Matagalpa,7329,126,0\nRegión,León,6428,100,0\nRegión,Masaya,6350,133,0\nRegión,Chinandega,5795,76,0\nRegión,Estelí,4778,68,0\nRegión,Chontales,4131,63,0\nRegión,Rivas,3924,55,0\nRegión,RACCS,3743,55,0\nRegión,Granada,3643,72,0\nRegión,Nueva Segovia,3585,44,0\nRegión,Jinotega,3351,64,0\nRegión,RACCN,3169,43,0\nRegión,Carazo,2987,56,0\nRegión,Boaco,2231,18,0\nRegión,Madriz,1623,17,0\nRegión,Río San Juan,1474,9,0\nRegión,Desconocido,19,0,0"};
+  const RAW = {"diario": "fecha,campana,alcance,impresiones,interacciones,cpm,clics,visitas,costo_por_visita,costo\n2026-11-16,CCN_LIT_TRF_DEGUSTACION_NOV_2026,134715,176173,3822,0.54,3475,1455,0.07,95.93\n2026-11-17,CCN_LIT_TRF_DEGUSTACION_NOV_2026,26354,34319,807,0.65,730,403,0.06,22.2\n", "acumulado": "alcance_unico,frecuencia,cpm\n184347,1.47,0.59\n", "creativos": "fecha,anuncio,alcance,impresiones,interacciones\n2026-11-16,MP_DEGUSTACIÓN,58269,67547,608\n2026-11-16,MP_DEGUSTACIÓN,30995,34394,935\n2026-11-16,PPL_DEGUSTACION,56308,74232,2279\n2026-11-17,MP_DEGUSTACIÓN,3178,3492,60\n2026-11-17,MP_DEGUSTACIÓN,2604,2866,81\n2026-11-17,PPL_DEGUSTACION,22718,27961,650\n", "audiencia": "dimension,segmento,alcance,clics,visitas\nGénero,Mujer,89597,2205,954\nGénero,Hombre,63887,1971,897\nGénero,Desconocido,776,13,7\nEdad,18-24,64800,1371,492\nEdad,25-34,45681,1448,685\nEdad,35-44,22119,687,370\nEdad,45-54,14206,394,178\nEdad,55-64,6708,158,70\nEdad,65+,5202,131,63\nRegión,Managua,58753,1925,0\nRegión,Masaya,11117,350,0\nRegión,León,10865,265,0\nRegión,Matagalpa,10485,235,0\nRegión,Chinandega,9236,185,0\nRegión,Estelí,7217,144,0\nRegión,Rivas,6253,152,0\nRegión,Granada,6234,174,0\nRegión,Chontales,6080,108,0\nRegión,RACCS,5516,108,0\nRegión,Nueva Segovia,5022,121,0\nRegión,Carazo,4885,123,0\nRegión,RACCN,4681,97,0\nRegión,Jinotega,4675,97,0\nRegión,Boaco,3228,53,0\nRegión,Madriz,2322,25,0\nRegión,Río San Juan,2062,27,0\nRegión,Desconocido,24,0,0\n"};
   const DS = {};
   for (const k in RAW) DS[k] = d3.csvParse(RAW[k]);
   const calcs = [], draws = {}, onDatas = [];
@@ -221,7 +221,7 @@ html, body { margin: 0; background: var(--color-bg); color: var(--color-fg); fon
 .dg-ad-tag.nuevo { background: var(--dg-or); }
 .dg-stats-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
 .dg-ppl { display: grid; grid-template-columns: minmax(130px, 44%) minmax(0, 1fr); gap: 14px; flex: 1; }
-.dg-ppl-img { aspect-ratio: 227 / 406; border-radius: 12px; background-size: cover; background-position: center; box-shadow: 0 6px 14px rgba(2, 24, 70, .2); align-self: start; width: 100%; }
+.dg-ppl-img { aspect-ratio: 9 / 16; border-radius: 12px; background-size: cover; background-position: center; box-shadow: 0 6px 14px rgba(2, 24, 70, .2); align-self: start; width: 100%; }
 .dg-ppl-stats { grid-template-columns: 1fr; grid-auto-rows: 1fr; }
 .dg-ppl-stats .dg-stat { justify-content: center; }
 .dg-ppl-stats .dg-stat b { font-size: 22px; }
@@ -290,7 +290,7 @@ html, body { margin: 0; background: var(--color-bg); color: var(--color-fg); fon
         <li style="--c: var(--dg-blue)"><i>2</i><span>El CTR es <b data-draw="num" data-source="totales" data-field="ctr" data-row="0" data-fmt="pct2">—</b>: <b data-draw="num" data-source="totales" data-field="clics_1000" data-row="0" data-fmt="dec2">—</b> clics por cada 1,000 impresiones.</span></li>
         <li style="--c: var(--dg-lime)"><i>3</i><span>Los jóvenes adultos (25 años en adelante) suman <b data-draw="num" data-source="conjuntos" data-field="clics" data-where="conjunto=adultos" data-fmt="int">—</b> clics contra <b data-draw="num" data-source="conjuntos" data-field="clics" data-where="conjunto=jovenes" data-fmt="int">—</b> de los jóvenes (18-24), y cada una de sus edades tiene un CTR de entre <b data-draw="num" data-source="conjuntos" data-field="ctr_min" data-where="conjunto=adultos" data-fmt="pct2">—</b> y <b data-draw="num" data-source="conjuntos" data-field="ctr_max" data-where="conjunto=adultos" data-fmt="pct2">—</b>, contra <b data-draw="num" data-source="conjuntos" data-field="ctr_min" data-where="conjunto=jovenes" data-fmt="pct2">—</b> de 18-24.</span></li>
         <li style="--c: var(--dg-purple)"><i>4</i><span>Managua aporta el <b data-draw="num" data-source="hallazgos" data-field="managua_clics" data-row="0" data-fmt="pct0">—</b> de los clics con el <b data-draw="num" data-source="hallazgos" data-field="managua_alcance" data-row="0" data-fmt="pct0">—</b> del alcance.</span></li>
-        <li style="--c: var(--dg-teal)"><i>5</i><span>Para la meta de clics faltan <b data-draw="num" data-source="hallazgos" data-field="clics_faltan" data-row="0" data-fmt="int">—</b>; al ritmo del último día serían unos <b data-draw="num" data-source="hallazgos" data-field="dias_meta" data-row="0" data-fmt="int">—</b> días más.</span></li>
+        <li style="--c: var(--dg-teal)"><i>5</i><span>Para la meta de clics faltan <b data-draw="num" data-source="hallazgos" data-field="clics_faltan" data-row="0" data-fmt="int">—</b>; al ritmo del último día completo serían unos <b data-draw="num" data-source="hallazgos" data-field="dias_meta" data-row="0" data-fmt="int">—</b> días más.</span></li>
       </ul>
     </section>
   </div>
@@ -371,7 +371,7 @@ html, body { margin: 0; background: var(--color-bg); color: var(--color-fg); fon
     </section>
     <section class="dg-card g5" id="card-ppl">
       <div class="dg-ad-h"><h3>PPL_DEGUSTACION</h3><span class="dg-ad-tag nuevo">PPL · nuevo</span></div>
-      <div class="dg-ppl"><div class="dg-ppl-img dg-s3" role="img" aria-label="Historia: Hoy el influencer sos vos. Click aquí, desbloqueá tu tasting gratis y retiralo en Super Express y AMPM; botón Registrarte."></div>
+      <div class="dg-ppl"><div class="dg-ppl-img dg-s3" role="img" aria-label="Historia: Hoy el influencer sos vos. Click aquí, desbloqueá tu tasting gratis y retiralo en Super Express y AMPM; compartí tu review en TikTok e Instagram."></div>
         <div class="dg-stats dg-ppl-stats">
         <div class="dg-stat"><small>Impresiones</small><b data-draw="num" data-source="anuncios" data-field="impresiones" data-where="anuncio=PPL_DEGUSTACION" data-fmt="int">—</b></div>
         <div class="dg-stat"><small>Interacciones</small><b data-draw="num" data-source="anuncios" data-field="interacciones" data-where="anuncio=PPL_DEGUSTACION" data-fmt="int">—</b></div>
@@ -580,14 +580,14 @@ dash.calc('conjuntos', {
 dash.calc('hallazgos', {
   inputs: ['aud', 'totales', 'por_dia', 'conjuntos'],
   title: 'Hallazgos clave',
-  description: 'Clics de jóvenes adultos ÷ clics de jóvenes; edad con más clics y con mejor CTR sobre alcance (sin desconocidos ni segmentos de menos de 1,000 personas), peso de Managua en clics y alcance, y clics que faltan para la meta con los días que tomaría al ritmo del último día.',
+  description: 'Clics de jóvenes adultos ÷ clics de jóvenes; edad con más clics y con mejor CTR sobre alcance (sin desconocidos ni segmentos de menos de 1,000 personas), peso de Managua en clics y alcance, y clics que faltan para la meta con los días que tomaría al ritmo del último día completo (el día en curso no cuenta porque aún está sumando).',
   fn: (aud, totales, por_dia, conjuntos) => {
     const t = totales[0]; if (!t || !aud.length) return [];
     const edades = aud.filter((r) => r.dimension === 'Edad' && r.segmento !== 'Desconocido');
     const top = [...edades].sort((a, b) => b.clics - a.clics)[0] || {};
     const ctr = [...edades].filter((r) => r.alcance >= 1000).sort((a, b) => b.ctr - a.ctr)[0] || {};
     const mga = aud.find((r) => r.dimension === 'Región' && r.segmento === 'Managua') || {};
-    const ult = por_dia[por_dia.length - 1] || {};
+    const hoy = new Date(Date.now() - 6 * 3600e3).toISOString().slice(0, 10), comp = por_dia.filter((r) => String(r.fecha).slice(0, 10) < hoy), ult = comp[comp.length - 1] || por_dia[por_dia.length - 1] || {};
     const faltan = Math.max(0, dg.META.clics - t.clics);
     const jv = conjuntos.find((r) => r.conjunto === 'jovenes') || {}, ad = conjuntos.find((r) => r.conjunto === 'adultos') || {};
     return [{ veces_clics: jv.clics ? ad.clics / jv.clics : null, edad_top: top.segmento, edad_top_clics: top.clics, edad_ctr: ctr.segmento, edad_ctr_v: ctr.ctr, managua_clics: mga.part_clics, managua_alcance: mga.part_alcance, clics_faltan: faltan, dias_meta: ult.clics ? Math.ceil(faltan / ult.clics) : null }];
