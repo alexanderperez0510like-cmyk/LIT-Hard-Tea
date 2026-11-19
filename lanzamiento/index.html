@@ -1124,6 +1124,16 @@ dash.draw('chart-creativos', (el) => {
     .on('pointermove', (ev, r) => t.show(ev, [r.creativo, 'Facebook: ' + lz.fmt.int(r.Facebook), 'Instagram: ' + lz.fmt.int(r.Instagram), 'Tasa de interacción: ' + lz.fmt.pct2(r.tasa_interaccion)])).on('pointerleave', () => t.hide());
 });
 
+lz.filasParejas = (el) => {
+  const items = [...el.children], n = items.length; if (!n) return;
+  const w = el.clientWidth || 1000, max = w > 980 ? 6 : w > 540 ? 3 : 2;
+  const filas = Math.ceil(n / max), base = Math.floor(n / filas), extra = n % filas;
+  const tam = Array.from({ length: filas }, (_, i) => base + (i < extra ? 1 : 0));
+  const gcd = (a, b) => b ? gcd(b, a % b) : a, cols = tam.reduce((a, b) => a * b / gcd(a, b), 1);
+  el.style.gridTemplateColumns = 'repeat(' + cols + ', minmax(0, 1fr))';
+  let k = 0; tam.forEach((t) => { for (let j = 0; j < t; j++) items[k++].style.gridColumn = 'span ' + (cols / t); });
+};
+
 dash.draw('cres-meta', (el) => {
   const d = dash.data('creativos');
   el.classList.toggle('dash-skeleton', d.status === 'loading');
@@ -1153,6 +1163,7 @@ dash.draw('cres-meta', (el) => {
     const fm = document.createElement('span'); fm.className = 'lz-fmt'; fm.style.setProperty('--c', tp[1]); fm.textContent = tp[0];
     b.append(fm, n, st, sp, sl); c.append(th, b); return c;
   }));
+  lz.filasParejas(el);
 });
 
 dash.draw('tabla-creativos', (el) => {
