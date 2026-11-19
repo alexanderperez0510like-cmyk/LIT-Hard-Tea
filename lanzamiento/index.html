@@ -167,10 +167,6 @@ html, body { margin: 0; background: var(--color-bg); color: var(--color-fg); fon
 .lz-cre { border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); overflow: hidden; display: flex; flex-direction: column; min-width: 0; }
 .lz-thumb { position: relative; aspect-ratio: 1 / 1; max-width: 100%; background: linear-gradient(145deg, color-mix(in srgb, var(--c-fb) 25%, var(--color-panel)), color-mix(in srgb, var(--c-ig) 18%, var(--color-panel))); background-size: cover; background-position: center; }
 .lz-thumb-ph { position: absolute; inset: 0; display: grid; place-items: center; font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
-.lz-thumb { overflow: hidden; }
-.lz-thumb-bg, .lz-thumb-fg { position: absolute; inset: 0; background-position: center; background-repeat: no-repeat; }
-.lz-thumb-bg { background-size: cover; filter: blur(18px) brightness(.75); transform: scale(1.25); }
-.lz-thumb-fg { background-size: contain; }
 .lz-rank, .lz-play { z-index: 2; }
 .lz-rank { position: absolute; top: 8px; left: 8px; background: rgba(0, 0, 0, .62); color: #fff; font-size: 11px; font-weight: 700; border-radius: 999px; padding: 1px 8px; }
 .lz-play { position: absolute; right: 8px; bottom: 8px; width: 30px; height: 30px; border-radius: 50%; background: rgba(0, 0, 0, .62); display: grid; place-items: center; }
@@ -1130,28 +1126,19 @@ dash.draw('chart-creativos', (el) => {
 });
 
 lz.filasParejas = (el) => {
+  // Todas las tarjetas del mismo tamaño y sin huecos: filas completas si la cantidad se reparte pareja;
+  // si no, una sola fila (deslizable cuando no cabe).
   const items = [...el.children], n = items.length; if (!n) return;
-  const w = el.clientWidth || 1000, max = w > 980 ? 6 : w > 540 ? 3 : 2;
-  const filas = Math.ceil(n / max), base = Math.floor(n / filas), extra = n % filas;
-  const tam = Array.from({ length: filas }, (_, i) => base + (i < extra ? 1 : 0));
-  const gcd = (a, b) => b ? gcd(b, a % b) : a, cols = tam.reduce((a, b) => a * b / gcd(a, b), 1);
-  el.style.gridTemplateColumns = 'repeat(' + cols + ', minmax(0, 1fr))';
-  let k = 0; tam.forEach((t) => { for (let j = 0; j < t; j++) items[k++].style.gridColumn = 'span ' + (cols / t); });
-  // Todas las miniaturas con el alto de la tarjeta más angosta: en filas más anchas el arte va completo y centrado sobre un fondo difuminado.
-  const min = Math.min(...items.map((c) => c.clientWidth));
-  items.forEach((c) => {
-    const th = c.querySelector('.lz-thumb'); if (!th) return;
-    th.querySelectorAll('.lz-thumb-bg, .lz-thumb-fg').forEach((x) => x.remove());
-    th.style.aspectRatio = ''; th.style.height = ''; th.style.backgroundImage = '';
-    if (c.clientWidth <= min + 2) return;
-    const bg = getComputedStyle(th).backgroundImage;
-    th.style.aspectRatio = 'auto'; th.style.height = min + 'px';
-    if (!bg || bg === 'none') return;
-    th.style.backgroundImage = 'none';
-    const b = document.createElement('div'); b.className = 'lz-thumb-bg'; b.style.backgroundImage = bg;
-    const f = document.createElement('div'); f.className = 'lz-thumb-fg'; f.style.backgroundImage = bg;
-    th.prepend(b, f);
-  });
+  Object.assign(el.style, { gridTemplateColumns: '', gridAutoFlow: '', gridAutoColumns: '', overflowX: '', scrollSnapType: '', paddingBottom: '' });
+  items.forEach((c) => { c.style.gridColumn = ''; c.style.scrollSnapAlign = ''; });
+  const gap = parseFloat(getComputedStyle(el).columnGap) || 8, w = el.clientWidth || 1000;
+  const max = Math.max(2, Math.min(8, Math.floor((w + gap) / (140 + gap))));
+  if (n <= max) { el.style.gridTemplateColumns = 'repeat(' + n + ', minmax(0, 1fr))'; return; }
+  let c = max; while (c > 1 && n % c) c--;
+  if (c >= Math.min(3, max)) { el.style.gridTemplateColumns = 'repeat(' + c + ', minmax(0, 1fr))'; return; }
+  const vis = max + 0.35, cw = (w - gap * Math.floor(vis)) / vis;
+  Object.assign(el.style, { gridTemplateColumns: 'none', gridAutoFlow: 'column', gridAutoColumns: cw + 'px', overflowX: 'auto', scrollSnapType: 'x mandatory', paddingBottom: '6px' });
+  items.forEach((x) => { x.style.scrollSnapAlign = 'start'; });
 };
 
 dash.draw('cres-meta', (el) => {
