@@ -186,6 +186,11 @@ html, body { margin: 0; background: var(--color-bg); color: var(--color-fg); fon
 .dg-set-grid span { display: flex; flex-direction: column; gap: 2px; font-size: 11px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: var(--color-fg-muted); }
 .dg-set-grid b { font-size: 17px; font-weight: 800; color: var(--color-fg); letter-spacing: 0; text-transform: none; font-variant-numeric: tabular-nums; }
 @container (max-width: 700px) { .dg-sets { grid-template-columns: 1fr; } .dg-set-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.det-tag { display: inline-block; font-size: 11px; font-weight: 800; padding: 2px 9px; border-radius: 999px; color: #fff; background: var(--dg-blue); white-space: nowrap; }
+.det-tag.rmkt { background: var(--dg-or); }
+.det-tot td { font-weight: 800; border-top: 2px solid var(--color-border-line); }
+#det-camp { margin-bottom: 2px; }
+#card-detalle th:nth-child(2), #card-detalle td:nth-child(2) { text-align: left; }
 .dg-chip[aria-pressed="true"] { background: var(--dg-navy); border-color: var(--dg-navy); color: #fff; }
 .dg-chart { position: relative; width: 100%; min-height: 240px; }
 .dg-chart svg { display: block; width: 100%; height: auto; overflow: visible; }
@@ -428,9 +433,10 @@ html, body { margin: 0; background: var(--color-bg); color: var(--color-fg); fon
 
   <div class="dg-sec" id="detalle"><span class="dg-sec-n">6</span><h2>Detalle diario</h2><p>Todas las cifras por fecha</p></div>
   <section class="dg-card" id="card-detalle">
+    <div class="dg-chips" id="det-camp" role="group" aria-label="Campaña"><button class="dg-chip" type="button" data-v="todas" aria-pressed="true">Todas</button><button class="dg-chip" type="button" data-v="TRF" aria-pressed="false">Tráfico (TRF)</button><button class="dg-chip" type="button" data-v="RMKT" aria-pressed="false">Remarketing (RMKT)</button></div>
     <div class="dg-table-wrap">
       <table class="dg-table" data-source="por_dia" data-row-key="fecha">
-        <thead><tr><th data-field="fecha">Fecha</th><th data-field="alcance">Alcance</th><th data-field="impresiones">Impresiones</th><th data-field="clics">Clics</th><th data-field="visitas">Visitas</th><th data-field="ctr">CTR</th><th data-field="tasa_llegada">Llegada</th><th data-field="inversion">Inversión</th><th data-field="cpv">Costo/visita</th></tr></thead>
+        <thead><tr><th data-field="fecha">Fecha</th><th>Campaña</th><th data-field="alcance">Alcance</th><th data-field="impresiones">Impresiones</th><th data-field="clics">Clics</th><th data-field="visitas">Visitas</th><th data-field="ctr">CTR</th><th data-field="tasa_llegada">Llegada</th><th data-field="inversion">Inversión</th><th data-field="cpv">Costo/visita</th></tr></thead>
         <tbody data-draw="tabla"></tbody>
       </table>
     </div>
@@ -445,7 +451,7 @@ html, body { margin: 0; background: var(--color-bg); color: var(--color-fg); fon
       <li>Inversión = Total Cost que reporta la hoja para cada día.</li>
       <li>Clics = clics en el enlace; visitas = landing page views. La hoja no trae visitas por región, por eso esa segmentación solo muestra alcance, clics y CTR.</li>
       <li>Conjuntos de anuncios: jóvenes (20-25) y jóvenes adultos (26-55). En edad se aproximan con los rangos de Meta: 18-24 y 25 en adelante. MP_DEGUSTACIÓN aparece una vez por conjunto y aquí se suman sus impresiones e interacciones; PPL_DEGUSTACION es el segundo anuncio.</li>
-      <li>El alcance acumulado es el alcance único que reporta Meta; no es la suma de los días.</li>
+      <li>El alcance acumulado es el alcance único que reporta Meta; no es la suma de los días. En el detalle diario, la fila Total de cada campaña muestra ese alcance único.</li>
     </ul>
   </details>
 
@@ -850,13 +856,22 @@ dash.draw('filas-anuncio', (el) => {
 dash.draw('tabla', (el) => {
   const d = dash.data('por_dia');
   if (d.status !== 'ok' || !d.data) { el.replaceChildren(); return; }
-  el.replaceChildren(...[...d.data].reverse().map((r) => {
-    const tr = document.createElement('tr'); tr.dataset.key = encodeURIComponent(r.fecha);
-    [dg.fecha(r.fecha), dg.fmt.int(r.alcance), dg.fmt.int(r.impresiones), dg.fmt.int(r.clics), dg.fmt.int(r.visitas), dg.fmt.pct2(r.ctr), dg.fmt.pct1(r.tasa_llegada), dg.fmt.usd2(r.inversion), r.cpv === null ? '—' : dg.fmt.usd2(r.cpv)]
-      .forEach((v) => { const td = document.createElement('td'); td.textContent = v; tr.append(td); });
-    return tr;
-  }));
+  const f = window.dgCamp || 'todas', RM = (window.RMKT && window.RMKT.diario) || [];
+  const trf = d.data.map((r) => ({ ...r, camp: 'TRF' }));
+  const rmk = RM.map((r) => ({ fecha: r.fecha, camp: 'RMKT', alcance: r.alcance, impresiones: r.impresiones, clics: r.clics, visitas: r.visitas, inversion: r.costo, ctr: r.impresiones ? r.clics / r.impresiones : 0, tasa_llegada: r.clics ? r.visitas / r.clics : null, cpv: r.visitas ? r.costo / r.visitas : null }));
+  const rows = [...trf, ...rmk].filter((r) => f === 'todas' || r.camp === f).sort((a, b) => b.fecha.localeCompare(a.fecha) || (a.camp === 'TRF' ? -1 : 1));
+  const tot = (camp) => { const rs = (camp === 'TRF' ? trf : rmk); if (!rs.length) return null; const s = (k) => rs.reduce((a, r) => a + (+r[k] || 0), 0), i = s('impresiones'), c = s('clics'), v = s('visitas'), inv = s('inversion');
+    const tt = dash.data('totales'); return { fecha: null, camp, tot: true, alcance: camp === 'TRF' ? (tt.data && tt.data[0] ? tt.data[0].alcance : null) : window.RMKT.acumulado.alcance, impresiones: i, clics: c, visitas: v, inversion: inv, ctr: i ? c / i : 0, tasa_llegada: c ? v / c : null, cpv: v ? inv / v : null }; };
+  const tots = (f === 'todas' ? ['TRF', 'RMKT'] : [f]).map(tot).filter(Boolean);
+  const tag = (c) => { const sp = document.createElement('span'); sp.className = 'det-tag ' + c.toLowerCase(); sp.textContent = c === 'TRF' ? 'Tráfico' : 'Remarketing'; return sp; };
+  el.replaceChildren(...[...rows, ...tots].map((r) => {
+    const tr = document.createElement('tr'); if (r.tot) tr.className = 'det-tot';
+    const cells = [r.tot ? 'Total' : dg.fecha(r.fecha), null, r.alcance == null ? '—' : dg.fmt.int(r.alcance), dg.fmt.int(r.impresiones), dg.fmt.int(r.clics), dg.fmt.int(r.visitas), dg.fmt.pct2(r.ctr), r.tasa_llegada == null ? '—' : dg.fmt.pct1(r.tasa_llegada), dg.fmt.usd2(r.inversion), r.cpv == null ? '—' : dg.fmt.usd2(r.cpv)];
+    cells.forEach((v, k) => { const td = document.createElement('td'); if (k === 1) td.append(tag(r.camp)); else td.textContent = v; tr.append(td); });
+    return tr; }));
 });
+document.getElementById('det-camp').addEventListener('click', (ev) => { const b = ev.target.closest('button'); if (!b) return; window.dgCamp = b.dataset.v; document.querySelectorAll('#det-camp button').forEach((x) => x.setAttribute('aria-pressed', String(x === b))); dash.draw('tabla'); });
+
 
 (() => {
   const D = window.RMKT; if (!D) return;
