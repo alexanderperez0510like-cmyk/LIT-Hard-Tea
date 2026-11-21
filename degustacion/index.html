@@ -237,6 +237,17 @@ html, body { margin: 0; background: var(--color-bg); color: var(--color-fg); fon
 .rm-aud { display: grid; grid-template-columns: .85fr 1fr 1.15fr; gap: 10px; }
 .rm-ad .dg-ad-h { flex-wrap: wrap; gap: 6px; }
 .rm-aud > div { background: var(--dg-track); border-radius: 12px; padding: 12px 14px; }
+.rm-aud > div { display: flex; flex-direction: column; }
+.rm-rows { flex: 1; display: flex; flex-direction: column; justify-content: space-between; gap: 4px; }
+.rm-rows .rm-hb { margin: 0; }
+.rm-gen { display: flex; flex-direction: column; }
+.rm-gen-b { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: space-between; gap: 8px; }
+.rm-gen-b svg { width: 80px; height: 80px; }
+.rm-gen-l { width: 100%; display: grid; gap: 6px; }
+.rm-gen-l div { display: grid; grid-template-columns: 10px 1fr auto; gap: 8px; align-items: center; font-size: 12px; }
+.rm-gen-l i { width: 10px; height: 10px; border-radius: 3px; }
+.rm-gen-l small { display: block; font-size: 10.5px; color: var(--color-fg-muted); }
+.rm-gen-l b { font-variant-numeric: tabular-nums; }
 .rm-aud h4 { margin: 0 0 8px; font-size: 13px; }
 .rm-hb { display: grid; grid-template-columns: 78px 1fr 38px; gap: 8px; align-items: center; font-size: 12px; margin: 5px 0; }
 .rm-hb div { height: 12px; border-radius: 999px; background: color-mix(in srgb, var(--dg-or) 15%, transparent); }
@@ -895,8 +906,13 @@ document.getElementById('det-camp').addEventListener('click', (ev) => { const b 
   document.getElementById('rm-ad-stats').innerHTML = [['Impresiones', int(ci)], ['Interacciones', int(ce)], ['Tasa de interacción', pct(ce / ci, 2)], ['Días al aire', new Set(c.map((r) => r.fecha)).size]].map(([a, b]) => `<div class="dg-stat"><small>${a}</small><b>${b}</b></div>`).join('');
   const blk = (dim, titulo, n) => { const rows = D.audiencia.filter((r) => r.dimension === dim && r.segmento !== 'Desconocido'), t = rows.reduce((s, r) => s + r.alcance, 0), top = [...rows].sort((a, b) => b.alcance - a.alcance).slice(0, n || 99), mx = Math.max(...top.map((r) => r.alcance));
     if (dim === 'Edad') top.sort((a, b) => a.segmento.localeCompare(b.segmento));
-    return `<div><h4>${titulo}</h4>${top.map((r) => `<div class="rm-hb"><span>${r.segmento}</span><div><i style="width:${r.alcance / mx * 100}%"></i></div><b>${pct(r.alcance / t, 0)}</b></div>`).join('')}</div>`; };
-  document.getElementById('rm-aud').innerHTML = blk('Género', 'Género') + blk('Edad', 'Edad') + blk('Región', 'Región', 6);
+    return `<div><h4>${titulo}</h4><div class="rm-rows">${top.map((r) => `<div class="rm-hb"><span>${r.segmento}</span><div><i style="width:${r.alcance / mx * 100}%"></i></div><b>${pct(r.alcance / t, 0)}</b></div>`).join('')}</div></div>`; };
+  const gen = () => { const rows = D.audiencia.filter((r) => r.dimension === 'Género' && r.segmento !== 'Desconocido'), t = rows.reduce((s, r) => s + r.alcance, 0), col = { Hombre: 'var(--dg-or)', Mujer: 'var(--dg-blue)' };
+    const S = 100, R1 = 46, R0 = 30; let a0 = -Math.PI / 2, paths = '';
+    rows.forEach((r) => { const a1 = a0 + r.alcance / t * Math.PI * 2, L = a1 - a0 > Math.PI ? 1 : 0, P = (a, rr) => (S / 2 + rr * Math.cos(a)) + ',' + (S / 2 + rr * Math.sin(a));
+      paths += `<path d="M${P(a0, R1)} A${R1},${R1} 0 ${L} 1 ${P(a1, R1)} L${P(a1, R0)} A${R0},${R0} 0 ${L} 0 ${P(a0, R0)} Z" style="fill:${col[r.segmento] || 'var(--color-fg-muted)'}"></path>`; a0 = a1; });
+    return `<div class="rm-gen"><h4>Género</h4><div class="rm-gen-b"><svg viewBox="0 0 ${S} ${S}" role="img" aria-label="${rows.map((r) => r.segmento + ' ' + pct(r.alcance / t, 0)).join(', ')}">${paths}</svg><div class="rm-gen-l">${rows.map((r) => `<div><i style="background:${col[r.segmento]}"></i><span>${r.segmento}<small>${int(r.alcance)} personas</small></span><b>${pct(r.alcance / t, 0)}</b></div>`).join('')}</div></div></div>`; };
+  document.getElementById('rm-aud').innerHTML = gen() + blk('Edad', 'Edad') + blk('Región', 'Región', 6);
 })();
 </script>
 </div></body></html>
