@@ -328,9 +328,9 @@ html, body { margin: 0; background: var(--color-bg); color: var(--color-fg); fon
   <div class="lz-hero-top">
   <header class="lz-head" id="encabezado">
     <div class="lz-redes" aria-label="Canales: Facebook, Instagram y YouTube">
-      <span class="lz-red lz-red-fb" title="Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#fff" d="M13.4 21v-7.6h2.6l.4-3h-3V8.5c0-.9.3-1.5 1.5-1.5h1.6V4.3c-.3 0-1.2-.1-2.3-.1-2.3 0-3.9 1.4-3.9 4v2.2H7.7v3h2.6V21z"/></svg></span>
-      <span class="lz-red lz-red-ig" title="Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="5" width="14" height="14" rx="4.2" fill="none" stroke="#fff" stroke-width="1.9"/><circle cx="12" cy="12" r="3.3" fill="none" stroke="#fff" stroke-width="1.9"/><circle cx="16.1" cy="7.9" r="1.1" fill="#fff"/></svg></span>
-      <span class="lz-red lz-red-yt" title="YouTube"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="6.5" width="16" height="11" rx="3.4" fill="#fff"/><path fill="#ff0000" d="M10.4 9.3v5.4l4.6-2.7z"/></svg></span>
+      <span class="lz-red lz-red-fb" aria-label="Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#fff" d="M13.4 21v-7.6h2.6l.4-3h-3V8.5c0-.9.3-1.5 1.5-1.5h1.6V4.3c-.3 0-1.2-.1-2.3-.1-2.3 0-3.9 1.4-3.9 4v2.2H7.7v3h2.6V21z"/></svg></span>
+      <span class="lz-red lz-red-ig" aria-label="Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="5" width="14" height="14" rx="4.2" fill="none" stroke="#fff" stroke-width="1.9"/><circle cx="12" cy="12" r="3.3" fill="none" stroke="#fff" stroke-width="1.9"/><circle cx="16.1" cy="7.9" r="1.1" fill="#fff"/></svg></span>
+      <span class="lz-red lz-red-yt" aria-label="YouTube"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="6.5" width="16" height="11" rx="3.4" fill="#fff"/><path fill="#ff0000" d="M10.4 9.3v5.4l4.6-2.7z"/></svg></span>
     </div>
     <span class="lz-eyebrow">Lanzamiento · Facebook · Instagram · YouTube · Nicaragua · Cierre 26 nov · <span data-draw="periodo" data-source="diario" data-field="fecha" class="dash-skeleton">—</span></span>
     <h1 class="lz-title">Campaña de lanzamiento LIT Hard Tea</h1>
@@ -1097,12 +1097,17 @@ dash.draw('ubic-creativo', (el) => {
     const n = document.createElement('span'); n.textContent = c.replace(/^BOOST_/, 'Boost ').replace(/_/g, ' ');
     const t = document.createElement('div'); t.className = 'lz-hbar-t'; t.style.display = 'flex';
     const mine = d.data.filter((r) => r.creativo === c).sort((a, b) => orden.indexOf(a.plataforma) - orden.indexOf(b.plataforma));
-    mine.forEach((r) => { const s = document.createElement('div'); s.style.width = (r.participacion * 100) + '%'; s.style.background = lz.color[r.plataforma] || 'var(--cds-chart-muted)'; s.title = r.plataforma + ' ' + lz.fmt.pct1(r.participacion); t.append(s); });
+    mine.forEach((r) => { const s = document.createElement('div'); s.style.width = (r.participacion * 100) + '%'; s.style.background = lz.color[r.plataforma] || 'var(--cds-chart-muted)'; t.append(s); });
     t.setAttribute('role', 'img'); t.setAttribute('aria-label', mine.map((r) => r.plataforma + ' ' + lz.fmt.pct1(r.participacion)).join(', '));
     const fb = mine.find((r) => r.plataforma === 'Facebook');
-    const v = document.createElement('span'); v.textContent = 'FB ' + lz.fmt.pct0(fb ? fb.participacion : 0);
+    const v = document.createElement('span'); v.textContent = 'FB ' + lz.fmt.pct0(fb ? fb.participacion : 0); v.style.whiteSpace = 'nowrap';
+    const nom = c.replace(/^BOOST_/, 'Boost ').replace(/_/g, ' '), tot = mine.reduce((a, r) => a + r.impresiones, 0);
+    const on = (ev) => tp.show(ev, [nom, ...mine.map((r) => r.plataforma + ': ' + lz.fmt.pct1(r.participacion) + ' · ' + lz.fmt.int(r.impresiones) + ' impresiones'), 'Total: ' + lz.fmt.int(tot) + ' impresiones']);
+    row.addEventListener('pointermove', on); row.addEventListener('pointerdown', on); row.addEventListener('pointerleave', () => tp.hide());
     row.append(n, t, v); return row;
   }));
+  el.style.position = 'relative';
+  const tp = lz.tip(el);
 });
 
 dash.draw('chart-creativos', (el) => {
@@ -1189,7 +1194,7 @@ dash.draw('videos', (el) => {
   if (d.status !== 'ok' || !d.data) { el.replaceChildren(); return; }
   el.replaceChildren(...d.data.map((r) => {
     const c = document.createElement('article'); c.className = 'lz-vid';
-    const a = document.createElement('a'); a.href = 'https://www.youtube.com/watch?v=' + encodeURIComponent(r.video_id); a.target = '_blank'; a.rel = 'noopener'; a.textContent = r.nombre || r.video_id; a.title = 'Ver en YouTube (' + r.video_id + ')';
+    const a = document.createElement('a'); a.href = 'https://www.youtube.com/watch?v=' + encodeURIComponent(r.video_id); a.target = '_blank'; a.rel = 'noopener'; a.textContent = r.nombre || r.video_id; a.setAttribute('aria-label', 'Ver en YouTube: ' + (r.nombre || r.video_id));
     const st = document.createElement('div'); st.className = 'lz-vid-stats';
     [['Impr.', lz.fmt.compact(r.impresiones)], ['Views', lz.fmt.compact(r.views)], ['CPV', r.costo_por_view === null ? '—' : lz.fmt.usd3(r.costo_por_view)]].forEach(([k, v]) => {
       const s = document.createElement('span'); const sm = document.createElement('small'); sm.textContent = k; s.append(sm, document.createTextNode(v)); st.append(s);
