@@ -417,7 +417,7 @@ html, body { margin: 0; background: var(--color-bg); color: var(--color-fg); fon
     <section class="lz-card s5" id="genero">
       <h2>Género</h2>
       <div class="lz-fill"><div class="lz-minis" data-draw="minis-genero" data-source="aud_pct"></div></div>
-      <div class="lz-legend"><span><span class="lz-sw" data-draw="sw" data-c="--lz-blue"></span>Hombre</span><span><span class="lz-sw" data-draw="sw" data-c="--lz-orange"></span>Mujer</span><span><span class="lz-sw" data-draw="sw" data-c="--cds-chart-muted"></span>Sin dato</span></div>
+      <div class="lz-legend"><span><span class="lz-sw" data-draw="sw" data-c="--lz-blue"></span>Hombre</span><span><span class="lz-sw" data-draw="sw" data-c="--lz-orange"></span>Mujer</span><span><span class="lz-sw" data-draw="sw" data-c="--cds-chart-muted"></span>Desconocido</span></div>
       <p class="lz-note">Meta: sobre alcance. YouTube: sobre impresiones.</p>
     </section>
     <section class="lz-card s7" id="edad">
@@ -1015,7 +1015,7 @@ dash.draw('minis-genero', (el) => {
     dn.paths.on('pointermove', (ev, a) => t.show(ev, [c + ' · ' + a.data.k, lz.fmt.pct1(a.data.v / dn.total)])).on('pointerleave', () => t.hide());
     const n = document.createElement('span'); n.className = 'lz-mini-n'; n.style.color = lz.color[c]; n.textContent = c;
     const pp = document.createElement('div'); pp.className = 'lz-mini-p';
-    rows.forEach((r) => { const l = document.createElement('span'); const bb = document.createElement('b'); bb.textContent = lz.fmt.pct0(r.v / dn.total); l.append((r.k === 'Desconocido' ? 'Sin dato' : r.k) + ' ', bb); pp.append(l); });
+    rows.forEach((r) => { const l = document.createElement('span'); const bb = document.createElement('b'); bb.textContent = lz.fmt.pct0(r.v / dn.total); l.append(r.k + ' ', bb); pp.append(l); });
     box.append(h, n, pp); return box;
   }));
 });
