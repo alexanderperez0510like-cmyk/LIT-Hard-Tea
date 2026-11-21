@@ -41,7 +41,8 @@ html, body { margin: 0; background: var(--color-bg); color: var(--color-fg); fon
 .lit-footer { margin-top: 24px; font-size: 12px; color: var(--color-fg-muted); text-align: center; }
 </style></head><body><script src="d3.min.js"></script><script>
 (() => {
-  const RAW = {"diario": "fecha,campana,alcance,impresiones,interacciones,cpm,clics,visitas,costo_por_visita,costo\n2026-11-16,CCN_LIT_TRF_DEGUSTACION_NOV_2026,136257,178358,3878,0.54,3529,1455,0.07,96.99\n2026-11-17,CCN_LIT_TRF_DEGUSTACION_NOV_2026,151633,295536,9065,0.61,8136,4782,0.04,181.06\n2026-11-18,CCN_LIT_TRF_DEGUSTACION_NOV_2026,263308,541333,19150,0.48,18092,6745,0.04,257.56\n2026-11-19,CCN_LIT_TRF_DEGUSTACION_NOV_2026,19965,26249,600,0.55,567,335,0.04,14.39\n", "acumulado": "alcance_unico,frecuencia,cpm\n457745,2.79,0.52\n", "creativos": "fecha,anuncio,alcance,impresiones,interacciones\n2026-11-16,MP_DEGUSTACIÓN,58299,67742,609\n2026-11-16,MP_DEGUSTACIÓN,31329,34682,943\n2026-11-16,PPL_DEGUSTACION,57203,75934,2326\n2026-11-17,MP_DEGUSTACIÓN,26163,29350,709\n2026-11-17,MP_DEGUSTACIÓN,24147,26725,793\n2026-11-17,PPL_DEGUSTACION,141406,239461,7563\n2026-11-18,MP_DEGUSTACIÓN,30404,35615,1248\n2026-11-18,PPL_DEGUSTACION,283078,473023,16854\n2026-11-19,MP_DEGUSTACIÓN,1133,1343,35\n2026-11-19,MP_DEGUSTACIÓN,798,895,27\n2026-11-19,PPL_DEGUSTACION,18201,24011,520\n", "audiencia": "dimension,segmento,alcance,clics,visitas\nGénero,Mujer,225634,15714,6569\nGénero,Hombre,182716,14405,6668\nGénero,Desconocido,2225,181,80\nEdad,18-24,103437,5257,2213\nEdad,25-34,147725,11664,5222\nEdad,35-44,78912,6855,3200\nEdad,45-54,44577,3380,1420\nEdad,55-64,25699,1817,701\nEdad,65+,18329,1325,561\nRegión,Managua,176585,14099,0\nRegión,Masaya,35953,3095,0\nRegión,León,28822,2131,0\nRegión,Chinandega,23202,1466,0\nRegión,Matagalpa,21677,1262,0\nRegión,Estelí,16058,989,0\nRegión,Granada,15874,1336,0\nRegión,Rivas,14669,1008,0\nRegión,Carazo,14348,953,0\nRegión,Chontales,13113,645,0\nRegión,RACCS,11193,685,0\nRegión,Nueva Segovia,10277,647,0\nRegión,Jinotega,9825,576,0\nRegión,RACCN,9525,665,0\nRegión,Boaco,6694,334,0\nRegión,Madriz,4425,202,0\nRegión,Río San Juan,3788,199,0\nRegión,Desconocido,84,8,0\n"};
+  window.RMKT = {"diario": [{"fecha": "2026-11-20", "alcance": 26380, "impresiones": 28716, "interacciones": 30, "cpm": 0.24, "clics": 12, "visitas": 0, "costo": 6.97}, {"fecha": "2026-11-21", "alcance": 30329, "impresiones": 32696, "interacciones": 21, "cpm": 0.21, "clics": 8, "visitas": 0, "costo": 7.0}], "acumulado": {"alcance": 56469, "frecuencia": 1.08, "cpm": 0.23}, "creativos": [{"fecha": "2026-11-20", "anuncio": "MP_DEGUSTACION_REFUERZO", "alcance": 26380, "impresiones": 28717, "interacciones": 30}, {"fecha": "2026-11-21", "anuncio": "MP_DEGUSTACION_REFUERZO", "alcance": 30790, "impresiones": 33079, "interacciones": 21}], "audiencia": [{"dimension": "Género", "segmento": "Hombre", "alcance": 32739, "clics": 11}, {"dimension": "Género", "segmento": "Mujer", "alcance": 24611, "clics": 8}, {"dimension": "Género", "segmento": "Desconocido", "alcance": 200, "clics": 1}, {"dimension": "Edad", "segmento": "25-34", "alcance": 18327, "clics": 3}, {"dimension": "Edad", "segmento": "18-24", "alcance": 15201, "clics": 10}, {"dimension": "Edad", "segmento": "35-44", "alcance": 12710, "clics": 5}, {"dimension": "Edad", "segmento": "45-54", "alcance": 8825, "clics": 1}, {"dimension": "Edad", "segmento": "55-64", "alcance": 2813, "clics": 1}, {"dimension": "Edad", "segmento": "65+", "alcance": 1355, "clics": 0}, {"dimension": "Región", "segmento": "Managua", "alcance": 20335, "clics": 7}, {"dimension": "Región", "segmento": "León", "alcance": 4402, "clics": 0}, {"dimension": "Región", "segmento": "Masaya", "alcance": 4400, "clics": 2}, {"dimension": "Región", "segmento": "Matagalpa", "alcance": 4087, "clics": 4}, {"dimension": "Región", "segmento": "Chinandega", "alcance": 3916, "clics": 0}, {"dimension": "Región", "segmento": "Estelí", "alcance": 2525, "clics": 1}, {"dimension": "Región", "segmento": "Rivas", "alcance": 2296, "clics": 0}, {"dimension": "Región", "segmento": "Nueva Segovia", "alcance": 2250, "clics": 0}, {"dimension": "Región", "segmento": "Granada", "alcance": 2245, "clics": 2}, {"dimension": "Región", "segmento": "RACCN", "alcance": 2229, "clics": 0}, {"dimension": "Región", "segmento": "RACCS", "alcance": 2078, "clics": 1}, {"dimension": "Región", "segmento": "Jinotega", "alcance": 1978, "clics": 0}, {"dimension": "Región", "segmento": "Carazo", "alcance": 1914, "clics": 1}, {"dimension": "Región", "segmento": "Chontales", "alcance": 1865, "clics": 1}, {"dimension": "Región", "segmento": "Boaco", "alcance": 1331, "clics": 0}, {"dimension": "Región", "segmento": "Madriz", "alcance": 947, "clics": 0}, {"dimension": "Región", "segmento": "Río San Juan", "alcance": 756, "clics": 1}]};
+  const RAW = {"diario": "fecha,campana,alcance,impresiones,interacciones,cpm,clics,visitas,costo_por_visita,costo\n2026-11-16,CCN_LIT_TRF_DEGUSTACION_NOV_2026,136257,178358,3878,0.54,3529,1455,0.07,96.99\n2026-11-17,CCN_LIT_TRF_DEGUSTACION_NOV_2026,151633,295537,9065,0.61,8136,4782,0.04,181.06\n2026-11-18,CCN_LIT_TRF_DEGUSTACION_NOV_2026,265021,548374,19366,0.48,18288,6745,0.04,260.63\n2026-11-19,CCN_LIT_TRF_DEGUSTACION_NOV_2026,496844,1263305,39600,0.55,37574,12040,0.06,696.88\n2026-11-20,CCN_LIT_TRF_DEGUSTACION_NOV_2026,249836,462069,15106,0.53,14417,4899,0.05,245.87\n2026-11-21,CCN_LIT_TRF_DEGUSTACION_NOV_2026,10862,13591,310,0.63,287,164,0.05,8.55\n", "acumulado": "alcance_unico,frecuencia,cpm\n738495,3.78,0.54\n", "creativos": "fecha,anuncio,alcance,impresiones,interacciones\n2026-11-16,MP_DEGUSTACIÓN,58299,67742,609\n2026-11-16,MP_DEGUSTACIÓN,31329,34682,943\n2026-11-16,PPL_DEGUSTACION,57203,75934,2326\n2026-11-17,MP_DEGUSTACIÓN,26163,29350,709\n2026-11-17,MP_DEGUSTACIÓN,24147,26725,793\n2026-11-17,PPL_DEGUSTACION,141406,239462,7563\n2026-11-18,MP_DEGUSTACIÓN,28394,32826,1054\n2026-11-18,MP_DEGUSTACIÓN,30545,35836,1256\n2026-11-18,PPL_DEGUSTACION,285219,479712,17056\n2026-11-19,MP_DEGUSTACIÓN,46626,56258,1647\n2026-11-19,MP_DEGUSTACIÓN,77489,92344,2286\n2026-11-19,PPL_DEGUSTACION,558128,1114703,35667\n2026-11-20,MP_DEGUSTACIÓN,25077,28816,625\n2026-11-20,MP_DEGUSTACIÓN,24977,29089,842\n2026-11-20,PPL_DEGUSTACION,245982,404164,13639\n2026-11-21,MP_DEGUSTACIÓN,3861,4687,57\n2026-11-21,PPL_DEGUSTACION,7209,8904,253\n", "audiencia": "dimension,segmento,alcance,clics,visitas\nGénero,Mujer,407200,45715,16007\nGénero,Hombre,331098,36123,13915\nGénero,Desconocido,3752,393,163\nEdad,25-34,256234,28840,10628\nEdad,18-24,146414,12019,4377\nEdad,35-44,143833,18502,6899\nEdad,45-54,89671,10381,3602\nEdad,55-64,58554,6675,2249\nEdad,65+,45247,5812,2330\nRegión,Managua,305727,34867,0\nRegión,Masaya,61656,7294,0\nRegión,León,51451,5544,0\nRegión,Chinandega,45288,4650,0\nRegión,Matagalpa,42078,4272,0\nRegión,Estelí,30946,3007,0\nRegión,Rivas,28618,2923,0\nRegión,Granada,28488,3186,0\nRegión,Carazo,25266,2498,0\nRegión,Chontales,23713,1986,0\nRegión,RACCS,23324,2263,0\nRegión,RACCN,20487,2707,0\nRegión,Nueva Segovia,20028,2117,0\nRegión,Jinotega,19177,1984,0\nRegión,Boaco,13814,1334,0\nRegión,Madriz,8529,796,0\nRegión,Río San Juan,7626,785,0\nRegión,Desconocido,148,18,0\n"};
   const DS = {};
   for (const k in RAW) DS[k] = d3.csvParse(RAW[k]);
   const calcs = [], draws = {}, onDatas = [];
@@ -214,6 +215,29 @@ html, body { margin: 0; background: var(--color-bg); color: var(--color-fg); fon
 .dg-cre-img { aspect-ratio: 1 / 1; border-radius: 12px; background-size: cover; background-position: center; box-shadow: 0 6px 14px rgba(2, 24, 70, .2); position: relative; }
 .dg-cre-img span { position: absolute; left: 8px; top: 8px; background: rgba(0, 0, 0, .6); color: #fff; border-radius: 999px; padding: 2px 9px; font-size: 11px; font-weight: 700; }
 .dg-stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+.rm-img { display: block; width: 100%; max-width: 420px; aspect-ratio: 1 / 1; object-fit: cover; border-radius: 12px; margin: 0 auto; box-shadow: 0 8px 20px rgba(3, 18, 52, .25); }
+.rm-tiles { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; }
+.rm-tile { background: var(--dg-track); border-radius: 12px; padding: 10px 12px; border-left: 4px solid var(--c, var(--dg-or)); }
+.rm-tile small { display: block; font-size: 10.5px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--color-fg-muted); }
+.rm-tile b { font-size: 1.25rem; font-weight: 800; font-variant-numeric: tabular-nums; }
+.rm-tile span { display: block; font-size: 11.5px; color: var(--color-fg-muted); }
+.rm-day { display: grid; grid-template-columns: 92px 1fr 84px; gap: 10px; align-items: center; font-size: 12.5px; margin: 6px 0; }
+.rm-day .bars { display: grid; gap: 4px; }
+.rm-bar { height: 14px; border-radius: 5px; background: color-mix(in srgb, var(--c) 14%, transparent); }
+.rm-bar i { display: block; height: 100%; border-radius: 5px; background: var(--c); }
+.rm-day b { font-variant-numeric: tabular-nums; text-align: right; }
+.rm-day small { color: var(--color-fg-muted); display: block; font-size: 10.5px; }
+.rm-keys { display: flex; gap: 14px; font-size: 11.5px; color: var(--color-fg-muted); }
+.rm-keys span::before { content: ""; display: inline-block; width: 10px; height: 10px; border-radius: 3px; background: var(--c); margin-right: 5px; vertical-align: -1px; }
+.rm-aud { display: grid; grid-template-columns: .85fr 1fr 1.15fr; gap: 10px; }
+.rm-ad .dg-ad-h { flex-wrap: wrap; gap: 6px; }
+.rm-aud > div { background: var(--dg-track); border-radius: 12px; padding: 12px 14px; }
+.rm-aud h4 { margin: 0 0 8px; font-size: 13px; }
+.rm-hb { display: grid; grid-template-columns: 78px 1fr 38px; gap: 8px; align-items: center; font-size: 12px; margin: 5px 0; }
+.rm-hb div { height: 12px; border-radius: 999px; background: color-mix(in srgb, var(--dg-or) 15%, transparent); }
+.rm-hb div i { display: block; height: 100%; border-radius: inherit; background: var(--dg-or); }
+.rm-hb b { text-align: right; font-variant-numeric: tabular-nums; }
+@container (max-width: 980px) { .rm-tiles { grid-template-columns: repeat(2, minmax(0, 1fr)); } .rm-aud { grid-template-columns: 1fr; } }
 .dg-stat { background: var(--dg-track); border-radius: 12px; padding: 10px 12px; display: flex; flex-direction: column; gap: 2px; }
 .dg-stat small { font-size: 11px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; color: var(--color-fg-muted); }
 .dg-stat b { font-size: 18px; font-weight: 800; font-variant-numeric: tabular-nums; }
@@ -253,6 +277,7 @@ html, body { margin: 0; background: var(--color-bg); color: var(--color-fg); fon
       <a class="dg-link" href="#tendencia" data-target="tendencia"><svg viewBox="0 0 24 24"><path d="M3 17l6-6 4 4 8-8"/><path d="M14 7h7v7"/></svg><span>Tendencia</span></a>
       <a class="dg-link" href="#audiencia" data-target="audiencia"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><path d="M16 4a3 3 0 010 6"/><path d="M21 20c0-2.5-1.5-4.6-3.6-5.5"/></svg><span>Audiencia</span></a>
       <a class="dg-link" href="#creativo" data-target="creativo"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="2"/><path d="M21 16l-5-5-8 9"/></svg><span>Creativos</span></a>
+      <a class="dg-link" href="#remarketing" data-target="remarketing"><svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 0 1 15.5-6.2L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-15.5 6.2L3 16"/><path d="M3 21v-5h5"/></svg><span>Remarketing</span></a>
       <a class="dg-link" href="#detalle" data-target="detalle"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18M9 4v16"/></svg><span>Detalle</span></a>
     </div>
   </nav>
@@ -382,7 +407,26 @@ html, body { margin: 0; background: var(--color-bg); color: var(--color-fg); fon
     </section>
   </div>
 
-  <div class="dg-sec" id="detalle"><span class="dg-sec-n">5</span><h2>Detalle diario</h2><p>Todas las cifras por fecha</p></div>
+  <div class="dg-sec" id="remarketing"><span class="dg-sec-n">5</span><h2>Remarketing · canje del código</h2><p>Para quienes ya tienen su código y no lo han canjeado</p></div>
+  <div class="dg-grid">
+    <section class="dg-card g5 rm-ad">
+      <div class="dg-ad-h"><h3>MP_DEGUSTACION_REFUERZO</h3><span class="dg-ad-tag nuevo">RMKT · nuevo</span></div>
+      <img class="rm-img" src="img/rmkt-refuerzo.jpg" alt="Psst… ya tenés tu código, ¿qué esperás para ir por tu LIT gratis?">
+      <div class="dg-stats dg-stats-4" id="rm-ad-stats"></div>
+    </section>
+    <section class="dg-card g7">
+      <h3>Campaña de recordatorio</h3>
+      <p class="dg-sub" id="rm-intro">—</p>
+      <div class="rm-tiles" id="rm-tiles"></div>
+      <h3 style="margin-top:4px">Entrega por día</h3>
+      <div id="rm-days"></div>
+      <h3 style="margin-top:4px">¿A quién le recordamos?</h3>
+      <div class="rm-aud" id="rm-aud"></div>
+      <p class="dg-sub" style="margin:0">Alcance por segmento. En región, los 6 departamentos con más alcance.</p>
+    </section>
+  </div>
+
+  <div class="dg-sec" id="detalle"><span class="dg-sec-n">6</span><h2>Detalle diario</h2><p>Todas las cifras por fecha</p></div>
   <section class="dg-card" id="card-detalle">
     <div class="dg-table-wrap">
       <table class="dg-table" data-source="por_dia" data-row-key="fecha">
@@ -396,6 +440,7 @@ html, body { margin: 0; background: var(--color-bg); color: var(--color-fg); fon
     <summary>Notas de las cifras</summary>
     <ul>
       <li>Fuente: hoja Data LIT 2026, pestaña Data_FB_LANZ_Ads, bloques LIT_TRF_META_ADS, LIT_Behaviour_TRF_META_ADS y LIT_TRF_DEM.</li>
+      <li>Remarketing: bloques LIT_RMKT_META_ADS, LIT_Behaviour_RMKT_META_ADS y LIT_RMKT_DEM (campaña CCN_LIT_RCH_DEGUSTACIÓN_RMKT, objetivo alcance). Sus cifras se muestran aparte y no se suman a los totales de la campaña de tráfico.</li>
       <li>Metas del plan: alcance 1,719,606, impresiones 4,176,859 y 16,000 clics.</li>
       <li>Inversión = Total Cost que reporta la hoja para cada día.</li>
       <li>Clics = clics en el enlace; visitas = landing page views. La hoja no trae visitas por región, por eso esa segmentación solo muestra alcance, clics y CTR.</li>
@@ -812,5 +857,26 @@ dash.draw('tabla', (el) => {
     return tr;
   }));
 });
+
+(() => {
+  const D = window.RMKT; if (!D) return;
+  const nf = (d) => new Intl.NumberFormat('en-US', { minimumFractionDigits: d, maximumFractionDigits: d });
+  const int = (v) => nf(0).format(v), usd = (v) => '$' + nf(2).format(v), pct = (v, d = 1) => nf(d).format(v * 100) + '%';
+  const MES = ['ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'], fecha = (s) => { const [y, m, d] = s.split('-').map(Number); return d + ' ' + MES[m - 1]; };
+  const sum = (a, k) => a.reduce((s, r) => s + (+r[k] || 0), 0);
+  const hoy = new Date(Date.now() - 6 * 3600e3).toISOString().slice(0, 10);
+  const d = D.diario, imp = sum(d, 'impresiones'), inv = sum(d, 'costo'), cl = sum(d, 'clics'), it = sum(d, 'interacciones'), ult = d[d.length - 1].fecha;
+  document.getElementById('rm-intro').innerHTML = `Desde el ${fecha(d[0].fecha)}, un anuncio de alcance le recuerda a quienes ya desbloquearon su código que lo canjeen en tienda. En ${d.length} días llegó a <b>${int(D.acumulado.alcance)}</b> personas con una frecuencia de <b>${nf(2).format(D.acumulado.frecuencia)}</b> y una inversión de <b>${usd(inv)}</b>.` + (ult >= hoy ? ` El ${fecha(ult)} está en curso.` : '');
+  const tiles = [['Alcance único', int(D.acumulado.alcance), 'personas', 'var(--dg-or)'], ['Impresiones', int(imp), 'frecuencia ' + nf(2).format(D.acumulado.frecuencia), 'var(--dg-blue)'], ['Inversión', usd(inv), 'CPM ' + usd(inv / imp * 1000), 'var(--dg-purple)'], ['Interacciones', int(it), int(cl) + ' clics al enlace', 'var(--dg-teal)']];
+  document.getElementById('rm-tiles').innerHTML = tiles.map(([a, b, c, col]) => `<div class="rm-tile" style="--c:${col}"><small>${a}</small><b>${b}</b><span>${c}</span></div>`).join('');
+  const mA = Math.max(...d.map((r) => r.alcance)), mI = Math.max(...d.map((r) => r.impresiones));
+  document.getElementById('rm-days').innerHTML = `<div class="rm-keys"><span style="--c:var(--dg-or)">Alcance</span><span style="--c:var(--dg-blue)">Impresiones</span></div>` + d.map((r) => `<div class="rm-day"><span><b style="text-align:left">${fecha(r.fecha)}</b>${r.fecha >= hoy ? '<small>en curso</small>' : ''}</span><div class="bars"><div class="rm-bar" style="--c:var(--dg-or)" title="Alcance ${int(r.alcance)}"><i style="width:${r.alcance / mI * 100}%"></i></div><div class="rm-bar" style="--c:var(--dg-blue)" title="Impresiones ${int(r.impresiones)}"><i style="width:${r.impresiones / mI * 100}%"></i></div></div><span><b style="display:block">${usd(r.costo)}</b><small style="text-align:right">${int(r.alcance)} alcance</small></span></div>`).join('');
+  const c = D.creativos, ci = sum(c, 'impresiones'), ce = sum(c, 'interacciones');
+  document.getElementById('rm-ad-stats').innerHTML = [['Impresiones', int(ci)], ['Interacciones', int(ce)], ['Tasa de interacción', pct(ce / ci, 2)], ['Días al aire', new Set(c.map((r) => r.fecha)).size]].map(([a, b]) => `<div class="dg-stat"><small>${a}</small><b>${b}</b></div>`).join('');
+  const blk = (dim, titulo, n) => { const rows = D.audiencia.filter((r) => r.dimension === dim && r.segmento !== 'Desconocido'), t = rows.reduce((s, r) => s + r.alcance, 0), top = [...rows].sort((a, b) => b.alcance - a.alcance).slice(0, n || 99), mx = Math.max(...top.map((r) => r.alcance));
+    if (dim === 'Edad') top.sort((a, b) => a.segmento.localeCompare(b.segmento));
+    return `<div><h4>${titulo}</h4>${top.map((r) => `<div class="rm-hb"><span>${r.segmento}</span><div><i style="width:${r.alcance / mx * 100}%"></i></div><b>${pct(r.alcance / t, 0)}</b></div>`).join('')}</div>`; };
+  document.getElementById('rm-aud').innerHTML = blk('Género', 'Género') + blk('Edad', 'Edad') + blk('Región', 'Región', 6);
+})();
 </script>
 </div></body></html>
