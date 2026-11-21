@@ -889,7 +889,7 @@ document.getElementById('det-camp').addEventListener('click', (ev) => { const b 
   const daysBox = document.getElementById('rm-days'); daysBox.style.position = 'relative';
   const tp = dg.tip(daysBox);
   daysBox.querySelectorAll('.rm-bar').forEach((b) => { const r = d.find((x) => x.fecha === b.dataset.f);
-    const on = (ev) => tp.show(ev, [fecha(r.fecha) + (r.fecha >= hoy ? ' (en curso)' : ''), 'Alcance: ' + int(r.alcance), 'Impresiones: ' + int(r.impresiones), 'Frecuencia del día: ' + nf(2).format(r.impresiones / r.alcance), 'Inversión: ' + usd(r.costo)]);
+    const on = (ev) => tp.show(ev, [fecha(r.fecha) + (r.fecha >= hoy ? ' (en curso)' : ''), 'Alcance: ' + int(r.alcance), 'Impresiones: ' + int(r.impresiones)]);
     b.addEventListener('pointermove', on); b.addEventListener('pointerdown', on); b.addEventListener('pointerleave', () => tp.hide()); });
   const c = D.creativos, ci = sum(c, 'impresiones'), ce = sum(c, 'interacciones');
   document.getElementById('rm-ad-stats').innerHTML = [['Impresiones', int(ci)], ['Interacciones', int(ce)], ['Tasa de interacción', pct(ce / ci, 2)], ['Días al aire', new Set(c.map((r) => r.fecha)).size]].map(([a, b]) => `<div class="dg-stat"><small>${a}</small><b>${b}</b></div>`).join('');
