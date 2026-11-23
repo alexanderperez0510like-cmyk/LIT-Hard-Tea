@@ -1,28 +1,32 @@
-# Bloques de la hoja "Data LIT 2026", pestaña Data_FB_LANZ_Ads — corte 2026-11-21.
+# Bloques de la hoja "Data LIT 2026", pestaña Data_FB_LANZ_Ads — corte 2026-11-22 (campañas finalizadas).
 # Tráfico (LIT_TRF_META_ADS): fecha alcance impresiones interacciones cpm clics visitas costo_por_visita costo
-TRF = """2026-11-21 10862 13591 310 0.63 287 164 0.05 8.55
-2026-11-20 249836 462069 15106 0.53 14417 4899 0.05 245.87
-2026-11-19 496844 1263305 39600 0.55 37574 12040 0.06 696.88
+TRF = """2026-11-22 52860 112038 1796 0.25 1640 959 0.03 28.3
+2026-11-21 52146 117848 2186 0.36 2009 1194 0.04 42.7
+2026-11-20 250159 462829 15134 0.53 14445 4899 0.05 246.39
+2026-11-19 496844 1263309 39600 0.55 37574 12040 0.06 696.89
 2026-11-18 265021 548374 19366 0.48 18288 6745 0.04 260.63
 2026-11-17 151633 295537 9065 0.61 8136 4782 0.04 181.06
 2026-11-16 136257 178358 3878 0.54 3529 1455 0.07 96.99"""
-TRF_ACUM = (738495, 3.78, 0.54)
-TRF_CRE = """21|MP_DEGUSTACIÓN 3861 4687 57;PPL_DEGUSTACION 7209 8904 253
-20|MP_DEGUSTACIÓN 25077 28816 625;MP_DEGUSTACIÓN 24977 29089 842;PPL_DEGUSTACION 245982 404164 13639
-19|MP_DEGUSTACIÓN 46626 56258 1647;MP_DEGUSTACIÓN 77489 92344 2286;PPL_DEGUSTACION 558128 1114703 35667
+TRF_ACUM = (746257, 3.99, 0.52)
+TRF_CRE = """22|MP_DEGUSTACIÓN 23678 39801 438;PPL_DEGUSTACION 36695 72237 1358
+21|MP_DEGUSTACIÓN 27911 64494 687;PPL_DEGUSTACION 32007 53354 1499
+20|MP_DEGUSTACIÓN 25077 28824 626;MP_DEGUSTACIÓN 24977 29103 842;PPL_DEGUSTACION 246297 404902 13666
+19|MP_DEGUSTACIÓN 46626 56258 1647;MP_DEGUSTACIÓN 77489 92344 2286;PPL_DEGUSTACION 558128 1114707 35667
 18|MP_DEGUSTACIÓN 28394 32826 1054;MP_DEGUSTACIÓN 30545 35836 1256;PPL_DEGUSTACION 285219 479712 17056
 17|MP_DEGUSTACIÓN 26163 29350 709;MP_DEGUSTACIÓN 24147 26725 793;PPL_DEGUSTACION 141406 239462 7563
 16|MP_DEGUSTACIÓN 58299 67742 609;MP_DEGUSTACIÓN 31329 34682 943;PPL_DEGUSTACION 57203 75934 2326"""
 # Audiencia tráfico: segmento alcance clics visitas
-TRF_GEN = [("female",407200,45715,16007),("male",331098,36123,13915),("unknown",3752,393,163)]
-TRF_EDAD = [("25-34",256234,28840,10628),("18-24",146414,12019,4377),("35-44",143833,18502,6899),("45-54",89671,10381,3602),("55-64",58554,6675,2249),("65+",45247,5812,2330)]
-TRF_REG = [("Managua Department",305727,34867),("Masaya Department",61656,7294),("León Department",51451,5544),("Chinandega Department",45288,4650),("Matagalpa Department",42078,4272),("Estelí Department",30946,3007),("Rivas Department",28618,2923),("Granada Department",28488,3186),("Carazo Department",25266,2498),("Chontales Department",23713,1986),("Región Autónoma del Atlántico Sur",23324,2263),("Región Autónoma del Atlántico Norte",20487,2707),("Nueva Segovia Department",20028,2117),("Jinotega Department",19177,1984),("Boaco Department",13814,1334),("Madriz Department",8529,796),("Río San Juan Department",7626,785),("Unknown",148,18)]
+TRF_GEN = [("female",410820,47374,16938),("male",335297,37836,14968),("unknown",3787,411,170)]
+TRF_EDAD = [("25-34",258698,30128,11397),("18-24",147507,12763,4784),("35-44",146092,19333,7400),("45-54",90927,10711,3813),("55-64",58709,6790,2314),("65+",45348,5894,2368)]
+TRF_REG = [("Managua Department",308252,36563),("Masaya Department",62387,7843),("León Department",51851,5782),("Chinandega Department",45413,4792),("Matagalpa Department",42403,4351),("Estelí Department",31285,3088),("Rivas Department",29054,3044),("Granada Department",28767,3364),("Carazo Department",25553,2613),("Chontales Department",23829,2019),("Región Autónoma del Atlántico Sur",23454,2292),("Región Autónoma del Atlántico Norte",20526,2739),("Nueva Segovia Department",20167,2137),("Jinotega Department",19284,2012),("Boaco Department",13884,1355),("Madriz Department",8619,810),("Río San Juan Department",7672,797),("Unknown",151,20)]
 # Remarketing (LIT_RMKT_META_ADS): fecha alcance impresiones interacciones cpm clics visitas costo
-RMKT = """2026-11-21 30329 32696 21 0.21 8 0 7
-2026-11-20 26380 28716 30 0.24 12 0 6.97"""
-RMKT_ACUM = (56469, 1.08, 0.23)
-RMKT_CRE = """2026-11-21 MP_DEGUSTACION_REFUERZO 30790 33079 21
-2026-11-20 MP_DEGUSTACION_REFUERZO 26380 28717 30"""
-RMKT_GEN = [("male",32739,11,0),("female",24611,8,0),("unknown",200,1,0)]
-RMKT_EDAD = [("25-34",18327,3,0),("18-24",15201,10,0),("35-44",12710,5,0),("45-54",8825,1,0),("55-64",2813,1,0),("65+",1355,0,0)]
-RMKT_REG = [("Managua Department",20335,7),("León Department",4402,0),("Masaya Department",4400,2),("Matagalpa Department",4087,4),("Chinandega Department",3916,0),("Estelí Department",2525,1),("Rivas Department",2296,0),("Nueva Segovia Department",2250,0),("Granada Department",2245,2),("Región Autónoma del Atlántico Norte",2229,0),("Región Autónoma del Atlántico Sur",2078,1),("Jinotega Department",1978,0),("Carazo Department",1914,1),("Chontales Department",1865,1),("Boaco Department",1331,0),("Madriz Department",947,0),("Río San Juan Department",756,1),("Unknown",7,0)]
+RMKT = """2026-11-22 96808 102685 50 0.2 18 0 20.64
+2026-11-21 93564 100401 61 0.21 23 0 21.28
+2026-11-20 26493 28838 30 0.24 12 0 7"""
+RMKT_ACUM = (178961, 1.3, 0.21)
+RMKT_CRE = """2026-11-22 MP_DEGUSTACION_REFUERZO 96808 102685 50
+2026-11-21 MP_DEGUSTACION_REFUERZO 93564 100401 61
+2026-11-20 MP_DEGUSTACION_REFUERZO 26493 28838 30"""
+RMKT_GEN = [("male",98043,37,0),("female",77158,15,0),("unknown",609,1,0)]
+RMKT_EDAD = [("25-34",52512,8,0),("18-24",44213,20,0),("35-44",36086,14,0),("45-54",24024,4,0),("55-64",12749,6,0),("65+",7000,1,0)]
+RMKT_REG = [("Managua Department",63866,22),("Masaya Department",13312,4),("León Department",12429,4),("Matagalpa Department",11711,4),("Chinandega Department",10911,0),("Estelí Department",7545,4),("Nueva Segovia Department",6825,0),("Rivas Department",6781,2),("Granada Department",6569,6),("Región Autónoma del Atlántico Norte",6010,0),("Jinotega Department",5908,0),("Carazo Department",5875,4),("Región Autónoma del Atlántico Sur",5813,1),("Chontales Department",5284,1),("Boaco Department",3907,0),("Madriz Department",2695,0),("Río San Juan Department",2153,1),("Unknown",17,0)]
