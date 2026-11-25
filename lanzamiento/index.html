@@ -67,7 +67,7 @@ html, body { margin: 0; background: var(--color-bg); color: var(--color-fg); fon
   });
 })();
 </script><div id="dash-root"><link rel="stylesheet" href="portada.css">
-<link rel="stylesheet" href="creativos.css?v=1119a">
+<link rel="stylesheet" href="creativos.css?v=1125a">
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
 .lz { --font-anthropic-sans: "Montserrat", system-ui, -apple-system, "Segoe UI", sans-serif; --font-anthropic-serif: "Montserrat", system-ui, -apple-system, "Segoe UI", sans-serif;
@@ -150,7 +150,8 @@ html, body { margin: 0; background: var(--color-bg); color: var(--color-fg); fon
 .lz-list { margin: 0; padding-left: 1.1rem; display: flex; flex-direction: column; gap: 10px; line-height: 1.5; }
 .lz-list li::marker { color: var(--color-fg-muted); }
 .lz-tag { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; margin-right: 4px; color: var(--c, var(--color-fg-muted)); }
-.lz-vids { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--cds-gap-sm); }
+.lz-vids { display: grid; grid-template-columns: repeat(var(--n, 3), minmax(0, 1fr)); gap: var(--cds-gap-sm); }
+@container (max-width: 900px) { .lz-vids { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @container (max-width: 560px) { .lz-vids { grid-template-columns: 1fr; } }
 .lz-vid { border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); padding: var(--cds-pad-md); display: flex; flex-direction: column; align-items: center; gap: 4px; text-align: center; min-width: 0; font-size: var(--cds-font-size-caption); font-variant-numeric: tabular-nums; }
 .lz-vid svg { width: 100%; max-width: 84px; height: auto; display: block; }
@@ -406,7 +407,7 @@ html, body { margin: 0; background: var(--color-bg); color: var(--color-fg); fon
         <li><span class="lz-tag" style="--c: var(--lz-amber)">Costos</span><b data-draw="num" data-source="hallazgos" data-field="cpm_min_canal" data-row="0" data-fmt="text">—</b> tiene el CPM más bajo (<b data-draw="num" data-source="hallazgos" data-field="cpm_min" data-row="0" data-fmt="usd2">—</b>) y <b data-draw="num" data-source="hallazgos" data-field="cpm_max_canal" data-row="0" data-fmt="text">—</b> el más alto (<b data-draw="num" data-source="hallazgos" data-field="cpm_max" data-row="0" data-fmt="usd2">—</b>).</li>
         <li><span class="lz-tag" style="--c: var(--c-ig)">Interacción</span><b data-draw="num" data-source="hallazgos" data-field="tasa_mejor_canal" data-row="0" data-fmt="text">—</b> interactúa al <b data-draw="num" data-source="hallazgos" data-field="tasa_mejor" data-row="0" data-fmt="pct2">—</b> de sus impresiones, contra <b data-draw="num" data-source="hallazgos" data-field="tasa_otro" data-row="0" data-fmt="pct2">—</b> de <b data-draw="num" data-source="hallazgos" data-field="tasa_otro_canal" data-row="0" data-fmt="text">—</b>.</li>
         <li><span class="lz-tag" style="--c: var(--lz-orange)">Formato</span>El <b data-draw="num" data-source="formatos" data-field="nombre" data-row="0" data-fmt="text">—</b> logra <b data-draw="num" data-source="formatos" data-field="tasa" data-row="0" data-fmt="pct2">—</b> de interacción, el <b data-draw="num" data-source="formatos" data-field="nombre" data-row="1" data-fmt="text">—</b> <b data-draw="num" data-source="formatos" data-field="tasa" data-row="1" data-fmt="pct2">—</b> y el <b data-draw="num" data-source="formatos" data-field="nombre" data-row="2" data-fmt="text">—</b> <b data-draw="num" data-source="formatos" data-field="tasa" data-row="2" data-fmt="pct2">—</b>. El estático concentra el <b data-draw="num" data-source="formatos" data-field="peso" data-where="tipo=PPL" data-fmt="pct0">—</b> de las impresiones de Meta: alcanza mucho, pero genera poca interacción.</li>
-        <li><span class="lz-tag" style="--c: var(--c-yt)">YouTube</span>El video de lanzamiento, <b data-draw="num" data-source="hallazgos" data-field="video_lanz" data-row="0" data-fmt="text">—</b>, suma <b data-draw="num" data-source="hallazgos" data-field="video_lanz_views" data-row="0" data-fmt="int">—</b> views (<b data-draw="num" data-source="hallazgos" data-field="video_lanz_share" data-row="0" data-fmt="pct0">—</b> del total) con una tasa de view de <b data-draw="num" data-source="hallazgos" data-field="video_lanz_vtr" data-row="0" data-fmt="pct1">—</b>; los dos videos de expectativa aportaron <b data-draw="num" data-source="hallazgos" data-field="exp_views" data-row="0" data-fmt="int">—</b> views al inicio de la fase.</li>
+        <li><span class="lz-tag" style="--c: var(--c-yt)">YouTube</span>El video principal de lanzamiento, <b data-draw="num" data-source="hallazgos" data-field="video_lanz" data-row="0" data-fmt="text">—</b>, suma <b data-draw="num" data-source="hallazgos" data-field="video_lanz_views" data-row="0" data-fmt="int">—</b> views (<b data-draw="num" data-source="hallazgos" data-field="video_lanz_share" data-row="0" data-fmt="pct0">—</b> del total) con una tasa de view de <b data-draw="num" data-source="hallazgos" data-field="video_lanz_vtr" data-row="0" data-fmt="pct1">—</b>; los dos videos de expectativa aportaron <b data-draw="num" data-source="hallazgos" data-field="exp_views" data-row="0" data-fmt="int">—</b> views al inicio de la fase.</li>
         <li><span class="lz-tag" style="--c: var(--lz-purple)">Audiencia</span>Edad principal: Facebook <b data-draw="num" data-source="hallazgos" data-field="edad_fb" data-row="0" data-fmt="text">—</b>, Instagram <b data-draw="num" data-source="hallazgos" data-field="edad_ig" data-row="0" data-fmt="text">—</b> y YouTube <b data-draw="num" data-source="hallazgos" data-field="edad_yt" data-row="0" data-fmt="text">—</b>. Managua pesa <b data-draw="num" data-source="hallazgos" data-field="managua_yt" data-row="0" data-fmt="pct0">—</b> en YouTube y <b data-draw="num" data-source="hallazgos" data-field="managua_fb" data-row="0" data-fmt="pct0">—</b> en Facebook.</li>
       </ul>
     </section>
@@ -751,15 +752,15 @@ dash.calc('formatos', {
 dash.calc('videos', {
   inputs: ['videos_yt'],
   title: 'Resultados por video de YouTube',
-  description: 'Impresiones y views de cada video sumados por día; inversión = views × costo por view del día; tasa de view = views ÷ impresiones. iW4HUcuY28k (LIT Hard Tea: Listo para disfrutar) es el video de lanzamiento; los demás son videos de expectativa que corrieron al inicio de la fase.',
+  description: 'Impresiones y views de cada video sumados por día; inversión = views × costo por view del día; tasa de view = views ÷ impresiones. iW4HUcuY28k (LIT Hard Tea: Listo para disfrutar) y VPOucsDFGTY (Lit Hard Tea: Tu nuevo favorito) son los videos de lanzamiento; los demás son videos de expectativa que corrieron al inicio de la fase.',
   fn: (videos_yt) => {
     const m = new Map();
     for (const r of videos_yt) {
       const a = m.get(r.video_id) || { impresiones: 0, views: 0, costo: 0, nombre: r.nombre || r.video_id };
       a.impresiones += Number(r.impresiones); a.views += Number(r.views); a.costo += Number(r.views) * Number(r.costo_por_view); m.set(r.video_id, a);
     }
-    const LANZ = 'iW4HUcuY28k';
-    return [...m].map(([video_id, a]) => ({ video_id, nombre: a.nombre, tipo: video_id === LANZ ? 'Lanzamiento' : 'Expectativa', impresiones: a.impresiones, views: a.views, costo: a.costo,
+    const LANZ = ['iW4HUcuY28k', 'VPOucsDFGTY'];
+    return [...m].map(([video_id, a]) => ({ video_id, nombre: a.nombre, tipo: LANZ.includes(video_id) ? 'Lanzamiento' : 'Expectativa', impresiones: a.impresiones, views: a.views, costo: a.costo,
       vtr: a.impresiones ? a.views / a.impresiones : 0, costo_por_view: a.views ? a.costo / a.views : null })).sort((a, b) => (b.tipo === 'Lanzamiento') - (a.tipo === 'Lanzamiento') || b.views - a.views);
   }
 });
@@ -1192,6 +1193,7 @@ dash.draw('videos', (el) => {
   const d = dash.data('videos');
   el.classList.toggle('dash-skeleton', d.status === 'loading');
   if (d.status !== 'ok' || !d.data) { el.replaceChildren(); return; }
+  el.style.setProperty('--n', Math.min(d.data.length, 4));
   el.replaceChildren(...d.data.map((r) => {
     const c = document.createElement('article'); c.className = 'lz-vid';
     const a = document.createElement('a'); a.href = 'https://www.youtube.com/watch?v=' + encodeURIComponent(r.video_id); a.target = '_blank'; a.rel = 'noopener'; a.textContent = r.nombre || r.video_id; a.setAttribute('aria-label', 'Ver en YouTube: ' + (r.nombre || r.video_id));
