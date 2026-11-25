@@ -33,7 +33,7 @@ new = {
  "diario": csv("canal,fecha,alcance,impresiones,interacciones,reproducciones,thruplays,clics,costo", dia),
  "acumulado": csv("canal,alcance_unico,frecuencia,cpm", [(k,) + v for k, v in H.ACUM.items()]),
  "creativos_meta": csv("canal,fecha,creativo,alcance,impresiones,interacciones", cre),
- "videos_yt": csv("fecha,video_id,impresiones,views,costo_por_view,nombre", [tuple(r) + (names[r[1]],) for r in vy]),
+ "videos_yt": csv("fecha,video_id,impresiones,views,costo_por_view,nombre", [tuple(r) + (names.get(r[1], "Video " + r[1]),) for r in vy]),
  "ubicaciones_meta": csv("plataforma,creativo,alcance,impresiones", [(pl.capitalize(), rn(c), a, i) for pl, c, a, i in lines(H.UBIC)]),
  "audiencia": csv("canal,dimension,segmento,valor", aud)}
 assert set(new) == set(old), set(new) ^ set(old)
