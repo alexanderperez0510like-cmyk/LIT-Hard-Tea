@@ -21,6 +21,7 @@ p = os.path.join(os.path.dirname(__file__), "..", "index.html")
 s = open(p, encoding="utf-8").read()
 old = json.loads(re.search(r"const RAW = (\{.*?\});\n", s, re.S).group(1))
 names = {l.split(",")[1]: l.split(",", 5)[5] for l in old["videos_yt"].strip().split("\n")[1:]}
+names.update({"VPOucsDFGTY": "Lit Hard Tea: Tu nuevo favorito"})  # nombre indicado por el equipo
 vy = sorted(lines(H.VIDEOS), key=lambda r: (r[0], r[1]))
 G = {'male': 'Hombre', 'female': 'Mujer', 'unknown': 'Desconocido', 'MALE': 'Hombre', 'FEMALE': 'Mujer', 'UNDETERMINED': 'Desconocido'}
 R = {'Región Autónoma del Atlántico Norte': 'RACCN', 'Región Autónoma del Atlántico Sur': 'RACCS', 'North Caribbean Coast Autonomous Region': 'RACCN', 'South Caribbean Coast Autonomous Region': 'RACCS', 'Leon': 'León', 'Esteli': 'Estelí', 'Rio San Juan': 'Río San Juan', 'Unknown': 'Desconocido'}
