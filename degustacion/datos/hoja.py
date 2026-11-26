@@ -1,7 +1,8 @@
-# Bloques de la hoja "Data LIT 2026", pestaña Data_FB_LANZ_Ads — corte tráfico 2026-11-25, remarketing 2026-11-22.
+# Bloques de la hoja "Data LIT 2026", pestaña Data_FB_LANZ_Ads — corte tráfico 2026-11-26, remarketing 2026-11-26.
 # Tráfico (LIT_TRF_META_ADS): fecha alcance impresiones interacciones cpm clics visitas costo_por_visita costo
-TRF = """2026-11-25 4618 5225 95 0.34 85 57 0.03 1.8
-2026-11-24 47582 65337 987 0.24 891 490 0.03 15.92
+TRF = """2026-11-26 2981 3406 63 0.35 51 35 0.03 1.18
+2026-11-25 48246 66440 1471 0.32 1340 714 0.03 21.07
+2026-11-24 47990 65755 999 0.24 902 490 0.03 16.03
 2026-11-23 0 0 0 0 0 3 0 0
 2026-11-22 52943 112385 1801 0.25 1645 959 0.03 28.32
 2026-11-21 52146 117848 2186 0.36 2009 1194 0.04 42.7
@@ -10,9 +11,10 @@ TRF = """2026-11-25 4618 5225 95 0.34 85 57 0.03 1.8
 2026-11-18 265021 548374 19366 0.48 18288 6745 0.04 260.63
 2026-11-17 151633 295537 9065 0.61 8136 4782 0.04 181.06
 2026-11-16 136257 178358 3878 0.54 3529 1455 0.07 96.99"""
-TRF_ACUM = (749639, 4.1, 0.51)
-TRF_CRE = """25|MP_DEGUSTACIÓN 1145 1189 25;PPL_DEGUSTACION 3551 4036 70
-24|MP_DEGUSTACIÓN 16411 19205 200;PPL_DEGUSTACION 34484 46132 787
+TRF_ACUM = (751003, 4.16, 0.51)
+TRF_CRE = """26|MP_DEGUSTACIÓN 1126 1313 13;PPL_DEGUSTACION 1902 2060 50
+25|MP_DEGUSTACIÓN 15293 20585 364;PPL_DEGUSTACION 35617 45855 1107
+24|MP_DEGUSTACIÓN 16485 19283 201;PPL_DEGUSTACION 34698 46472 798
 22|MP_DEGUSTACIÓN 23684 39850 439;PPL_DEGUSTACION 36861 72535 1362
 21|MP_DEGUSTACIÓN 27911 64494 687;PPL_DEGUSTACION 32007 53354 1499
 20|MP_DEGUSTACIÓN 25077 28824 626;MP_DEGUSTACIÓN 24977 29103 842;PPL_DEGUSTACION 246297 404902 13666
@@ -21,17 +23,21 @@ TRF_CRE = """25|MP_DEGUSTACIÓN 1145 1189 25;PPL_DEGUSTACION 3551 4036 70
 17|MP_DEGUSTACIÓN 26163 29350 709;MP_DEGUSTACIÓN 24147 26725 793;PPL_DEGUSTACION 141406 239462 7563
 16|MP_DEGUSTACIÓN 58299 67742 609;MP_DEGUSTACIÓN 31329 34682 943;PPL_DEGUSTACION 57203 75934 2326"""
 # Audiencia tráfico: segmento alcance clics visitas
-TRF_GEN = [('female', 411707, 47830, 17169), ('male', 336243, 38353, 15282), ('unknown', 3811, 419, 173)]
-TRF_EDAD = [('25-34', 259751, 30545, 11616), ('18-24', 148423, 12984, 4905), ('35-44', 147448, 19542, 7526), ('45-54', 90959, 10802, 3871), ('55-64', 58794, 6823, 2330), ('65+', 45369, 5904, 2376)]
-TRF_REG = [('Managua Department', 309911, 37050), ('Masaya Department', 62715, 7978), ('León Department', 52018, 5871), ('Chinandega Department', 45801, 4831), ('Matagalpa Department', 42550, 4384), ('Estelí Department', 31392, 3102), ('Rivas Department', 29272, 3086), ('Granada Department', 28886, 3424), ('Carazo Department', 25762, 2642), ('Chontales Department', 23892, 2029), ('Región Autónoma del Atlántico Sur', 23484, 2302), ('Región Autónoma del Atlántico Norte', 20539, 2742), ('Nueva Segovia Department', 20199, 2145), ('Jinotega Department', 19327, 2016), ('Boaco Department', 13926, 1362), ('Madriz Department', 8634, 819), ('Río San Juan Department', 7696, 799), ('Unknown', 159, 20)]
+TRF_GEN = [('female', 415295, 48465, 17484), ('male', 338819, 39026, 15653), ('unknown', 3836, 428, 179)]
+TRF_EDAD = [('25-34', 262092, 31082, 11924), ('18-24', 149624, 13214, 5012), ('35-44', 148083, 19862, 7690), ('45-54', 91363, 10956, 3944), ('55-64', 58857, 6879, 2360), ('65+', 45427, 5924, 2386)]
+TRF_REG = [('Managua Department', 311736, 37710), ('Masaya Department', 62955, 8173), ('León Department', 52339, 5981), ('Chinandega Department', 45950, 4871), ('Matagalpa Department', 42653, 4410), ('Estelí Department', 31498, 3130), ('Rivas Department', 29363, 3122), ('Granada Department', 29094, 3484), ('Carazo Department', 25808, 2707), ('Chontales Department', 23988, 2040), ('Región Autónoma del Atlántico Sur', 23571, 2312), ('Región Autónoma del Atlántico Norte', 20641, 2758), ('Nueva Segovia Department', 20386, 2159), ('Jinotega Department', 19413, 2033), ('Boaco Department', 13980, 1380), ('Madriz Department', 8714, 826), ('Río San Juan Department', 7702, 803), ('Unknown', 167, 20)]
 # Remarketing (LIT_RMKT_META_ADS): fecha alcance impresiones interacciones cpm clics visitas costo
-RMKT = """2026-11-22 97154 103196 50 0.2 18 0 20.71
+RMKT = """2026-11-26 2981 3139 1 0.21 1 0 0.65
+2026-11-25 32435 34113 12 0.2 7 0 6.8
+2026-11-22 97154 103196 50 0.2 18 0 20.71
 2026-11-21 93564 100401 61 0.21 23 0 21.28
 2026-11-20 26493 28838 30 0.24 12 0 7"""
-RMKT_ACUM = (179668, 1.29, 0.21)
-RMKT_CRE = """2026-11-22 MP_DEGUSTACION_REFUERZO 97154 103196 50
+RMKT_ACUM = (205349, 1.37, 0.21)
+RMKT_CRE = """2026-11-26 MP_DEGUSTACION_REFUERZO 2981 3139 1
+2026-11-25 MP_DEGUSTACION_REFUERZO 32435 34113 12
+2026-11-22 MP_DEGUSTACION_REFUERZO 97154 103196 50
 2026-11-21 MP_DEGUSTACION_REFUERZO 93564 100401 61
 2026-11-20 MP_DEGUSTACION_REFUERZO 26493 28838 30"""
-RMKT_GEN = [('male', 98218, 37, 0), ('female', 77393, 15, 0), ('unknown', 611, 1, 0)]
-RMKT_EDAD = [('25-34', 52561, 8, 0), ('18-24', 44290, 20, 0), ('35-44', 36127, 14, 0), ('45-54', 24054, 4, 0), ('55-64', 12801, 6, 0), ('65+', 7012, 1, 0)]
-RMKT_REG = [('Managua Department', 63977, 22), ('Masaya Department', 13318, 4), ('León Department', 12431, 4), ('Matagalpa Department', 11730, 4), ('Chinandega Department', 10930, 0), ('Estelí Department', 7545, 4), ('Nueva Segovia Department', 6829, 0), ('Rivas Department', 6799, 2), ('Granada Department', 6593, 6), ('Región Autónoma del Atlántico Norte', 6015, 0), ('Jinotega Department', 5912, 0), ('Carazo Department', 5879, 4), ('Región Autónoma del Atlántico Sur', 5829, 1), ('Chontales Department', 5284, 1), ('Boaco Department', 3916, 0), ('Madriz Department', 2697, 0), ('Río San Juan Department', 2153, 1), ('Unknown', 17, 0)]
+RMKT_GEN = [('male', 108230, 42, 0), ('female', 85215, 18, 0), ('unknown', 682, 1, 0)]
+RMKT_EDAD = [('25-34', 59634, 13, 0), ('18-24', 47343, 21, 0), ('35-44', 40522, 16, 0), ('45-54', 26364, 4, 0), ('55-64', 13059, 6, 0), ('65+', 7012, 1, 0)]
+RMKT_REG = [('Managua Department', 72550, 27), ('Masaya Department', 14647, 4), ('León Department', 13508, 5), ('Matagalpa Department', 12613, 5), ('Chinandega Department', 11827, 0), ('Estelí Department', 8344, 4), ('Rivas Department', 7570, 2), ('Nueva Segovia Department', 7429, 0), ('Granada Department', 7326, 6), ('Carazo Department', 6475, 4), ('Jinotega Department', 6453, 0), ('Región Autónoma del Atlántico Norte', 6427, 0), ('Región Autónoma del Atlántico Sur', 6335, 1), ('Chontales Department', 5713, 1), ('Boaco Department', 4259, 0), ('Madriz Department', 2975, 0), ('Río San Juan Department', 2334, 2), ('Unknown', 30, 0)]
