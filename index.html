@@ -208,22 +208,21 @@ html, body { margin: 0; background: var(--color-bg); color: var(--color-fg); fon
     <p class="lit-note">Una frecuencia mayor a la planificada indica más impactos por persona de lo previsto.</p>
   </section>
 
-  <div class="lit-grid">
-    <section class="lit-card" id="entrega-diaria">
+  <div class="lit-grid" style="align-items:stretch">
+    <section class="lit-card" id="entrega-diaria" style="display:flex;flex-direction:column">
       <h2>Entrega diaria</h2>
       <div class="lit-legend"><span><span class="lit-sw" data-draw="sw" data-c="--lit-blue"></span>Impresiones</span><span><span class="lit-sw lit-sw-line" data-draw="sw" data-c="--lit-orange"></span>Alcance del día</span></div>
-      <div class="lit-chart" data-draw="chart-diario" data-source="diario">—</div>
+      <div class="lit-chart" data-draw="chart-diario" data-source="diario" style="flex:1 1 auto;min-height:240px">—</div>
     </section>
 
     <section class="lit-card" id="hallazgos-clave">
-      <h2>Hallazgos clave</h2>
+      <h2>Hallazgos estratégicos</h2>
       <ul class="lit-list" data-read lang="es">
-        <li><span class="lit-tag lit-c-green">Metas</span>Se alcanzaron <b data-draw="num" data-source="hallazgos" data-field="metas_alcanzadas" data-row="0" data-fmt="int">—</b> de <b data-draw="num" data-source="hallazgos" data-field="metas_total" data-row="0" data-fmt="int">—</b> metas: impresiones al <b data-draw="num" data-source="metas" data-field="cumplimiento" data-where="indicador_id=impresiones" data-fmt="pct0">—</b> y alcance al <b data-draw="num" data-source="metas" data-field="cumplimiento" data-where="indicador_id=alcance" data-fmt="pct0">—</b> del plan.</li>
-        <li><span class="lit-tag lit-c-blue">Entrega</span>El pico fue el <b data-draw="num" data-source="hallazgos" data-field="dia_pico" data-row="0" data-fmt="fecha">—</b> con <b data-draw="num" data-source="hallazgos" data-field="imp_pico" data-row="0" data-fmt="int">—</b> impresiones. El primer día (<b data-draw="num" data-source="hallazgos" data-field="primer_dia" data-row="0" data-fmt="fecha">—</b>) entregó <b data-draw="num" data-source="hallazgos" data-field="imp_primer_dia" data-row="0" data-fmt="int">—</b>.</li>
-        <li><span class="lit-tag lit-c-orange">Interacción</span><span data-er="cae">La tasa de interacción bajó de <b data-draw="num" data-source="hallazgos" data-field="er_max" data-row="0" data-fmt="pct2">—</b> (<b data-draw="num" data-source="hallazgos" data-field="er_max_fecha" data-row="0" data-fmt="fecha">—</b>) a <b data-draw="num" data-source="hallazgos" data-field="er_ultimo" data-row="0" data-fmt="pct2">—</b> en el último día, con impresiones estables: hay señales de desgaste de las piezas.</span><span data-er="estable" hidden>La tasa de interacción del último día (<b data-draw="num" data-source="hallazgos" data-field="er_ultimo" data-row="0" data-fmt="pct2">—</b>) se mantiene cerca de su mejor nivel.</span></li>
-        <li><span class="lit-tag lit-c-amber">Formatos</span><b data-draw="num" data-source="hallazgos" data-field="formato_mejor" data-row="0" data-fmt="text">—</b> tiene la mejor tasa de interacción (<b data-draw="num" data-source="hallazgos" data-field="formato_mejor_tasa" data-row="0" data-fmt="pct2">—</b>) con solo el <b data-draw="num" data-source="hallazgos" data-field="formato_mejor_participacion" data-row="0" data-fmt="pct1">—</b> de las impresiones; <b data-draw="num" data-source="hallazgos" data-field="formato_top" data-row="0" data-fmt="text">—</b>, con el <b data-draw="num" data-source="hallazgos" data-field="formato_top_participacion" data-row="0" data-fmt="pct1">—</b>, interactúa al <b data-draw="num" data-source="hallazgos" data-field="formato_top_tasa" data-row="0" data-fmt="pct2">—</b>.</li>
-        <li><span class="lit-tag lit-c-ig">Ubicaciones</span><b data-draw="num" data-source="hallazgos" data-field="plataforma_top" data-row="0" data-fmt="text">—</b> entrega el <b data-draw="num" data-source="hallazgos" data-field="plataforma_top_participacion" data-row="0" data-fmt="pct1">—</b> de las impresiones <span data-draw="conj-plat">y</span> <b data-draw="num" data-source="hallazgos" data-field="plataforma_2" data-row="0" data-fmt="text">—</b> el <b data-draw="num" data-source="hallazgos" data-field="plataforma_2_participacion" data-row="0" data-fmt="pct1">—</b>.</li>
-        <li><span class="lit-tag lit-c-purple">Audiencia</span>El grupo de <b data-draw="num" data-source="hallazgos" data-field="edad_top" data-row="0" data-fmt="text">—</b> años es el de mayor alcance (<b data-draw="num" data-source="hallazgos" data-field="edad_top_participacion" data-row="0" data-fmt="pct1">—</b>) y <b data-draw="num" data-source="hallazgos" data-field="region_top" data-row="0" data-fmt="text">—</b> concentra el <b data-draw="num" data-source="hallazgos" data-field="region_top_participacion" data-row="0" data-fmt="pct1">—</b> del alcance.</li>
+        <li><span class="lit-tag lit-c-orange">Creatividad</span>El <b>video</b> fue el motor de la conversación: <b>11.2%</b> de interacción contra <b>0.06%</b> de los estáticos, con apenas el <b>2.3%</b> de las impresiones.<br><small style="display:block;margin-top:4px;opacity:.8"><b>Oportunidad:</b> En la próxima expectativa, asignar al video al menos una cuarta parte de la inversión y usar los estáticos solo para cobertura.</small></li>
+        <li><span class="lit-tag lit-c-blue">Ritmo</span>La curiosidad se agota rápido: la interacción cayó de <b>0.40%</b> el 4 de noviembre a <b>0.26%</b> al sexto día, con la misma entrega diaria.<br><small style="display:block;margin-top:4px;opacity:.8"><b>Oportunidad:</b> Expectativas de 3 a 4 días o rotación de piezas cada dos días, con pistas nuevas que mantengan el misterio.</small></li>
+        <li><span class="lit-tag lit-c-amber">Mensajes</span>Entre los estáticos, <b>V7</b> (0.11%) y <b>V5</b> (0.10%) duplicaron la respuesta de <b>V3</b> (0.04%), pero <b>V4</b> se llevó el 31% de las impresiones por su bajo costo.<br><small style="display:block;margin-top:4px;opacity:.8"><b>Oportunidad:</b> Identificar qué tienen en común V7 y V5 (mensaje, visual, pregunta) y forzar su peso con presupuesto por anuncio.</small></li>
+        <li><span class="lit-tag lit-c-ig">Plataforma</span>Facebook entregó el <b>90%</b> de las impresiones e Instagram solo el <b>9%</b>, aunque el núcleo de la marca tiene 18-34 años (56% del alcance).<br><small style="display:block;margin-top:4px;opacity:.8"><b>Oportunidad:</b> Abrir historias y reels en Instagram con formatos de revelación (cuenta regresiva, encuestas) para el público más joven.</small></li>
+        <li><span class="lit-tag lit-c-purple">Audiencia</span>El grupo de <b>25-34</b> años fue el de mayor alcance (33%) y el 63% del alcance estuvo fuera de Managua, con Matagalpa, Masaya, Chinandega y León a la cabeza.<br><small style="display:block;margin-top:4px;opacity:.8"><b>Oportunidad:</b> Llevar la expectativa a lo local: pistas con lugares y planes de cada departamento para generar conversación regional.</small></li>
       </ul>
     </section>
   </div>
@@ -565,7 +564,7 @@ dash.draw('chart-diario', (el) => {
   const rows = d.data.map((r) => ({ fecha: r.fecha, imp: +r.impresiones, alc: +r.alcance, inter: +r.interacciones, cpm: +r.cpm, vid: +r.reproducciones_video, costo: +r.costo_total }))
     .sort((a, b) => a.fecha < b.fecha ? -1 : 1);
   el.replaceChildren();
-  const W = Math.max(el.clientWidth || 600, 280), H = 240, m = { t: 20, r: 6, b: 24, l: 6 };
+  const W = Math.max(el.clientWidth || 600, 280), H = Math.max(240, (el.clientHeight || 240) - 8), m = { t: 20, r: 6, b: 24, l: 6 };
   const y = d3.scaleLinear().domain([0, d3.max(rows, (r) => Math.max(r.imp, r.alc)) * 1.12]).nice(4);
   const svg = d3.select(el).append('svg').attr('width', '100%').attr('viewBox', `0 0 ${W} ${H}`).attr('role', 'img')
     .attr('aria-label', 'Impresiones y alcance por día de campaña');

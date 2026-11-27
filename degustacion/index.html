@@ -198,6 +198,7 @@ html, body { margin: 0; background: var(--color-bg); color: var(--color-fg); fon
 .dg-chart .halo { paint-order: stroke; stroke: var(--dg-panel); stroke-width: 4px; stroke-linejoin: round; }
 .dg-tip { position: absolute; z-index: 4; pointer-events: none; background: var(--cds-surface-popover); border: 1px solid var(--cds-border); box-shadow: var(--cds-shadow-popover); border-radius: 8px; padding: 7px 10px; font-size: 12px; line-height: 1.45; white-space: nowrap; font-variant-numeric: tabular-nums; }
 .dg-funnel { display: flex; flex-direction: column; gap: 6px; }
+#card-embudo .dg-funnel { flex: 1 1 auto; justify-content: space-evenly; }
 .dg-step { display: grid; grid-template-columns: 150px minmax(0, 1fr); gap: 14px; align-items: center; }
 .dg-step-l { display: flex; flex-direction: column; gap: 2px; }
 .dg-step-l b { font-size: 13px; }
@@ -327,14 +328,8 @@ html, body { margin: 0; background: var(--color-bg); color: var(--color-fg); fon
       <div class="dg-funnel" data-draw="embudo" data-source="embudo"></div>
     </section>
     <section class="dg-card g4" id="hallazgos">
-      <h3>Hallazgos clave</h3>
-      <ul class="dg-list">
-        <li style="--c: var(--dg-or)"><i>1</i><span>De cada 100 clics, <b data-draw="num" data-source="totales" data-field="visitas_100" data-row="0" data-fmt="int">—</b> llegan a ver la página cargada.</span></li>
-        <li style="--c: var(--dg-blue)"><i>2</i><span>El CTR es <b data-draw="num" data-source="totales" data-field="ctr" data-row="0" data-fmt="pct2">—</b>: <b data-draw="num" data-source="totales" data-field="clics_1000" data-row="0" data-fmt="dec2">—</b> clics por cada 1,000 impresiones.</span></li>
-        <li style="--c: var(--dg-lime)"><i>3</i><span>Los jóvenes adultos (25 años en adelante) suman <b data-draw="num" data-source="conjuntos" data-field="clics" data-where="conjunto=adultos" data-fmt="int">—</b> clics contra <b data-draw="num" data-source="conjuntos" data-field="clics" data-where="conjunto=jovenes" data-fmt="int">—</b> de los jóvenes (18-24), y cada una de sus edades tiene un CTR de entre <b data-draw="num" data-source="conjuntos" data-field="ctr_min" data-where="conjunto=adultos" data-fmt="pct2">—</b> y <b data-draw="num" data-source="conjuntos" data-field="ctr_max" data-where="conjunto=adultos" data-fmt="pct2">—</b>, contra <b data-draw="num" data-source="conjuntos" data-field="ctr_min" data-where="conjunto=jovenes" data-fmt="pct2">—</b> de 18-24.</span></li>
-        <li style="--c: var(--dg-purple)"><i>4</i><span>Managua aporta el <b data-draw="num" data-source="hallazgos" data-field="managua_clics" data-row="0" data-fmt="pct0">—</b> de los clics con el <b data-draw="num" data-source="hallazgos" data-field="managua_alcance" data-row="0" data-fmt="pct0">—</b> del alcance.</span></li>
-        <li style="--c: var(--dg-teal)"><i>5</i><span data-draw="num" data-source="hallazgos" data-field="meta_txt" data-row="0" data-fmt="text">—</span></li>
-      </ul>
+      <h3>Hallazgos estratégicos</h3>
+      <ul class="dg-list" data-draw="estrategia" data-source="aud"></ul>
     </section>
   </div>
 
@@ -660,6 +655,27 @@ dash.draw('num', (el) => {
   const v = r ? r[el.dataset.field] : null;
   const f = dg.fmt[el.dataset.fmt] || dg.fmt.text;
   el.textContent = v === null || v === undefined || (typeof v === 'number' && !isFinite(v)) ? '—' : f(v);
+});
+
+dash.draw('estrategia', (el) => {
+  const g = (k) => { const d = dash.data(k); return d.status === 'ok' && Array.isArray(d.data) ? d.data : null; };
+  const dia = g('por_dia'), an = g('anuncios'), aud = g('aud'), tot = g('totales');
+  if (!dia || !an || !aud || !tot || !tot[0]) { el.replaceChildren(); return; }
+  const f = dg.fmt, P = (v) => f.pct1(v), hoy = new Date(Date.now() - 6 * 3600e3).toISOString().slice(0, 10);
+  const wd = (s) => new Date(String(s).slice(0, 10) + 'T12:00:00Z').getUTCDay(), ok = dia.filter((r) => String(r.fecha).slice(0, 10) < hoy && r.impresiones > 0);
+  const ag = (rs) => { const i = rs.reduce((s, r) => s + r.impresiones, 0), c = rs.reduce((s, r) => s + r.clics, 0), v = rs.reduce((s, r) => s + r.visitas, 0); return { ctr: i ? c / i : 0, lle: c ? v / c : 0 }; };
+  const mid = ag(ok.filter((r) => [3, 4, 5].includes(wd(r.fecha)))), fin = ag(ok.filter((r) => [6, 0].includes(wd(r.fecha))));
+  const t = tot[0], A = (n) => an.find((r) => r.anuncio === n) || {}, ppl = A('PPL_DEGUSTACION'), mp = A('MP_DEGUSTACIÓN'), ref = A('MP_DEGUSTACION_REFUERZO');
+  const ed = aud.filter((r) => r.dimension === 'Edad' && r.segmento !== 'Desconocido' && r.alcance >= 1000).sort((a, b) => b.ctr - a.ctr), j = aud.find((r) => r.dimension === 'Edad' && r.segmento === '18-24') || {};
+  const rg = aud.filter((r) => r.dimension === 'Región' && r.segmento !== 'Desconocido' && r.alcance >= 10000).sort((a, b) => b.ctr - a.ctr);
+  const it = [
+    ['var(--dg-or)', `<b>Miércoles a viernes</b> es el momento de decidir el plan: CTR de <b>${P(mid.ctr)}</b> frente a <b>${P(fin.ctr)}</b> el fin de semana, cuando hay menos clics pero más calificados (${f.pct0(fin.lle)} llega a la página).`, 'Concentrar inversión de miércoles a viernes y usar el fin de semana para recordar fecha y lugar.'],
+    ['var(--dg-blue)', `La invitación directa funciona: el estático <b>PPL_DEGUSTACION</b> interactúa al <b>${P(ppl.tasa || 0)}</b>, el carrusel al ${P(mp.tasa || 0)} y el refuerzo apenas al ${P(ref.tasa || 0)}.`, 'Renovar el refuerzo con urgencia y datos concretos: “este fin de semana”, lugar, hora y lo que se va a probar.'],
+    ['var(--dg-lime)', `Los mayores de 35 tienen mejor CTR (<b>${ed[0].segmento}</b> ${P(ed[0].ctr)}, ${ed[1].segmento} ${P(ed[1].ctr)}) que el público de 18-24 (${P(j.ctr || 0)}).`, 'Presentar la degustación como plan social con amigos y pareja para 25-44 y probar mensajes para adultos que buscan algo nuevo.'],
+    ['var(--dg-purple)', `<b>${rg[0].segmento}</b> (${P(rg[0].ctr)}) y <b>${rg[1].segmento}</b> (${P(rg[1].ctr)}) responden mejor que el promedio; ${rg[rg.length - 1].segmento} queda en ${P(rg[rg.length - 1].ctr)}.`, `Priorizar ${rg[0].segmento} y ${rg[1].segmento} para las próximas sedes de degustación.`],
+    ['var(--dg-teal)', `La intención existe (<b>${f.int(t.clics)}</b> clics), pero solo <b>${f.int(t.visitas_100)}</b> de cada 100 llegan a ver la página.`, 'Aligerar la página para móvil y agregar mapa y botón de WhatsApp para convertir más clics en asistentes.']
+  ];
+  el.innerHTML = it.map(([c, x, o], i) => `<li style="--c: ${c}"><i>${i + 1}</i><span>${x}<br><small style="display:block;margin-top:4px;color:var(--color-text-secondary, #5b6475)"><b style="color:${c}">Oportunidad:</b> ${o}</small></span></li>`).join('');
 });
 
 dash.draw('metas', (el) => {
