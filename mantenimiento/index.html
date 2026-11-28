@@ -29,7 +29,7 @@ h1, h2, h3, h4, p { margin: 0; }
 /* ---------- Hero ---------- */
 .hero { position: relative; overflow: hidden; color: #fff; background: radial-gradient(900px 600px at 80% 20%, #2a8cff 0%, transparent 60%), linear-gradient(135deg, #1440b8 0%, #0b2a85 60%, #071a57 100%); }
 .hero::before { content: ""; position: absolute; inset: 0; background: radial-gradient(circle at 15% 85%, rgba(156,211,59,.35), transparent 35%), radial-gradient(circle at 60% 110%, rgba(255,210,26,.35), transparent 40%); }
-.hero-in { position: relative; max-width: 1280px; margin: 0 auto; padding: 36px 92px 0 32px; display: grid; grid-template-columns: 1.2fr .8fr; gap: 24px; align-items: end; min-height: 560px; }
+.hero-in { position: relative; max-width: 1280px; margin: 0 auto; padding: 36px 92px 0 32px; display: grid; grid-template-columns: 1.5fr .5fr; gap: 24px; align-items: end; min-height: 560px; }
 .hero-top { display: flex; align-items: center; gap: 14px; margin-bottom: 26px; }
 .hero-top img { height: 30px; width: auto; }
 .hero-top span { font-size: 11px; letter-spacing: .24em; text-transform: uppercase; font-weight: 700; opacity: .85; }
@@ -38,7 +38,8 @@ h1, h2, h3, h4, p { margin: 0; }
 .hero h1 { font-size: clamp(40px, 6vw, 78px); font-weight: 900; line-height: .95; margin: 18px 0 10px; letter-spacing: -.02em; }
 .hero h1 b { color: var(--yellow); }
 .hero p.lead { font-size: 16px; max-width: 560px; opacity: .92; }
-.counters { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin: 30px 0 40px; }
+.counters { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 10px; margin: 30px 0 40px; }
+.counter b { font-size: clamp(18px, 1.7vw, 25px) !important; }
 .counter { background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.22); border-radius: 18px; padding: 14px 16px; backdrop-filter: blur(6px); }
 .counter small { display: block; font-size: 10.5px; letter-spacing: .14em; text-transform: uppercase; font-weight: 700; opacity: .8; }
 .counter b { display: block; font-size: clamp(20px, 2vw, 28px); font-weight: 900; margin-top: 4px; }
@@ -92,6 +93,25 @@ h1, h2, h3, h4, p { margin: 0; }
 .ring b { display: block; font-size: 18px; font-weight: 900; color: var(--ink); }
 .ring span { font-size: 11.5px; color: var(--muted); }
 .ring.na b { color: var(--muted); font-size: 14px; }
+
+/* Grupos Meta / Google */
+.kg { display: flex; align-items: center; gap: 12px; margin: 0 0 12px; color: #fff; }
+.kg b { font-size: 18px; font-weight: 900; letter-spacing: .02em; }
+.kg span { font-size: 12px; font-weight: 600; opacity: .8; }
+.kg::after { content: ""; flex: 1; height: 2px; background: linear-gradient(90deg, rgba(255,255,255,.35), transparent); }
+.kpis.m3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.kpis.g2 { grid-template-columns: repeat(2, minmax(0, 1fr)); margin-top: 0; }
+.kgw + .kgw { margin-top: 26px; }
+.kpis.g2 .kc-r { flex-direction: row; flex-wrap: wrap; align-items: center; }
+.kpis.g2 .kc-r .ring { flex: 1 1 0; min-width: 165px; }
+.kpis.g2 .kc-f.n4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.kpis.g2 .kc-f.n6 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.kc-h .lg { width: 34px; height: 34px; border-radius: 50%; background: #fff; display: grid; place-items: center; flex: none; box-shadow: 0 3px 10px rgba(7,26,87,.25); }
+.kc-h .lg svg { width: 20px; height: 20px; fill: var(--lc); }
+.kc-h .lg svg.st0 { fill: none; stroke: var(--lc); stroke-width: 2.6; }
+.bh { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+.bh h3 { font-size: 17px; font-weight: 900; color: var(--blue-dd); min-width: 70px; }
+.bh h3::after { content: ""; display: inline-block; width: 7px; height: 7px; margin-left: 3px; background: var(--orange); transform: skewX(-14deg); }
 
 /* Marcador por plataforma */
 .chips { display: flex; flex-wrap: wrap; gap: 8px; }
@@ -212,7 +232,7 @@ details.notes ul { padding-left: 18px; line-height: 1.65; }
 .pace-l { display: flex; justify-content: space-between; font-size: 10.5px; letter-spacing: .1em; text-transform: uppercase; font-weight: 800; opacity: .8; }
 @keyframes shine { from { transform: translateX(-100%); } to { transform: translateX(100%); } }
 /* Estado de ritmo en KPIs */
-.st { display: inline-block; margin-top: 4px; font-style: normal; font-size: 10px; font-weight: 900; letter-spacing: .06em; text-transform: uppercase; padding: 2px 8px; border-radius: 999px; }
+.st { display: inline-block; white-space: nowrap; margin-top: 4px; font-style: normal; font-size: 10px; font-weight: 900; letter-spacing: .06em; text-transform: uppercase; padding: 2px 8px; border-radius: 999px; }
 .st.up { background: rgba(140,198,63,.2); color: #3f7a0c; } .st.ok { background: rgba(255,194,14,.25); color: #7a5a00; } .st.dn { background: rgba(242,102,28,.15); color: #c2470a; }
 /* Ticker */
 .ticker { position: relative; overflow: hidden; background: linear-gradient(90deg, var(--lime), var(--yellow)); color: var(--blue-dd); margin-top: -2px; }
@@ -268,9 +288,14 @@ details.notes ul { padding-left: 18px; line-height: 1.65; }
   .s4, .s5, .s6, .s7, .s8 { grid-column: span 12; }
   .finds { grid-template-columns: 1fr; }
   .counters { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .counter:last-child { grid-column: span 2; }
+  .kpis.m3, .kpis.g2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .kpis.m3 .kc:first-child { grid-column: span 2; }
   .dotring { display: none; }
 }
 @media (max-width: 760px) {
+  .kpis.m3, .kpis.g2 { grid-template-columns: 1fr; }
+  .kpis.m3 .kc:first-child { grid-column: auto; }
   .wrap, .hero-in, .foot-in { padding-right: 16px; padding-left: 16px; }
   .hero-in { grid-template-columns: 1fr; min-height: 0; padding-top: 24px; }
   .hero-cans img { width: 220px; transform: rotate(-6deg) translateY(10px); }
@@ -295,7 +320,7 @@ details.notes ul { padding-left: 18px; line-height: 1.65; }
       <div class="counters" id="counters"></div>
       <div class="pace" id="pace"></div>
     </div>
-    <div class="hero-cans"><svg class="dotring" viewBox="0 0 200 200" aria-hidden="true" id="dotring"></svg><img src="img/latas.webp" alt="Latas de LIT Hard Tea" width="471" height="704"></div>
+    <div class="hero-cans"><svg class="dotring" viewBox="0 0 200 200" aria-hidden="true" id="dotring"></svg><img src="img/latas.webp?v=2" alt="Latas de LIT Hard Tea" width="471" height="704"></div>
   </div>
   <svg class="wave" viewBox="0 0 1440 70" preserveAspectRatio="none" aria-hidden="true"><defs><linearGradient id="wg" x1="0" x2="1"><stop offset="0" stop-color="#9cd33b"/><stop offset="1" stop-color="#ffd21a"/></linearGradient></defs><path d="M0 40 C 240 80 480 0 720 30 C 960 60 1200 10 1440 40 L1440 70 L0 70 Z" fill="url(#wg)"/></svg>
   <div class="ticker" aria-hidden="true"><div id="ticker"></div></div>
@@ -307,15 +332,14 @@ details.notes ul { padding-left: 18px; line-height: 1.65; }
 <main class="wrap">
   <section class="sec" id="kpis" data-t="KPIs">
     <div class="sec-h"><div><small>Táctica vs. real</small><h2>Avance de los KPIs</h2></div><p id="kpi-p">Cada anillo muestra qué parte del KPI ya se cumplió; el punto naranja marca dónde deberíamos ir según los días transcurridos de campaña.</p></div>
-    <div class="kpis" id="kpi-cards"></div>
+    <div class="kgw"><div class="kg"><b>Meta</b><span>Global · Facebook · Instagram</span></div><div class="kpis m3" id="kpi-meta"></div></div>
+    <div class="kgw"><div class="kg"><b>Google</b><span>YouTube · Display</span></div><div class="kpis g2" id="kpi-goog"></div></div>
   </section>
 
   <section class="sec" id="metricas" data-t="Métricas">
-    <div class="sec-h"><div><small>Por plataforma</small><h2>Métricas</h2></div><p>Elige una plataforma para ver su marcador completo.</p></div>
-    <div class="card">
-      <div class="chips" id="chips"></div>
-      <div class="board" id="board"></div>
-    </div>
+    <div class="sec-h"><div><small>Por plataforma</small><h2>Métricas</h2></div><p>Meta en global y por red; Google separado en YouTube y Display. Elige una vista para ver su marcador.</p></div>
+    <div class="card"><div class="bh"><h3>Meta</h3><div class="chips" id="chips-m"></div></div><div class="board" id="board-m"></div></div>
+    <div class="card" style="margin-top:var(--gap)"><div class="bh"><h3>Google</h3><div class="chips" id="chips-g"></div></div><div class="board" id="board-g"></div></div>
   </section>
 
   <section class="sec" id="graficos" data-t="Gráficos">
@@ -364,7 +388,7 @@ details.notes ul { padding-left: 18px; line-height: 1.65; }
     <div class="finds" id="finds"></div>
     <details class="notes"><summary>Notas sobre las cifras</summary><ul>
       <li>Alcance, usuarios únicos, frecuencia y CPM de la campaña se toman tal como los reporta cada plataforma y no se suman entre días.</li>
-      <li>KPIs según la táctica digital de mantenimiento: Instagram 400,000 de alcance y 2,293,650 impresiones; Facebook 594,871 de alcance y 6,520,067 impresiones; YouTube 239,724 views y 2,000,000 impresiones; Display 1,666,000 impresiones; frecuencia objetivo 3.</li>
+      <li>KPIs según la táctica digital de mantenimiento: Instagram 400,000 de alcance y 2,293,650 impresiones; Facebook 594,871 de alcance y 6,520,067 impresiones; YouTube 239,724 views y 2,000,000 impresiones; Meta global = suma de Facebook e Instagram (994,871 de alcance y 8,813,717 impresiones; el alcance de Meta elimina duplicados entre ambas redes, por lo que es un comparativo de referencia); Display 1,666,000 impresiones; frecuencia objetivo 3.</li>
       <li>Ritmo esperado = días transcurridos ÷ 66 días de campaña (27 de noviembre de 2026 al 31 de enero de 2027). «Adelantado» supera ese ritmo, «En ritmo» está entre 80% y 100% de él y «Por debajo» queda bajo 80%. La frecuencia se evalúa contra el objetivo final.</li>
       <li>Inversión = costo en plataforma en USD.</li>
     </ul></details>
@@ -375,12 +399,12 @@ details.notes ul { padding-left: 18px; line-height: 1.65; }
 <footer class="foot" id="cierre">
   <div class="foot-in">
     <div><h2>Que siga el <b>mantenimiento</b> de LIT</h2><p id="foot-p"></p><img class="um" src="img/logo_um.png" alt="CCCP UM"></div>
-    <img class="cans" src="img/latas.webp" alt="">
+    <img class="cans" src="img/latas.webp?v=2" alt="">
   </div>
   <div class="conf">Documento confidencial · Elaborado por CCCP UM Nicaragua para LIT Hard Tea. Prohibida su distribución sin autorización.</div>
 </footer>
 
-<script src="datos.js?v=2"></script>
+<script src="datos.js?v=3"></script>
 <script>
 (() => {
   const D = window.LM_DATA, R = D.diario, K = D.kpi, RS = D.resumen;
@@ -402,8 +426,12 @@ details.notes ul { padding-left: 18px; line-height: 1.65; }
 
   const by = (p) => R.filter((r) => r.red === p), T = (rs) => ({ imp: sum(rs, 'impresiones'), costo: sum(rs, 'costo'), inter: sum(rs, 'interacciones'), views: sum(rs, 'views'), clics: sum(rs, 'clics'), thru: sum(rs, 'thruplays') });
   const TP = Object.fromEntries(PL.map((p) => [p, T(by(p))])), TT = T(R), TMeta = T(R.filter((r) => r.canal === 'Meta'));
+  TP.Meta = TMeta; K.Meta = { alcance: K.Facebook.alcance + K.Instagram.alcance, impresiones: K.Facebook.impresiones + K.Instagram.impresiones, frecuencia: 3 };
+  PC.Meta = 'var(--blue-dd)'; PT.Meta = '#fff';
+  const LC = { Meta: '#0866ff', Facebook: '#1877f2', Instagram: '#e1306c', YouTube: '#ff0000', Display: '#4285f4' };
+  ICO.Meta = '<svg class="st0" viewBox="0 0 24 24"><path d="M4 16.2c-1.3-2.6.3-8.4 3.6-8.4 3.6 0 5.6 8.6 9 8.6 2.2 0 3.4-2 3.4-4.3 0-2.6-1.4-4.3-3.4-4.3-3.4 0-5.4 8.6-9 8.6-1.6 0-3-.2-3.6-.2z"/></svg>';
   const desde = R.reduce((a, r) => r.fecha < a ? r.fecha : a, '9999'), dias = [...new Set(R.map((r) => r.fecha))].sort();
-  const RES = { Facebook: RS.facebook, Instagram: RS.instagram, YouTube: RS.youtube, Display: RS.display };
+  const RES = { Meta: RS.meta, Facebook: RS.facebook, Instagram: RS.instagram, YouTube: RS.youtube, Display: RS.display };
   const TRANS = Math.min(DUR, dd0(INI, ult) + 1), ESP = TRANS / DUR, FALTAN = DUR - TRANS;
   const ST = (f) => f >= ESP ? ['up', 'Adelantado'] : f >= ESP * .8 ? ['ok', 'En ritmo'] : ['dn', 'Por debajo'];
 
@@ -412,7 +440,7 @@ details.notes ul { padding-left: 18px; line-height: 1.65; }
   $('hero-lead').textContent = 'Mantenimiento de marca en Meta (Facebook e Instagram) y Google (YouTube y Display), del 27 de noviembre de 2026 al 31 de enero de 2027.';
   $('pace').innerHTML = `<div class="pace-h"><span>Ritmo de campaña · día <b>${TRANS}</b> de ${DUR}</span><span><b>${F.pct1(ESP)}</b> del tiempo · faltan ${FALTAN} días</span></div><div class="pace-bar"><i style="width:${Math.max(1.5, ESP * 100)}%"></i></div><div class="pace-l"><span>27 nov 2026</span><span>31 ene 2027</span></div>`;
   $('dotring').innerHTML = Array.from({ length: 48 }, (_, i) => { const a = i / 48 * Math.PI * 2, rr = i % 2 ? 92 : 84; return `<circle cx="${100 + rr * Math.cos(a)}" cy="${100 + rr * Math.sin(a)}" r="${i % 2 ? 2.2 : 3.2}" fill="${i % 3 ? '#f2661c' : '#ffd21a'}"/>`; }).join('');
-  const cnt = [['Inversión', TT.costo, F.usd, '4 plataformas'], ['Impresiones', TT.imp, F.int, 'CPM ' + F.usd(TT.costo / TT.imp * 1000)], ['Alcance Meta', RS.meta ? RS.meta.alcance : 0, F.int, RS.meta ? 'frecuencia ' + F.d2(RS.meta.frecuencia) : ''], ['Views YouTube', TP.YouTube.views, F.int, 'VTR ' + F.pct1(TP.YouTube.views / TP.YouTube.imp)]];
+  const cnt = [['Alcance Meta', RS.meta ? RS.meta.alcance : 0, F.int, RS.meta ? 'frecuencia ' + F.d2(RS.meta.frecuencia) : ''], ['Views YouTube', TP.YouTube.views, F.int, 'VTR ' + F.pct1(TP.YouTube.views / TP.YouTube.imp)], ['Alcance Display', RS.display ? RS.display.alcance : 0, F.int, RS.display ? 'frecuencia ' + F.d2(RS.display.frecuencia) : ''], ['Impresiones', TT.imp, F.int, 'CPM ' + F.usd(TT.costo / TT.imp * 1000)], ['Inversión', TT.costo, F.usd, '4 plataformas']];
   $('counters').innerHTML = cnt.map(([a, v, f, s], i) => `<div class="counter"><small>${a}</small><b class="num" data-v="${v}" data-i="${i}">${f(0)}</b><span>${s}</span></div>`).join('');
   const countUp = () => { const els = [...document.querySelectorAll('.counter b')], t0 = performance.now(), dur = 1200;
     const step = (t) => { const k = Math.min(1, (t - t0) / dur), e = 1 - Math.pow(1 - k, 3); els.forEach((el) => { el.textContent = cnt[+el.dataset.i][2](+el.dataset.v * e); }); if (k < 1) requestAnimationFrame(step); }; requestAnimationFrame(step); };
@@ -425,23 +453,26 @@ details.notes ul { padding-left: 18px; line-height: 1.65; }
   // ---------- KPI: anillos ----------
   const ring = (frac, c, esp) => { const R0 = 30, C = 2 * Math.PI * R0, f = Math.max(0, Math.min(1, frac || 0)), a = esp == null ? 0 : (-90 + 360 * Math.min(1, esp)) * Math.PI / 180;
     return `<svg viewBox="0 0 76 76" aria-hidden="true"><circle cx="38" cy="38" r="${R0}" fill="none" stroke="#e6ecfb" stroke-width="9"/><circle class="arc" cx="38" cy="38" r="${R0}" fill="none" stroke="${c}" stroke-width="9" stroke-linecap="round" stroke-dasharray="${C} ${C}" style="--c0:${C};--off:${C * (1 - f)}" transform="rotate(-90 38 38)"/>${esp == null ? '' : `<circle class="mk" cx="${38 + R0 * Math.cos(a)}" cy="${38 + R0 * Math.sin(a)}" r="4.5" fill="#f2661c" stroke="#fff" stroke-width="2"/>`}<text x="38" y="42" text-anchor="middle" style="font-size:13px;font-weight:900;fill:#0d1b45">${frac == null ? '—' : F.pct(frac)}</text></svg>`; };
-  $('kpi-cards').innerHTML = PL.map((p) => { const k = K[p], t = TP[p], rs = RES[p], rows = [];
+  const kcard = (p) => { const k = K[p], t = TP[p], rs = RES[p], rows = [];
     if (k.alcance) rows.push(rs ? ['Alcance', rs.alcance / k.alcance, F.int(rs.alcance), 'de ' + F.int(k.alcance), 1] : ['Alcance', null, 'Sin dato', 'meta ' + F.int(k.alcance)]);
     if (k.views) rows.push(['Views', t.views / k.views, F.int(t.views), 'de ' + F.int(k.views), 1]);
     rows.push(['Impresiones', t.imp / k.impresiones, F.int(t.imp), 'de ' + F.int(k.impresiones), 1]);
     if (k.frecuencia) rows.push(rs ? ['Frecuencia', rs.frecuencia / k.frecuencia, F.d2(rs.frecuencia), 'objetivo ' + (p === 'YouTube' ? '' : '+') + k.frecuencia] : ['Frecuencia', null, 'Sin dato', 'objetivo +' + k.frecuencia]);
     const foot = [['Inversión', F.usd(t.costo)], ['CPM', F.usd(t.costo / t.imp * 1000)]].concat(p === 'Display' ? [['Usuarios únicos', rs ? F.int(rs.alcance) : '—'], ['Clics', F.int(t.clics)], ['CTR', F.pct2(t.clics / t.imp)], ['Frecuencia', rs ? F.d2(rs.frecuencia) : '—']] : p === 'YouTube' ? [['Usuarios únicos', rs ? F.int(rs.alcance) : '—'], ['VTR', F.pct1(t.views / t.imp)]] : [['Interacciones', F.int(t.inter)], ['ER', F.pct2(t.inter / t.imp)]]);
-    return `<article class="kc" style="--c:${PC[p]};--ct:${PT[p]}"><div class="kc-h">${ICO[p]}<b>${p}</b><span>${p === 'Display' ? 'Banners' : p === 'YouTube' ? 'Video' : 'Video + imagen'}</span></div><div class="kc-b"><div class="kc-r${rows.length === 1 ? ' one' : ''}">${rows.map(([a, f, v, s, pc]) => `<div class="ring${f == null ? ' na' : ''}">${ring(f, PC[p], pc && f != null ? ESP : null)}<div><small>${a}</small><b class="num">${v}</b><span>${s}</span>${pc && f != null ? `<br><i class="st ${ST(f)[0]}">${ST(f)[1]}</i>` : ''}</div></div>`).join('')}</div><div class="kc-f">${foot.map(([a, b]) => `<div><small>${a}</small><b class="num">${b}</b></div>`).join('')}</div></div></article>`; }).join('');
+    return `<article class="kc" style="--c:${PC[p]};--ct:${PT[p]}"><div class="kc-h"><em class="lg" style="--lc:${LC[p]}">${ICO[p]}</em><b>${p === 'Meta' ? 'Meta global' : p}</b><span>${p === 'Meta' ? 'Facebook + Instagram' : p === 'Display' ? 'Banners' : p === 'YouTube' ? 'Video' : 'Video + imagen'}</span></div><div class="kc-b"><div class="kc-r${rows.length === 1 ? ' one' : ''}">${rows.map(([a, f, v, s, pc]) => `<div class="ring${f == null ? ' na' : ''}">${ring(f, PC[p], pc && f != null ? ESP : null)}<div><small>${a}</small><b class="num">${v}</b><span>${s}</span>${pc && f != null ? `<br><i class="st ${ST(f)[0]}">${ST(f)[1]}</i>` : ''}</div></div>`).join('')}</div><div class="kc-f n${foot.length}">${foot.map(([a, b]) => `<div><small>${a}</small><b class="num">${b}</b></div>`).join('')}</div></div></article>`; };
+  $('kpi-meta').innerHTML = ['Meta', 'Facebook', 'Instagram'].map(kcard).join(''); $('kpi-goog').innerHTML = ['YouTube', 'Display'].map(kcard).join('');
 
   // ---------- Marcador por plataforma ----------
-  let bp = 'Facebook';
-  const drawBoard = () => { const t = TP[bp], rs = RES[bp], c = PC[bp], tiles = [['Inversión', F.usd(t.costo), F.pct(t.costo / TT.costo) + ' del total'], ['Impresiones', F.int(t.imp), 'CPM ' + F.usd(t.costo / t.imp * 1000)],
+  let bm = 'Meta', bg = 'YouTube';
+  const board = (bp, el) => { const t = TP[bp], rs = RES[bp], c = PC[bp], tiles = [['Inversión', F.usd(t.costo), F.pct(t.costo / TT.costo) + ' del total'], ['Impresiones', F.int(t.imp), 'CPM ' + F.usd(t.costo / t.imp * 1000)],
       [bp === 'YouTube' || bp === 'Display' ? 'Usuarios únicos' : 'Alcance', rs ? F.int(rs.alcance) : '—', rs ? 'frecuencia ' + F.d2(rs.frecuencia) : '']];
-    if (bp === 'Facebook' || bp === 'Instagram') tiles.push(['Interacciones', F.int(t.inter), 'ER ' + F.pct2(t.inter / t.imp)], ['Reproducciones de video', F.int(t.views), F.pct(t.views / t.imp) + ' de las impresiones'], ['ThruPlays', F.int(t.thru), 'costo ' + F.usd(t.costo / (t.thru || 1)) + ' c/u'], ['Costo por interacción', '$' + nf(4).format(t.costo / (t.inter || 1)), 'CPE'], ['Avance de impresiones', F.pct1(t.imp / K[bp].impresiones), 'de ' + F.M(K[bp].impresiones)]);
+    if (bp === 'Meta' || bp === 'Facebook' || bp === 'Instagram') tiles.push(['Interacciones', F.int(t.inter), 'ER ' + F.pct2(t.inter / t.imp)], ['Reproducciones de video', F.int(t.views), F.pct(t.views / t.imp) + ' de las impresiones'], ['ThruPlays', F.int(t.thru), 'costo ' + F.usd(t.costo / (t.thru || 1)) + ' c/u'], ['Costo por interacción', '$' + nf(4).format(t.costo / (t.inter || 1)), 'CPE'], ['Avance de impresiones', F.pct1(t.imp / K[bp].impresiones), 'de ' + F.M(K[bp].impresiones)]);
     if (bp === 'YouTube') tiles.push(['Views', F.int(t.views), 'VTR ' + F.pct1(t.views / t.imp)], ['CPV', '$' + nf(4).format(t.costo / t.views), 'costo por view'], ['Clics', F.int(t.clics), 'CTR ' + F.pct2(t.clics / t.imp)], ['Avance de views', F.pct1(t.views / K.YouTube.views), 'de ' + F.int(K.YouTube.views)], ['Avance de impresiones', F.pct1(t.imp / K.YouTube.impresiones), 'de ' + F.M(K.YouTube.impresiones)]);
     if (bp === 'Display') tiles.push(['Clics', F.int(t.clics), 'CTR ' + F.pct2(t.clics / t.imp)], ['CPC', F.usd(t.costo / t.clics), 'costo por clic'], ['Banners activos', F.int(D.cre_display.length), 'tamaños y versiones'], ['Avance de impresiones', F.pct1(t.imp / K.Display.impresiones), 'de ' + F.M(K.Display.impresiones)], ['CPM real', rs ? F.usd(rs.cpm) : '—', 'reportado por Google']);
-    $('board').innerHTML = tiles.map(([a, b, s]) => `<div class="tile" style="--c:${c}"><small>${a}</small><b class="num">${b}</b><span>${s}</span></div>`).join(''); };
-  chips('chips', PL.map((p) => [p, p, PC[p]]), bp, (v) => { bp = v; drawBoard(); });
+    $(el).innerHTML = tiles.map(([a, b, s]) => `<div class="tile" style="--c:${c}"><small>${a}</small><b class="num">${b}</b><span>${s}</span></div>`).join(''); };
+  const drawBoard = () => { board(bm, 'board-m'); board(bg, 'board-g'); };
+  chips('chips-m', [['Meta', 'Meta global', PC.Meta], ['Facebook', 'Facebook', PC.Facebook], ['Instagram', 'Instagram', PC.Instagram]], bm, (v) => { bm = v; board(bm, 'board-m'); });
+  chips('chips-g', [['YouTube', 'YouTube', PC.YouTube], ['Display', 'Display', PC.Display]], bg, (v) => { bg = v; board(bg, 'board-g'); });
 
   // ---------- Gráficos ----------
   const donut = () => { const box = $('c-don'), S = 220, R0 = 96, r0 = 64, tot = TT.imp || 1; let a0 = -Math.PI / 2, o = '';
