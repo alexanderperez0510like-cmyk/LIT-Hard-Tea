@@ -11,15 +11,17 @@
 <style>
 :root {
   --blue: #1440b8; --blue-d: #0b2a85; --blue-dd: #071a57; --sky: #2a8cff; --lime: #9cd33b; --yellow: #ffd21a; --orange: #f2661c;
-  --bg: #eef3ff; --paper: #ffffff; --ink: #0d1b45; --muted: #5d6a8f; --line: #dfe6f7; --soft: #f3f6fd;
-  --c-fb: #1877f2; --c-ig: #e1306c; --c-yt: #ff0033; --c-gdn: #f2a20f;
+  --bg: #0c2d93; --paper: #ffffff; --ink: #0d1b45; --muted: #5d6a8f; --line: #dfe6f7; --soft: #f3f6fd;
+  --c-fb: #1440b8; --c-ig: #f2661c; --c-yt: #8cc63f; --c-gdn: #ffc20e;
+  --t-fb: #ffffff; --t-ig: #ffffff; --t-yt: #071a57; --t-gdn: #071a57;
+  --d-fb: #1440b8; --d-ig: #d4500c; --d-yt: #4f8a12; --d-gdn: #a67c00;
   --r: 22px; --gap: 18px; --shadow: 0 2px 0 rgba(13,27,69,.03), 0 18px 40px rgba(20,64,184,.10);
 }
 * { box-sizing: border-box; font-family: "Montserrat", system-ui, sans-serif; }
 svg text, button { font-family: "Montserrat", system-ui, sans-serif !important; }
 html { scroll-behavior: smooth; }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
-body { margin: 0; background: var(--bg); color: var(--ink); font-size: 14px; line-height: 1.5; -webkit-font-smoothing: antialiased; }
+body { margin: 0; background: radial-gradient(1200px 700px at 100% 0%, rgba(42,140,255,.35), transparent 60%), radial-gradient(900px 700px at 0% 60%, rgba(20,64,184,.9), transparent 70%), linear-gradient(180deg, #1440b8 0%, #0c2d93 45%, #0a2478 100%); background-color: var(--bg); overflow-x: hidden; color: var(--ink); font-size: 14px; line-height: 1.5; -webkit-font-smoothing: antialiased; }
 h1, h2, h3, h4, p { margin: 0; }
 .num { font-variant-numeric: tabular-nums; }
 .wrap { max-width: 1280px; margin: 0 auto; padding: 0 92px 0 32px; }
@@ -43,7 +45,7 @@ h1, h2, h3, h4, p { margin: 0; }
 .counter span { font-size: 11.5px; opacity: .8; }
 .hero-cans { align-self: end; display: flex; justify-content: center; }
 .hero-cans img { width: min(360px, 100%); height: auto; filter: drop-shadow(0 30px 40px rgba(0,0,0,.4)); transform: rotate(-6deg) translateY(18px); }
-.wave { display: block; width: 100%; height: 70px; margin-top: -1px; }
+.wave { display: block; width: 100%; height: 70px; margin-top: -1px; position: relative; }
 
 /* ---------- Índice lateral ---------- */
 .dots { position: fixed; right: 22px; top: 50%; transform: translateY(-50%); z-index: 40; display: flex; flex-direction: column; gap: 6px; padding: 12px 8px; background: rgba(255,255,255,.92); border: 1px solid var(--line); border-radius: 999px; box-shadow: var(--shadow); }
@@ -57,9 +59,10 @@ h1, h2, h3, h4, p { margin: 0; }
 /* ---------- Secciones ---------- */
 .sec { padding: 54px 0 6px; }
 .sec-h { display: flex; align-items: flex-end; justify-content: space-between; gap: 16px; margin-bottom: 20px; flex-wrap: wrap; }
-.sec-h div small { display: inline-block; font-size: 11px; letter-spacing: .2em; text-transform: uppercase; font-weight: 800; color: var(--orange); background: rgba(242,102,28,.1); padding: 4px 10px; border-radius: 999px; }
-.sec-h h2 { font-size: clamp(26px, 3vw, 38px); font-weight: 900; color: var(--blue-dd); letter-spacing: -.01em; margin-top: 8px; }
-.sec-h p { color: var(--muted); max-width: 520px; font-size: 13.5px; }
+.sec-h div small { display: inline-block; font-size: 11px; letter-spacing: .2em; text-transform: uppercase; font-weight: 800; color: var(--blue-dd); background: linear-gradient(90deg, var(--lime), var(--yellow)); padding: 4px 12px; border-radius: 999px; }
+.sec-h h2 { position: relative; font-size: clamp(26px, 3vw, 38px); font-weight: 900; color: #fff; letter-spacing: -.01em; margin-top: 8px; }
+.sec-h h2::after { content: ""; display: inline-block; width: .32em; height: .32em; margin-left: .12em; background: var(--orange); transform: skewX(-14deg); border-radius: 2px; }
+.sec-h p { color: rgba(255,255,255,.82); max-width: 520px; font-size: 13.5px; }
 .card { background: var(--paper); border: 1px solid var(--line); border-radius: var(--r); padding: 22px; box-shadow: var(--shadow); min-width: 0; }
 .card h3 { font-size: 15px; font-weight: 800; color: var(--blue-dd); }
 .card .sub { font-size: 12.5px; color: var(--muted); margin-top: 4px; }
@@ -70,10 +73,10 @@ h1, h2, h3, h4, p { margin: 0; }
 /* KPI: anillos */
 .kpis { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--gap); }
 .kc { background: var(--paper); border: 1px solid var(--line); border-radius: var(--r); box-shadow: var(--shadow); overflow: hidden; display: flex; flex-direction: column; }
-.kc-h { display: flex; align-items: center; gap: 10px; padding: 14px 18px; background: var(--c); color: #fff; }
-.kc-h svg { width: 22px; height: 22px; fill: #fff; flex: none; }
+.kc-h { display: flex; align-items: center; gap: 10px; padding: 14px 18px; background: var(--c); color: var(--ct, #fff); }
+.kc-h svg { width: 22px; height: 22px; fill: currentColor; flex: none; }
 .kc-h b { font-size: 14px; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; }
-.kc-h span { margin-left: auto; white-space: nowrap; font-size: 11px; font-weight: 700; background: rgba(255,255,255,.2); padding: 3px 9px; border-radius: 999px; }
+.kc-h span { margin-left: auto; white-space: nowrap; font-size: 11px; font-weight: 700; background: rgba(255,255,255,.28); padding: 3px 9px; border-radius: 999px; }
 .kc-b { padding: 16px 18px 18px; display: flex; flex-direction: column; gap: 14px; flex: 1; justify-content: space-between; }
 .kc-r { flex: 1; display: flex; flex-direction: column; justify-content: space-evenly; gap: 14px; }
 .kc-r.one .ring { grid-template-columns: 110px 1fr; }
@@ -125,7 +128,7 @@ h1, h2, h3, h4, p { margin: 0; }
 /* Entrega diaria: tarjetas de día */
 .days { display: flex; gap: 14px; overflow-x: auto; scroll-snap-type: x mandatory; padding: 4px 2px 12px; margin-top: 14px; }
 .day { scroll-snap-align: start; flex: 1 0 260px; max-width: 100%; background: var(--paper); border: 1px solid var(--line); border-radius: 20px; padding: 16px; box-shadow: var(--shadow); position: relative; }
-.day.cur { border-color: var(--orange); }
+.day.cur { border-color: var(--orange); box-shadow: 0 0 0 3px rgba(242,102,28,.25), var(--shadow); }
 .day-h { display: flex; justify-content: space-between; align-items: baseline; }
 .day-h b { font-size: 20px; font-weight: 900; color: var(--blue-dd); }
 .day-h span { font-size: 11px; letter-spacing: .12em; text-transform: uppercase; font-weight: 800; color: var(--muted); }
@@ -150,9 +153,9 @@ h1, h2, h3, h4, p { margin: 0; }
 .cc .im img { max-width: 100%; max-height: 230px; width: auto; height: auto; object-fit: contain; position: relative; z-index: 1; display: block; }
 .cc .im em { position: absolute; inset: 0; display: grid; place-items: center; text-align: center; padding: 14px; font-style: normal; font-weight: 800; color: rgba(255,255,255,.8); font-size: 12px; }
 .cc .rk { position: absolute; top: 10px; left: 10px; z-index: 2; background: var(--yellow); color: var(--blue-dd); font-size: 11px; font-weight: 900; border-radius: 999px; padding: 3px 9px; }
-.cc .pl { position: absolute; top: 10px; right: 10px; z-index: 2; background: var(--c); color: #fff; font-size: 10.5px; font-weight: 800; border-radius: 999px; padding: 3px 9px; }
+.cc .pl { position: absolute; top: 10px; right: 10px; z-index: 2; background: var(--c); color: var(--ct, #fff); font-size: 10.5px; font-weight: 800; border-radius: 999px; padding: 3px 9px; }
 .cc a.play { position: absolute; z-index: 2; width: 50px; height: 50px; border-radius: 50%; background: var(--c-yt); display: grid; place-items: center; box-shadow: 0 8px 18px rgba(0,0,0,.35); }
-.cc a.play svg { width: 18px; height: 18px; fill: #fff; margin-left: 3px; }
+.cc a.play svg { width: 18px; height: 18px; fill: var(--blue-dd); margin-left: 3px; }
 .cc .bd { padding: 12px 14px 14px; display: flex; flex-direction: column; gap: 6px; flex: 1; }
 .cc .bd b.n { font-size: 13px; font-weight: 800; color: var(--blue-dd); word-break: break-word; }
 .cc .bd span.d { font-size: 11px; color: var(--muted); }
@@ -179,17 +182,17 @@ h1, h2, h3, h4, p { margin: 0; }
 .finds { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--gap); }
 .find { background: var(--paper); border: 1px solid var(--line); border-radius: var(--r); padding: 20px; box-shadow: var(--shadow); display: flex; flex-direction: column; position: relative; overflow: hidden; }
 .find::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 5px; background: var(--c); }
-.find small { font-size: 10.5px; letter-spacing: .16em; text-transform: uppercase; font-weight: 900; color: var(--c); text-align: center; }
-.find p { margin-top: 10px; font-size: 13.5px; text-align: justify; hyphens: auto; }
+.find small { font-size: 10.5px; letter-spacing: .16em; text-transform: uppercase; font-weight: 900; color: var(--cd, var(--c)); text-align: center; }
+.find p { margin-top: 10px; font-size: 13.5px; text-align: justify; hyphens: manual; }
 .find .op { margin-top: auto; padding-top: 12px; border-top: 1px dashed var(--line); font-size: 12.5px; color: var(--muted); }
-.find .op b { color: var(--c); }
+.find .op b { color: var(--cd, var(--c)); }
 .find .t { margin-bottom: 12px; }
 details.notes { margin-top: 20px; background: var(--paper); border: 1px solid var(--line); border-radius: 16px; padding: 12px 18px; font-size: 12.5px; color: var(--muted); }
 details.notes summary { cursor: pointer; font-weight: 800; color: var(--blue-dd); }
 details.notes ul { padding-left: 18px; line-height: 1.65; }
 
 /* Cierre */
-.foot { margin-top: 60px; color: #fff; background: linear-gradient(135deg, #1440b8, #071a57); position: relative; overflow: hidden; }
+.foot { margin-top: 0; color: #fff; background: linear-gradient(135deg, #1440b8, #071a57); position: relative; overflow: hidden; }
 .foot::before { content: ""; position: absolute; inset: 0; background: radial-gradient(circle at 85% 20%, rgba(255,210,26,.3), transparent 35%), radial-gradient(circle at 10% 90%, rgba(156,211,59,.3), transparent 35%); }
 .foot-in { position: relative; max-width: 1280px; margin: 0 auto; padding: 48px 92px 48px 32px; display: grid; grid-template-columns: 1fr auto; gap: 24px; align-items: center; }
 .foot h2 { font-size: clamp(26px, 3vw, 40px); font-weight: 900; line-height: 1.05; }
@@ -198,6 +201,59 @@ details.notes ul { padding-left: 18px; line-height: 1.65; }
 .foot img.um { height: 34px; margin-top: 20px; }
 .foot img.cans { height: 220px; width: auto; filter: drop-shadow(0 20px 30px rgba(0,0,0,.4)); }
 .conf { position: relative; background: var(--blue-dd); color: rgba(255,255,255,.75); font-size: 11.5px; text-align: center; padding: 14px 20px; }
+
+/* Ritmo de campaña (hero) */
+.pace { margin: -18px 0 40px; background: rgba(7,26,87,.35); border: 1px solid rgba(255,255,255,.2); border-radius: 18px; padding: 14px 16px; }
+.pace-h { display: flex; justify-content: space-between; gap: 10px; flex-wrap: wrap; font-size: 12px; font-weight: 700; }
+.pace-h b { color: var(--yellow); }
+.pace-bar { position: relative; height: 12px; border-radius: 999px; background: rgba(255,255,255,.15); margin: 10px 0 6px; overflow: hidden; }
+.pace-bar i { position: absolute; left: 0; top: 0; bottom: 0; border-radius: 999px; background: linear-gradient(90deg, var(--lime), var(--yellow)); }
+.pace-bar i::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, transparent, rgba(255,255,255,.7), transparent); animation: shine 2.4s infinite; }
+.pace-l { display: flex; justify-content: space-between; font-size: 10.5px; letter-spacing: .1em; text-transform: uppercase; font-weight: 800; opacity: .8; }
+@keyframes shine { from { transform: translateX(-100%); } to { transform: translateX(100%); } }
+/* Estado de ritmo en KPIs */
+.st { display: inline-block; margin-top: 4px; font-style: normal; font-size: 10px; font-weight: 900; letter-spacing: .06em; text-transform: uppercase; padding: 2px 8px; border-radius: 999px; }
+.st.up { background: rgba(140,198,63,.2); color: #3f7a0c; } .st.ok { background: rgba(255,194,14,.25); color: #7a5a00; } .st.dn { background: rgba(242,102,28,.15); color: #c2470a; }
+/* Ticker */
+.ticker { position: relative; overflow: hidden; background: linear-gradient(90deg, var(--lime), var(--yellow)); color: var(--blue-dd); margin-top: -2px; }
+.ticker div { display: flex; width: max-content; animation: tick 38s linear infinite; }
+.ticker span { white-space: nowrap; padding: 11px 22px; font-size: 13px; font-weight: 800; }
+.ticker span b { font-weight: 900; }
+.ticker span::after { content: ""; display: inline-block; width: 8px; height: 8px; margin-left: 44px; background: var(--orange); transform: skewX(-14deg); vertical-align: middle; }
+.ticker:hover div { animation-play-state: paused; }
+@keyframes tick { to { transform: translateX(-50%); } }
+/* Movimiento */
+.hero::before { animation: glow 9s ease-in-out infinite alternate; }
+@keyframes glow { to { transform: translate(3%, -4%) scale(1.08); } }
+.hero-cans { position: relative; }
+.hero-cans img { animation: float 5s ease-in-out infinite; position: relative; z-index: 1; }
+@keyframes float { 50% { translate: 0 -14px; } }
+.dotring { position: absolute; width: min(420px, 110%); aspect-ratio: 1; left: 50%; top: 46%; margin: calc(min(420px, 110%) / -2) 0 0 calc(min(420px, 110%) / -2); animation: spin 40s linear infinite; opacity: .9; }
+@keyframes spin { to { rotate: 360deg; } }
+.card, .kc, .find, .day, .cc { transition: transform .25s ease, box-shadow .25s ease, opacity .7s ease var(--d, 0s), translate .7s cubic-bezier(.2,.8,.2,1) var(--d, 0s); }
+.card:hover, .kc:hover, .find:hover, .day:hover, .cc:hover { transform: translateY(-5px); box-shadow: 0 2px 0 rgba(13,27,69,.03), 0 26px 50px rgba(7,26,87,.35); }
+.cc .im img { transition: transform .5s ease; } .cc:hover .im img { transform: scale(1.05); }
+.chip { transition: transform .15s, background .2s, border-color .2s; } .chip:hover { transform: translateY(-2px); }
+.anim .sec .sec-h, .anim .sec .card, .anim .sec .kc, .anim .sec .find, .anim .sec details { opacity: 0; translate: 0 34px; transition: transform .25s ease, box-shadow .25s ease, opacity .7s ease var(--d, 0s), translate .7s cubic-bezier(.2,.8,.2,1) var(--d, 0s); }
+.anim .sec.in .sec-h, .anim .sec.in .card, .anim .sec.in .kc, .anim .sec.in .find, .anim .sec.in details { opacity: 1; translate: 0 0; }
+.kc:nth-child(2), .find:nth-child(2) { --d: .1s; } .kc:nth-child(3), .find:nth-child(3) { --d: .2s; } .kc:nth-child(4), .find:nth-child(4) { --d: .3s; } .find:nth-child(5) { --d: .4s; } .find:nth-child(6) { --d: .5s; }
+.grid > .card:nth-child(2) { --d: .12s; } .grid > .card:nth-child(3) { --d: .24s; }
+.arc { stroke-dashoffset: var(--c0); transition: stroke-dashoffset 1.6s cubic-bezier(.2,.8,.2,1) calc(var(--d, 0s) + .35s); }
+.sec.in .arc, html:not(.anim) .arc { stroke-dashoffset: var(--off); }
+.mk { opacity: 0; transition: opacity .4s ease calc(var(--d, 0s) + 1.4s); } .sec.in .mk, html:not(.anim) .mk { opacity: 1; }
+.hb-r .bar i, .lol-r .ln i { animation: grow 1.1s cubic-bezier(.2,.8,.2,1) both; }
+.day-stack, .tile { animation: wipe 1.1s cubic-bezier(.2,.8,.2,1) both; }
+@keyframes grow { from { width: 0; } }
+.tile { animation-name: rise; animation-duration: .6s; }
+.tile:nth-child(2) { animation-delay: .05s; } .tile:nth-child(3) { animation-delay: .1s; } .tile:nth-child(4) { animation-delay: .15s; } .tile:nth-child(5) { animation-delay: .2s; } .tile:nth-child(6) { animation-delay: .25s; } .tile:nth-child(7) { animation-delay: .3s; } .tile:nth-child(8) { animation-delay: .35s; }
+.anim .sec:not(.in) .hb-r .bar i, .anim .sec:not(.in) .lol-r .ln i, .anim .sec:not(.in) .day-stack, .anim .sec:not(.in) .tile, .anim .sec:not(.in) .ln-p, .anim .sec:not(.in) .ln-c, .anim .sec:not(.in) .dn-s { animation-play-state: paused; }
+.ln-p { stroke-dasharray: 1; animation: draw 1.6s cubic-bezier(.4,0,.2,1) both; }
+.ln-c, .dn-s { transform-box: fill-box; transform-origin: center; animation: pop .5s cubic-bezier(.3,1.6,.5,1) both; }
+@keyframes wipe { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 0 0 0); } }
+@keyframes rise { from { opacity: 0; transform: translateY(14px); } }
+@keyframes draw { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
+@keyframes pop { from { opacity: 0; transform: scale(.3); } }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
 
 /* Barra inferior móvil */
 .tabbar { display: none; }
@@ -212,6 +268,7 @@ details.notes ul { padding-left: 18px; line-height: 1.65; }
   .s4, .s5, .s6, .s7, .s8 { grid-column: span 12; }
   .finds { grid-template-columns: 1fr; }
   .counters { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .dotring { display: none; }
 }
 @media (max-width: 760px) {
   .wrap, .hero-in, .foot-in { padding-right: 16px; padding-left: 16px; }
@@ -236,10 +293,12 @@ details.notes ul { padding-left: 18px; line-height: 1.65; }
       <h1>LIT Hard Tea<br><b>Mantenimiento</b></h1>
       <p class="lead" id="hero-lead"></p>
       <div class="counters" id="counters"></div>
+      <div class="pace" id="pace"></div>
     </div>
-    <div class="hero-cans"><img src="img/latas.webp" alt="Latas de LIT Hard Tea" width="471" height="704"></div>
+    <div class="hero-cans"><svg class="dotring" viewBox="0 0 200 200" aria-hidden="true" id="dotring"></svg><img src="img/latas.webp" alt="Latas de LIT Hard Tea" width="471" height="704"></div>
   </div>
-  <svg class="wave" viewBox="0 0 1440 70" preserveAspectRatio="none" aria-hidden="true"><path d="M0 40 C 240 80 480 0 720 30 C 960 60 1200 10 1440 40 L1440 70 L0 70 Z" fill="#eef3ff"/></svg>
+  <svg class="wave" viewBox="0 0 1440 70" preserveAspectRatio="none" aria-hidden="true"><defs><linearGradient id="wg" x1="0" x2="1"><stop offset="0" stop-color="#9cd33b"/><stop offset="1" stop-color="#ffd21a"/></linearGradient></defs><path d="M0 40 C 240 80 480 0 720 30 C 960 60 1200 10 1440 40 L1440 70 L0 70 Z" fill="url(#wg)"/></svg>
+  <div class="ticker" aria-hidden="true"><div id="ticker"></div></div>
 </header>
 
 <nav class="dots" id="dots" aria-label="Índice"><span class="prog"><i id="prog"></i></span></nav>
@@ -247,7 +306,7 @@ details.notes ul { padding-left: 18px; line-height: 1.65; }
 
 <main class="wrap">
   <section class="sec" id="kpis" data-t="KPIs">
-    <div class="sec-h"><div><small>Táctica vs. real</small><h2>Avance de los KPIs</h2></div><p id="kpi-p">Cada anillo muestra qué parte del KPI de la táctica digital ya se cumplió.</p></div>
+    <div class="sec-h"><div><small>Táctica vs. real</small><h2>Avance de los KPIs</h2></div><p id="kpi-p">Cada anillo muestra qué parte del KPI ya se cumplió; el punto naranja marca dónde deberíamos ir según los días transcurridos de campaña.</p></div>
     <div class="kpis" id="kpi-cards"></div>
   </section>
 
@@ -306,12 +365,13 @@ details.notes ul { padding-left: 18px; line-height: 1.65; }
     <details class="notes"><summary>Notas sobre las cifras</summary><ul>
       <li>Alcance, usuarios únicos, frecuencia y CPM de la campaña se toman tal como los reporta cada plataforma y no se suman entre días.</li>
       <li>KPIs según la táctica digital de mantenimiento: Instagram 400,000 de alcance y 2,293,650 impresiones; Facebook 594,871 de alcance y 6,520,067 impresiones; YouTube 239,724 views y 2,000,000 impresiones; Display 1,666,000 impresiones; frecuencia objetivo 3.</li>
-      <li>Instagram todavía no reporta alcance ni frecuencia acumulados de la campaña; su anillo de alcance se completará cuando el dato esté disponible.</li>
+      <li>Ritmo esperado = días transcurridos ÷ 66 días de campaña (27 de noviembre de 2026 al 31 de enero de 2027). «Adelantado» supera ese ritmo, «En ritmo» está entre 80% y 100% de él y «Por debajo» queda bajo 80%. La frecuencia se evalúa contra el objetivo final.</li>
       <li>Inversión = costo en plataforma en USD.</li>
     </ul></details>
   </section>
 </main>
 
+<svg class="wave" viewBox="0 0 1440 70" preserveAspectRatio="none" aria-hidden="true" style="height:50px;margin:70px 0 -2px"><path d="M0 40 C 240 80 480 0 720 30 C 960 60 1200 10 1440 40 L1440 70 L0 70 Z" fill="url(#wg)"/></svg>
 <footer class="foot" id="cierre">
   <div class="foot-in">
     <div><h2>Que siga el <b>mantenimiento</b> de LIT</h2><p id="foot-p"></p><img class="um" src="img/logo_um.png" alt="CCCP UM"></div>
@@ -320,7 +380,7 @@ details.notes ul { padding-left: 18px; line-height: 1.65; }
   <div class="conf">Documento confidencial · Elaborado por CCCP UM Nicaragua para LIT Hard Tea. Prohibida su distribución sin autorización.</div>
 </footer>
 
-<script src="datos.js?v=1"></script>
+<script src="datos.js?v=2"></script>
 <script>
 (() => {
   const D = window.LM_DATA, R = D.diario, K = D.kpi, RS = D.resumen;
@@ -331,7 +391,8 @@ details.notes ul { padding-left: 18px; line-height: 1.65; }
   const sum = (a, k) => a.reduce((s, r) => s + (+r[k] || 0), 0), $ = (id) => document.getElementById(id);
   const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
   const hoy = new Date(Date.now() - 6 * 3600e3).toISOString().slice(0, 10), ult = D.actualizado, enCurso = ult >= hoy;
-  const PL = ['Facebook', 'Instagram', 'YouTube', 'Display'], PC = { Facebook: 'var(--c-fb)', Instagram: 'var(--c-ig)', YouTube: 'var(--c-yt)', Display: 'var(--c-gdn)' };
+  const PL = ['Facebook', 'Instagram', 'YouTube', 'Display'], PC = { Facebook: 'var(--c-fb)', Instagram: 'var(--c-ig)', YouTube: 'var(--c-yt)', Display: 'var(--c-gdn)' }, PT = { Facebook: 'var(--t-fb)', Instagram: 'var(--t-ig)', YouTube: 'var(--t-yt)', Display: 'var(--t-gdn)' }, PD = { Facebook: 'var(--d-fb)', Instagram: 'var(--d-ig)', YouTube: 'var(--d-yt)', Display: 'var(--d-gdn)' };
+  const INI = '2026-11-27', FIN = '2027-01-31', dd0 = (a, b) => Math.round((new Date(b + 'T12:00:00Z') - new Date(a + 'T12:00:00Z')) / 864e5), DUR = dd0(INI, FIN) + 1;
   const ICO = { Facebook: '<svg viewBox="0 0 24 24"><path d="M14 8h3V4h-3c-2.8 0-4 1.8-4 4.2V10H7v4h3v8h4v-8h3l1-4h-4V8.5c0-.3.2-.5.5-.5z"/></svg>', Instagram: '<svg viewBox="0 0 24 24"><path d="M12 7.3A4.7 4.7 0 1 0 12 16.7 4.7 4.7 0 0 0 12 7.3zm0 7.7a3 3 0 1 1 0-6 3 3 0 0 1 0 6zm6-7.9a1.1 1.1 0 1 1-2.2 0 1.1 1.1 0 0 1 2.2 0zM12 4c2.2 0 2.4 0 3.3.1 2.2.1 3.2 1.1 3.3 3.3.1.9.1 1.1.1 3.3v2.6c0 2.2 0 2.4-.1 3.3-.1 2.2-1.1 3.2-3.3 3.3-.9.1-1.1.1-3.3.1s-2.4 0-3.3-.1c-2.2-.1-3.2-1.1-3.3-3.3C5.3 15.7 5.3 15.5 5.3 13.3v-2.6c0-2.2 0-2.4.1-3.3.1-2.2 1.1-3.2 3.3-3.3C9.6 4 9.8 4 12 4z"/></svg>', YouTube: '<svg viewBox="0 0 24 24"><path d="M22 8.2s-.2-1.5-.8-2.1c-.8-.8-1.6-.8-2-.9C16.4 5 12 5 12 5s-4.4 0-7.2.2c-.4.1-1.2.1-2 .9-.6.6-.8 2.1-.8 2.1S2 9.9 2 11.6v1.6c0 1.7.2 3.4.2 3.4s.2 1.5.8 2.1c.8.8 1.8.8 2.2.9 1.6.2 6.8.2 6.8.2s4.4 0 7.2-.2c.4-.1 1.2-.1 2-.9.6-.6.8-2.1.8-2.1s.2-1.7.2-3.4v-1.6c0-1.7-.2-3.4-.2-3.4zM10 15V9l5.2 3L10 15z"/></svg>', Display: '<svg viewBox="0 0 24 24"><path d="M3 5h18v12H3zM8 20h8v-1.5H8z"/></svg>' };
   const tipFor = (box) => { let t = box.querySelector(':scope > .tip'); if (!t) { t = document.createElement('div'); t.className = 'tip'; box.append(t); }
     return { show(ev, lines) { t.innerHTML = '<b>' + esc(lines[0]) + '</b>' + lines.slice(1).map((l) => '<div>' + esc(l) + '</div>').join(''); const r = box.getBoundingClientRect(); t.style.opacity = 1; let x = ev.clientX - r.left + 14; const w = t.offsetWidth; if (x + w > r.width) x = Math.max(0, ev.clientX - r.left - w - 14); t.style.left = x + 'px'; t.style.top = (ev.clientY - r.top + 14) + 'px'; }, hide() { t.style.opacity = 0; } }; };
@@ -343,31 +404,39 @@ details.notes ul { padding-left: 18px; line-height: 1.65; }
   const TP = Object.fromEntries(PL.map((p) => [p, T(by(p))])), TT = T(R), TMeta = T(R.filter((r) => r.canal === 'Meta'));
   const desde = R.reduce((a, r) => r.fecha < a ? r.fecha : a, '9999'), dias = [...new Set(R.map((r) => r.fecha))].sort();
   const RES = { Facebook: RS.facebook, Instagram: RS.instagram, YouTube: RS.youtube, Display: RS.display };
+  const TRANS = Math.min(DUR, dd0(INI, ult) + 1), ESP = TRANS / DUR, FALTAN = DUR - TRANS;
+  const ST = (f) => f >= ESP ? ['up', 'Adelantado'] : f >= ESP * .8 ? ['ok', 'En ritmo'] : ['dn', 'Por debajo'];
 
   // ---------- Hero ----------
-  $('hero-tag').textContent = (enCurso ? 'Campaña en curso · ' : '') + 'Día ' + dias.length + ' · datos al ' + F.fecha(ult);
-  $('hero-lead').textContent = `Mantenimiento de marca en Meta (Facebook e Instagram) y Google (YouTube y Display) desde el ${F.fecha(desde)} de 2026.`;
+  $('hero-tag').textContent = (enCurso ? 'Campaña en curso · ' : '') + 'Día ' + TRANS + ' de ' + DUR + ' · datos al ' + F.fecha(ult);
+  $('hero-lead').textContent = 'Mantenimiento de marca en Meta (Facebook e Instagram) y Google (YouTube y Display), del 27 de noviembre de 2026 al 31 de enero de 2027.';
+  $('pace').innerHTML = `<div class="pace-h"><span>Ritmo de campaña · día <b>${TRANS}</b> de ${DUR}</span><span><b>${F.pct1(ESP)}</b> del tiempo · faltan ${FALTAN} días</span></div><div class="pace-bar"><i style="width:${Math.max(1.5, ESP * 100)}%"></i></div><div class="pace-l"><span>27 nov 2026</span><span>31 ene 2027</span></div>`;
+  $('dotring').innerHTML = Array.from({ length: 48 }, (_, i) => { const a = i / 48 * Math.PI * 2, rr = i % 2 ? 92 : 84; return `<circle cx="${100 + rr * Math.cos(a)}" cy="${100 + rr * Math.sin(a)}" r="${i % 2 ? 2.2 : 3.2}" fill="${i % 3 ? '#f2661c' : '#ffd21a'}"/>`; }).join('');
   const cnt = [['Inversión', TT.costo, F.usd, '4 plataformas'], ['Impresiones', TT.imp, F.int, 'CPM ' + F.usd(TT.costo / TT.imp * 1000)], ['Alcance Meta', RS.meta ? RS.meta.alcance : 0, F.int, RS.meta ? 'frecuencia ' + F.d2(RS.meta.frecuencia) : ''], ['Views YouTube', TP.YouTube.views, F.int, 'VTR ' + F.pct1(TP.YouTube.views / TP.YouTube.imp)]];
   $('counters').innerHTML = cnt.map(([a, v, f, s], i) => `<div class="counter"><small>${a}</small><b class="num" data-v="${v}" data-i="${i}">${f(0)}</b><span>${s}</span></div>`).join('');
   const countUp = () => { const els = [...document.querySelectorAll('.counter b')], t0 = performance.now(), dur = 1200;
     const step = (t) => { const k = Math.min(1, (t - t0) / dur), e = 1 - Math.pow(1 - k, 3); els.forEach((el) => { el.textContent = cnt[+el.dataset.i][2](+el.dataset.v * e); }); if (k < 1) requestAnimationFrame(step); }; requestAnimationFrame(step); };
   if (matchMedia('(prefers-reduced-motion: reduce)').matches) document.querySelectorAll('.counter b').forEach((el) => { el.textContent = cnt[+el.dataset.i][2](+el.dataset.v); }); else countUp();
 
+  // ---------- Ticker ----------
+  { const it = [['Impresiones', F.int(TT.imp)], ['Inversión', F.usd(TT.costo)], ['Alcance Meta', RS.meta ? F.int(RS.meta.alcance) : '—'], ['Alcance Instagram', RS.instagram ? F.int(RS.instagram.alcance) : '—'], ['Views YouTube', F.int(TP.YouTube.views)], ['Clics Display', F.int(TP.Display.clics)], ['Interacciones Meta', F.int(TMeta.inter)], ['CPM general', F.usd(TT.costo / TT.imp * 1000)], ['Día', TRANS + ' de ' + DUR]].map(([a, b]) => `<span>${a} <b class="num">${b}</b></span>`).join('');
+    $('ticker').innerHTML = it + it; }
+
   // ---------- KPI: anillos ----------
-  const ring = (frac, c) => { const R0 = 30, C = 2 * Math.PI * R0, f = Math.max(0, Math.min(1, frac || 0));
-    return `<svg viewBox="0 0 76 76" aria-hidden="true"><circle cx="38" cy="38" r="${R0}" fill="none" stroke="#e6ecfb" stroke-width="9"/><circle cx="38" cy="38" r="${R0}" fill="none" stroke="${c}" stroke-width="9" stroke-linecap="round" stroke-dasharray="${C * f} ${C}" transform="rotate(-90 38 38)"/><text x="38" y="42" text-anchor="middle" style="font-size:13px;font-weight:900;fill:#0d1b45">${frac == null ? '—' : F.pct(frac)}</text></svg>`; };
+  const ring = (frac, c, esp) => { const R0 = 30, C = 2 * Math.PI * R0, f = Math.max(0, Math.min(1, frac || 0)), a = esp == null ? 0 : (-90 + 360 * Math.min(1, esp)) * Math.PI / 180;
+    return `<svg viewBox="0 0 76 76" aria-hidden="true"><circle cx="38" cy="38" r="${R0}" fill="none" stroke="#e6ecfb" stroke-width="9"/><circle class="arc" cx="38" cy="38" r="${R0}" fill="none" stroke="${c}" stroke-width="9" stroke-linecap="round" stroke-dasharray="${C} ${C}" style="--c0:${C};--off:${C * (1 - f)}" transform="rotate(-90 38 38)"/>${esp == null ? '' : `<circle class="mk" cx="${38 + R0 * Math.cos(a)}" cy="${38 + R0 * Math.sin(a)}" r="4.5" fill="#f2661c" stroke="#fff" stroke-width="2"/>`}<text x="38" y="42" text-anchor="middle" style="font-size:13px;font-weight:900;fill:#0d1b45">${frac == null ? '—' : F.pct(frac)}</text></svg>`; };
   $('kpi-cards').innerHTML = PL.map((p) => { const k = K[p], t = TP[p], rs = RES[p], rows = [];
-    if (k.alcance) rows.push(rs ? ['Alcance', rs.alcance / k.alcance, F.int(rs.alcance), 'de ' + F.int(k.alcance)] : ['Alcance', null, 'Pendiente', 'meta ' + F.int(k.alcance)]);
-    if (k.views) rows.push(['Views', t.views / k.views, F.int(t.views), 'de ' + F.int(k.views)]);
-    rows.push(['Impresiones', t.imp / k.impresiones, F.int(t.imp), 'de ' + F.int(k.impresiones)]);
-    if (k.frecuencia) rows.push(rs ? ['Frecuencia', rs.frecuencia / k.frecuencia, F.d2(rs.frecuencia), 'objetivo ' + (p === 'YouTube' ? '' : '+') + k.frecuencia] : ['Frecuencia', null, 'Pendiente', 'objetivo +' + k.frecuencia]);
+    if (k.alcance) rows.push(rs ? ['Alcance', rs.alcance / k.alcance, F.int(rs.alcance), 'de ' + F.int(k.alcance), 1] : ['Alcance', null, 'Sin dato', 'meta ' + F.int(k.alcance)]);
+    if (k.views) rows.push(['Views', t.views / k.views, F.int(t.views), 'de ' + F.int(k.views), 1]);
+    rows.push(['Impresiones', t.imp / k.impresiones, F.int(t.imp), 'de ' + F.int(k.impresiones), 1]);
+    if (k.frecuencia) rows.push(rs ? ['Frecuencia', rs.frecuencia / k.frecuencia, F.d2(rs.frecuencia), 'objetivo ' + (p === 'YouTube' ? '' : '+') + k.frecuencia] : ['Frecuencia', null, 'Sin dato', 'objetivo +' + k.frecuencia]);
     const foot = [['Inversión', F.usd(t.costo)], ['CPM', F.usd(t.costo / t.imp * 1000)]].concat(p === 'Display' ? [['Usuarios únicos', rs ? F.int(rs.alcance) : '—'], ['Clics', F.int(t.clics)], ['CTR', F.pct2(t.clics / t.imp)], ['Frecuencia', rs ? F.d2(rs.frecuencia) : '—']] : p === 'YouTube' ? [['Usuarios únicos', rs ? F.int(rs.alcance) : '—'], ['VTR', F.pct1(t.views / t.imp)]] : [['Interacciones', F.int(t.inter)], ['ER', F.pct2(t.inter / t.imp)]]);
-    return `<article class="kc" style="--c:${PC[p]}"><div class="kc-h">${ICO[p]}<b>${p}</b><span>${p === 'Display' ? 'Banners' : p === 'YouTube' ? 'Video' : 'Video + imagen'}</span></div><div class="kc-b"><div class="kc-r${rows.length === 1 ? ' one' : ''}">${rows.map(([a, f, v, s]) => `<div class="ring${f == null ? ' na' : ''}">${ring(f, PC[p])}<div><small>${a}</small><b class="num">${v}</b><span>${s}</span></div></div>`).join('')}</div><div class="kc-f">${foot.map(([a, b]) => `<div><small>${a}</small><b class="num">${b}</b></div>`).join('')}</div></div></article>`; }).join('');
+    return `<article class="kc" style="--c:${PC[p]};--ct:${PT[p]}"><div class="kc-h">${ICO[p]}<b>${p}</b><span>${p === 'Display' ? 'Banners' : p === 'YouTube' ? 'Video' : 'Video + imagen'}</span></div><div class="kc-b"><div class="kc-r${rows.length === 1 ? ' one' : ''}">${rows.map(([a, f, v, s, pc]) => `<div class="ring${f == null ? ' na' : ''}">${ring(f, PC[p], pc && f != null ? ESP : null)}<div><small>${a}</small><b class="num">${v}</b><span>${s}</span>${pc && f != null ? `<br><i class="st ${ST(f)[0]}">${ST(f)[1]}</i>` : ''}</div></div>`).join('')}</div><div class="kc-f">${foot.map(([a, b]) => `<div><small>${a}</small><b class="num">${b}</b></div>`).join('')}</div></div></article>`; }).join('');
 
   // ---------- Marcador por plataforma ----------
   let bp = 'Facebook';
   const drawBoard = () => { const t = TP[bp], rs = RES[bp], c = PC[bp], tiles = [['Inversión', F.usd(t.costo), F.pct(t.costo / TT.costo) + ' del total'], ['Impresiones', F.int(t.imp), 'CPM ' + F.usd(t.costo / t.imp * 1000)],
-      [bp === 'YouTube' || bp === 'Display' ? 'Usuarios únicos' : 'Alcance', rs ? F.int(rs.alcance) : 'Pendiente', rs ? 'frecuencia ' + F.d2(rs.frecuencia) : 'sin dato acumulado aún']];
+      [bp === 'YouTube' || bp === 'Display' ? 'Usuarios únicos' : 'Alcance', rs ? F.int(rs.alcance) : '—', rs ? 'frecuencia ' + F.d2(rs.frecuencia) : '']];
     if (bp === 'Facebook' || bp === 'Instagram') tiles.push(['Interacciones', F.int(t.inter), 'ER ' + F.pct2(t.inter / t.imp)], ['Reproducciones de video', F.int(t.views), F.pct(t.views / t.imp) + ' de las impresiones'], ['ThruPlays', F.int(t.thru), 'costo ' + F.usd(t.costo / (t.thru || 1)) + ' c/u'], ['Costo por interacción', '$' + nf(4).format(t.costo / (t.inter || 1)), 'CPE'], ['Avance de impresiones', F.pct1(t.imp / K[bp].impresiones), 'de ' + F.M(K[bp].impresiones)]);
     if (bp === 'YouTube') tiles.push(['Views', F.int(t.views), 'VTR ' + F.pct1(t.views / t.imp)], ['CPV', '$' + nf(4).format(t.costo / t.views), 'costo por view'], ['Clics', F.int(t.clics), 'CTR ' + F.pct2(t.clics / t.imp)], ['Avance de views', F.pct1(t.views / K.YouTube.views), 'de ' + F.int(K.YouTube.views)], ['Avance de impresiones', F.pct1(t.imp / K.YouTube.impresiones), 'de ' + F.M(K.YouTube.impresiones)]);
     if (bp === 'Display') tiles.push(['Clics', F.int(t.clics), 'CTR ' + F.pct2(t.clics / t.imp)], ['CPC', F.usd(t.costo / t.clics), 'costo por clic'], ['Banners activos', F.int(D.cre_display.length), 'tamaños y versiones'], ['Avance de impresiones', F.pct1(t.imp / K.Display.impresiones), 'de ' + F.M(K.Display.impresiones)], ['CPM real', rs ? F.usd(rs.cpm) : '—', 'reportado por Google']);
@@ -377,21 +446,21 @@ details.notes ul { padding-left: 18px; line-height: 1.65; }
   // ---------- Gráficos ----------
   const donut = () => { const box = $('c-don'), S = 220, R0 = 96, r0 = 64, tot = TT.imp || 1; let a0 = -Math.PI / 2, o = '';
     PL.forEach((p, i) => { const v = TP[p].imp; if (!v) return; const a1 = a0 + v / tot * Math.PI * 2 - .0001, Lg = a1 - a0 > Math.PI ? 1 : 0, P = (a, rr) => (S / 2 + rr * Math.cos(a)) + ',' + (S / 2 + rr * Math.sin(a));
-      o += `<path data-i="${i}" d="M${P(a0, R0)} A${R0},${R0} 0 ${Lg} 1 ${P(a1, R0)} L${P(a1, r0)} A${r0},${r0} 0 ${Lg} 0 ${P(a0, r0)} Z" style="fill:${PC[p]};stroke:#fff;stroke-width:3"></path>`; a0 = a1; });
+      o += `<path class="dn-s" data-i="${i}" style="animation-delay:${i * .12}s" d="M${P(a0, R0)} A${R0},${R0} 0 ${Lg} 1 ${P(a1, R0)} L${P(a1, r0)} A${r0},${r0} 0 ${Lg} 0 ${P(a0, r0)} Z" fill="${PC[p]}" stroke="#fff" stroke-width="3"></path>`; a0 = a1; });
     const big = PL.reduce((a, p) => TP[p].imp > TP[a].imp ? p : a, PL[0]);
     box.innerHTML = `<svg viewBox="0 0 ${S} ${S}" style="max-width:250px;margin:0 auto" role="img">${o}<text x="${S / 2}" y="${S / 2}" text-anchor="middle" style="font-size:22px;font-weight:900;fill:#0d1b45">${F.pct(TP[big].imp / tot)}</text><text x="${S / 2}" y="${S / 2 + 18}" text-anchor="middle" style="font-size:11px">${big}</text></svg>`;
     const tp = tipFor(box); box.querySelectorAll('path').forEach((pa) => { const p = PL[+pa.dataset.i], on = (ev) => tp.show(ev, [p, F.int(TP[p].imp) + ' impresiones', F.pct1(TP[p].imp / tot)]); pa.addEventListener('pointermove', on); pa.addEventListener('pointerdown', on); pa.addEventListener('pointerleave', () => tp.hide()); });
     $('k-don').innerHTML = PL.map((p) => `<span style="--c:${PC[p]}">${p} ${F.pct1(TP[p].imp / tot)}</span>`).join(''); };
   let ef = 'cpm';
   const drawLol = () => { const val = (p) => ef === 'cpm' ? TP[p].costo / TP[p].imp * 1000 : ef === 'costo' ? TP[p].costo : (RES[p] || {}).frecuencia || 0, mx = Math.max(...PL.map(val)) || 1, f = ef === 'frec' ? F.d2 : F.usd;
-    $('lol').innerHTML = PL.map((p) => `<div class="lol-r" style="--c:${PC[p]}"><span>${p}</span><div class="ln"><i style="width:calc(${val(p) / mx * 100}% - 8px)"></i></div><b class="num">${val(p) ? f(val(p)) : '—'}</b></div>`).join('') + (ef === 'frec' ? '<p class="sub" style="margin-top:4px">Objetivo de frecuencia de la táctica: 3. Instagram aún no reporta frecuencia acumulada.</p>' : ''); };
+    $('lol').innerHTML = PL.map((p) => `<div class="lol-r" style="--c:${PC[p]}"><span>${p}</span><div class="ln"><i style="width:calc(${val(p) / mx * 100}% - 8px)"></i></div><b class="num">${val(p) ? f(val(p)) : '—'}</b></div>`).join('') + (ef === 'frec' ? '<p class="sub" style="margin-top:4px">Objetivo de frecuencia de la táctica: 3 al cierre de la campaña.</p>' : ''); };
   segs('seg-ef', (v) => { ef = v; drawLol(); });
   let ev = 'impresiones';
   const drawEv = () => { const box = $('c-ev'), W = Math.max(box.clientWidth, 300), H = 260, m = { t: 16, r: 16, b: 28, l: 56 }, ps = PL.filter((p) => by(p).some((r) => r[ev])), vals = (p) => dias.map((f) => sum(by(p).filter((r) => r.fecha === f), ev));
     const mx = Math.max(1, ...ps.flatMap(vals)) * 1.15, x = (i) => m.l + (dias.length > 1 ? i / (dias.length - 1) * (W - m.l - m.r) : (W - m.l - m.r) / 2), y = (v) => H - m.b - v / mx * (H - m.t - m.b), fmt = ev === 'costo' ? (v) => '$' + nf(v < 100 ? 0 : 0).format(v) : F.M;
     let g = ''; for (let k = 0; k <= 4; k++) { const v = mx / 1.15 * k / 4; g += `<line x1="${m.l}" x2="${W - m.r}" y1="${y(v)}" y2="${y(v)}" style="stroke:var(--line)"></line><text x="${m.l - 8}" y="${y(v) + 3}" text-anchor="end">${ev === 'costo' ? '$' + nf(1).format(v) : F.M(v)}</text>`; }
     dias.forEach((f, i) => { g += `<text x="${x(i)}" y="${H - 8}" text-anchor="middle">${F.fecha(f)}</text>`; });
-    ps.forEach((p) => { const v = vals(p); g += `<path d="${v.map((a, i) => (i ? 'L' : 'M') + x(i) + ',' + y(a)).join(' ')}" style="fill:none;stroke:${PC[p]};stroke-width:3;stroke-linejoin:round;stroke-linecap:round"></path>` + v.map((a, i) => `<circle cx="${x(i)}" cy="${y(a)}" r="5" style="fill:#fff;stroke:${PC[p]};stroke-width:3"></circle>`).join(''); });
+    ps.forEach((p, j) => { const v = vals(p); g += `<path class="ln-p" pathLength="1" d="${v.map((a, i) => (i ? 'L' : 'M') + x(i) + ',' + y(a)).join(' ')}" style="fill:none;stroke:${PC[p]};stroke-width:3.5;stroke-linejoin:round;stroke-linecap:round;animation-delay:${j * .15}s"></path>` + v.map((a, i) => `<circle class="ln-c" cx="${x(i)}" cy="${y(a)}" r="5.5" style="fill:#fff;stroke:${PC[p]};stroke-width:3;animation-delay:${.6 + j * .15 + i * .1}s"></circle>`).join(''); });
     dias.forEach((f, i) => { const w = (W - m.l - m.r) / Math.max(1, dias.length); g += `<rect data-i="${i}" x="${x(i) - w / 2}" y="${m.t}" width="${w}" height="${H - m.t - m.b}" style="fill:transparent"></rect>`; });
     box.innerHTML = `<svg viewBox="0 0 ${W} ${H}" role="img">${g}</svg>`; const tp = tipFor(box), tf = ev === 'costo' ? F.usd : F.int;
     box.querySelectorAll('rect[data-i]').forEach((rc) => { const i = +rc.dataset.i, on = (e) => tp.show(e, [F.fecha(dias[i]) + (dias[i] === ult && enCurso ? ' (en curso)' : ''), ...ps.map((p) => p + ': ' + tf(vals(p)[i]))]); rc.addEventListener('pointermove', on); rc.addEventListener('pointerdown', on); rc.addEventListener('pointerleave', () => tp.hide()); });
@@ -420,7 +489,7 @@ details.notes ul { padding-left: 18px; line-height: 1.65; }
   };
   let cc = 'meta';
   const drawCar = () => { const list = POOL[cc]();
-    $('car').innerHTML = list.map((c, i) => `<article class="cc" style="--c:${PC[c.pl]}"><div class="im"><span class="rk">#${i + 1}</span><span class="pl">${c.pl}</span><em>${esc(c.ph || c.t)}</em>${c.img ? `<img src="${esc(c.img)}" alt="${esc(c.ph || c.t)}" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">` : ''}${c.href ? `<a class="play" href="${c.href}" target="_blank" rel="noopener" aria-label="Ver video en YouTube"><svg viewBox="0 0 24 24"><path d="M6 4l14 8-14 8z"/></svg></a>` : ''}</div>
+    $('car').innerHTML = list.map((c, i) => `<article class="cc" style="--c:${PC[c.pl]};--ct:${PT[c.pl]}"><div class="im"><span class="rk">#${i + 1}</span><span class="pl">${c.pl}</span><em>${esc(c.ph || c.t)}</em>${c.img ? `<img src="${esc(c.img)}" alt="${esc(c.ph || c.t)}" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">` : ''}${c.href ? `<a class="play" href="${c.href}" target="_blank" rel="noopener" aria-label="Ver video en YouTube"><svg viewBox="0 0 24 24"><path d="M6 4l14 8-14 8z"/></svg></a>` : ''}</div>
       <div class="bd">${c.t ? `<b class="n">${esc(c.t)}</b>` : ''}<span class="d">${c.d}</span><div class="kv">${c.kv.map(([a, b]) => `<span>${a}</span><b class="num">${b}</b>`).join('')}</div></div></article>`).join('');
     $('car').scrollLeft = 0; arrows(); };
   const arrows = () => { const c = $('car'), over = c.scrollWidth > c.clientWidth + 5; c.classList.toggle('fit', !over && c.children.length <= 4); $('car-l').hidden = $('car-r').hidden = !over; $('car-l').disabled = c.scrollLeft < 5; $('car-r').disabled = c.scrollLeft + c.clientWidth >= c.scrollWidth - 5; };
@@ -434,7 +503,7 @@ details.notes ul { padding-left: 18px; line-height: 1.65; }
   const AUD = { meta: ['Meta · global', 'var(--c-fb)', 'alcance'], instagram: ['Instagram', 'var(--c-ig)', 'alcance'], youtube: ['YouTube', 'var(--c-yt)', 'views'], display: ['Display', 'var(--c-gdn)', 'impresiones'] };
   const hb = (id, rows, c) => { const mx = Math.max(...rows.map((r) => r[1])) || 1; $(id).innerHTML = rows.map(([k, v, t]) => `<div class="hb-r" style="--c:${c}"><span>${esc(k)}</span><div class="bar"><i style="width:${v / mx * 100}%"></i></div><b class="num">${t}</b></div>`).join(''); };
   const drawAud = () => { const A = D.audiencia[ap], c = AUD[ap][1], gt = A.genero.reduce((s, x) => s + x[1], 0), et = A.edad.reduce((s, x) => s + x[1], 0), rt = A.region.reduce((s, x) => s + x[1], 0);
-    $('gen').innerHTML = A.genero.map(([k, v]) => `<div style="--c:${k === 'Mujeres' ? 'var(--c-ig)' : 'var(--blue)'}"><small>${k}</small><b class="num">${F.pct(v / gt)}</b><span style="font-size:11px;opacity:.85">${F.int(v)} ${AUD[ap][2]}</span></div>`).join('');
+    $('gen').innerHTML = A.genero.map(([k, v]) => `<div style="--c:${k === 'Mujeres' ? 'var(--orange)' : 'var(--blue)'}"><small>${k}</small><b class="num">${F.pct(v / gt)}</b><span style="font-size:11px;opacity:.85">${F.int(v)} ${AUD[ap][2]}</span></div>`).join('');
     hb('edad', A.edad.map(([k, v]) => [k, v, F.pct1(v / et)]), c); hb('reg', A.region.slice(0, 8).map(([k, v]) => [k, v, F.pct1(v / rt)]), c); };
   chips('chips-aud', Object.entries(AUD).map(([k, [l, c]]) => [k, l, c]), ap, (v) => { ap = v; drawAud(); });
 
@@ -443,16 +512,20 @@ details.notes ul { padding-left: 18px; line-height: 1.65; }
     const cm = [...D.cre_meta].sort((a, b) => b.interacciones / b.impresiones - a.interacciones / a.impresiones), best = cm[0], vids = [...D.cre_video].sort((a, b) => b.views / b.impresiones - a.views / a.impresiones);
     const bans = [...D.cre_display].filter((b) => b.impresiones > 1000).sort((a, b) => b.clics / b.impresiones - a.clics / a.impresiones), size = (n) => (n.match(/(\d+\s*x\s*\d+)/) || [])[1] || n;
     const ed = D.audiencia.meta.edad, et = ed.reduce((s, x) => s + x[1], 0), top = [...ed].sort((a, b) => b[1] - a[1])[0];
+    const yj = (a) => a.length > 1 ? a.slice(0, -1).join(', ') + ' y ' + a[a.length - 1] : a.join('');
+    const ade = PL.filter((p) => TP[p].imp / K[p].impresiones >= ESP), atr = PL.filter((p) => TP[p].imp / K[p].impresiones < ESP * .8);
     const cards = [
-      ['Arranque', 'var(--blue)', `En ${dias.length} días la campaña entregó <b>${F.int(TT.imp)}</b> impresiones con <b>${F.usd(TT.costo)}</b>, a un CPM general de <b>${F.usd(TT.costo / TT.imp * 1000)}</b>. Instagram ya lleva <b>${F.pct1(ig.imp / K.Instagram.impresiones)}</b> de sus impresiones y Display <b>${F.pct1(gd.imp / K.Display.impresiones)}</b>.`, 'Mantener el ritmo de entrega diario para llegar a los KPIs de frecuencia +3 en Facebook e Instagram durante las primeras semanas.'],
+      ['Ritmo', 'var(--blue)', `Con <b>${TRANS} de ${DUR}</b> días transcurridos (${F.pct1(ESP)} del tiempo), la campaña lleva <b>${F.int(TT.imp)}</b> impresiones y <b>${F.usd(TT.costo)}</b> invertidos. ${ade.length ? `Van adelantadas en impresiones: <b>${yj(ade)}</b>` : 'Ninguna plataforma va adelantada en impresiones'}${atr.length ? `; por debajo del ritmo: <b>${yj(atr)}</b>.` : '.'}`, atr.length ? `Subir presupuesto diario o puja en ${yj(atr)} para cerrar la brecha antes de las fiestas de diciembre, la temporada de mayor consumo.` : 'Sostener la entrega diaria y reservar peso para las fiestas de diciembre, la temporada de mayor consumo.'],
+      ['Alcance', 'var(--orange)', `Instagram ya suma <b>${RS.instagram ? F.int(RS.instagram.alcance) : '—'}</b> personas alcanzadas, el <b>${RS.instagram ? F.pct1(RS.instagram.alcance / K.Instagram.alcance) : '—'}</b> de su KPI, con frecuencia de ${RS.instagram ? F.d2(RS.instagram.frecuencia) : '—'}; Facebook lleva ${RS.facebook ? F.pct1(RS.facebook.alcance / K.Facebook.alcance) : '—'} de su alcance.`, 'Con el alcance de Instagram encaminado, pasar a construir frecuencia (+3) con secuencias de historias y reels en los fines de semana.'],
       ['Creatividad', 'var(--c-fb)', best ? `<b>${esc(best.anuncio.replace(/_/g, ' '))}</b> es la pieza con mejor respuesta en Meta: ER de <b>${F.pct2(best.interacciones / best.impresiones)}</b> sobre ${F.int(best.impresiones)} impresiones.` : '', 'Sumar variaciones de la pieza ganadora (mismo formato, nuevo mensaje) para sostener la interacción sin saturar.'],
       ['Plataforma', 'var(--c-ig)', `Instagram compra impresiones a <b>${F.usd(cpm(ig))}</b> de CPM y Facebook a <b>${F.usd(cpm(fb))}</b>; Instagram concentra el <b>${F.pct(ig.imp / (ig.imp + fb.imp))}</b> de las impresiones de Meta.`, 'Usar Instagram para el contenido de marca más visual (reels, historias) y Facebook para frecuencia y alcance amplio.'],
       ['Video', 'var(--c-yt)', vids.length ? `En YouTube el mejor video logra un VTR de <b>${F.pct1(vids[0].views / vids[0].impresiones)}</b>; el total va en <b>${F.int(y.views)}</b> views (${F.pct1(y.views / K.YouTube.views)} del KPI) a <b>$${nf(4).format(y.costo / y.views)}</b> por view.` : '', 'Dar más peso al video con mejor VTR y cortar versiones de 6 segundos para recordación en momentos de consumo (fin de semana y reuniones).'],
       ['Display', 'var(--c-gdn)', bans.length ? `El banner <b>${esc(size(bans[0].nombre))}</b> tiene el mejor CTR (<b>${F.pct2(bans[0].clics / bans[0].impresiones)}</b>), frente a un CTR general de ${F.pct2(gd.clics / gd.imp)} en ${D.cre_display.length} piezas.` : '', 'Rotar presupuesto hacia los tamaños con mejor CTR y revisar los de menor respuesta.'],
-      ['Audiencia', 'var(--orange)', top ? `El grupo de <b>${top[0]}</b> años es el de mayor alcance en Meta (${F.pct(top[1] / et)}), el núcleo de la marca para esta etapa.` : '', 'Conectar LIT con planes de fin de año y vacaciones del público de 25 a 34 años: reuniones, playa y salidas con amigos.']
+      ['Audiencia', 'var(--sky)', top ? `El grupo de <b>${top[0]}</b> años es el de mayor alcance en Meta (${F.pct(top[1] / et)}), el núcleo de la marca para esta etapa.` : '', 'Conectar LIT con planes de fin de año y vacaciones del público de 25 a 34 años: reuniones, playa y salidas con amigos.']
     ];
-    $('finds').innerHTML = cards.map(([k, c, t, o]) => `<div class="find" style="--c:${c}"><small>${k}</small><p class="t">${t}</p><p class="op"><b>Oportunidad:</b> ${o}</p></div>`).join(''); }
-  $('foot-p').textContent = `Campaña de mantenimiento de LIT Hard Tea en Meta y Google · datos del ${F.fecha(desde)} al ${F.fecha(ult)} de 2026 · CCCP UM Nicaragua.`;
+    const CD = { 'var(--c-yt)': 'var(--d-yt)', 'var(--c-gdn)': 'var(--d-gdn)', 'var(--c-ig)': 'var(--d-ig)' };
+    $('finds').innerHTML = cards.filter((x) => x[2] && x[0] !== 'Plataforma').slice(0, 6).map(([k, c, t, o]) => `<div class="find" style="--c:${c};--cd:${CD[c] || c}"><small>${k}</small><p class="t">${t}</p><p class="op"><b>Oportunidad:</b> ${o}</p></div>`).join(''); }
+  $('foot-p').textContent = `Campaña de mantenimiento de LIT Hard Tea en Meta y Google, del 27 de noviembre de 2026 al 31 de enero de 2027 · datos al ${F.fecha(ult)} de 2026 · CCCP UM Nicaragua.`;
 
   // ---------- Índice lateral y barra móvil ----------
   const SECS = [...document.querySelectorAll('main .sec[data-t]')];
@@ -462,6 +535,13 @@ details.notes ul { padding-left: 18px; line-height: 1.65; }
     document.querySelectorAll('#dots a, #tabbar a').forEach((a) => a.classList.toggle('cur', a.dataset.t === cur.id));
     const h = document.documentElement.scrollHeight - innerHeight; $('prog').style.height = (h > 0 ? scrollY / h * 100 : 0) + '%'; };
   addEventListener('scroll', onScroll, { passive: true });
+
+  // Revelado al hacer scroll
+  if ('IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    document.documentElement.classList.add('anim');
+    const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: .08, rootMargin: '0px 0px -8% 0px' });
+    SECS.forEach((s) => io.observe(s));
+  } else SECS.forEach((s) => s.classList.add('in'));
 
   const drawAll = () => { drawBoard(); donut(); drawLol(); drawEv(); drawDays(); drawCar(); drawAud(); onScroll(); };
   drawAll();

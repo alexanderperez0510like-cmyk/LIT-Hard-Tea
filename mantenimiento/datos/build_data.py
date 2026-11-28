@@ -50,7 +50,7 @@ diario.sort(key=lambda x: (x['fecha'], x['red']))
 def nuevo(V, title, ri, fi, ci):
     d = block(V, title); r = next((r for r in V[1:] if g(r, d - 1 + ri)), None)
     return dict(alcance=I(r[d - 1 + ri]), frecuencia=N(r[d - 1 + fi]), cpm=N(r[d - 1 + ci])) if r else None
-res = dict(meta=nuevo(fb, 'LIT_MANT_META_ADS', 12, 10, 11), facebook=nuevo(fb, 'LIT_MANT_FB_META_ADS', 13, 11, 12), instagram=None,
+res = dict(meta=nuevo(fb, 'LIT_MANT_META_ADS', 12, 10, 11), facebook=nuevo(fb, 'LIT_MANT_FB_META_ADS', 13, 11, 12), instagram=nuevo(fb, 'LIT_MANT_IG_META_ADS', 13, 11, 12),
            youtube=nuevo(yt, 'LIT_MANT_GA_VIDEO_ADS', 11, 9, 10), display=nuevo(gd, 'LIT_MANT_GA_GDN_ADS', 11, 10, 9))
 
 # Creativos
