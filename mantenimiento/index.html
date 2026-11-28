@@ -12,9 +12,9 @@
 :root {
   --blue: #1440b8; --blue-d: #0b2a85; --blue-dd: #071a57; --sky: #2a8cff; --lime: #9cd33b; --yellow: #ffd21a; --orange: #f2661c;
   --bg: #0c2d93; --paper: #ffffff; --ink: #0d1b45; --muted: #5d6a8f; --line: #dfe6f7; --soft: #f3f6fd;
-  --c-fb: #1440b8; --c-ig: #f2661c; --c-yt: #8cc63f; --c-gdn: #ffc20e;
+  --c-fb: #4fa3ff; --c-ig: #f2661c; --c-yt: #8cc63f; --c-gdn: #ffc20e;
   --t-fb: #ffffff; --t-ig: #ffffff; --t-yt: #071a57; --t-gdn: #071a57;
-  --d-fb: #1440b8; --d-ig: #d4500c; --d-yt: #4f8a12; --d-gdn: #a67c00;
+  --d-fb: #8cc4ff; --d-ig: #ff8a4c; --d-yt: #b4e36b; --d-gdn: #ffd65a;
   --r: 22px; --gap: 18px; --shadow: 0 2px 0 rgba(13,27,69,.03), 0 18px 40px rgba(20,64,184,.10);
 }
 * { box-sizing: border-box; font-family: "Montserrat", system-ui, sans-serif; }
@@ -29,7 +29,7 @@ h1, h2, h3, h4, p { margin: 0; }
 /* ---------- Hero ---------- */
 .hero { position: relative; overflow: hidden; color: #fff; background: radial-gradient(900px 600px at 80% 20%, #2a8cff 0%, transparent 60%), linear-gradient(135deg, #1440b8 0%, #0b2a85 60%, #071a57 100%); }
 .hero::before { content: ""; position: absolute; inset: 0; background: radial-gradient(circle at 15% 85%, rgba(156,211,59,.35), transparent 35%), radial-gradient(circle at 60% 110%, rgba(255,210,26,.35), transparent 40%); }
-.hero-in { position: relative; max-width: 1280px; margin: 0 auto; padding: 36px 92px 0 32px; display: grid; grid-template-columns: 1.5fr .5fr; gap: 24px; align-items: end; min-height: 560px; }
+.hero-in { position: relative; max-width: 1280px; margin: 0 auto; padding: 36px 92px 0 32px; display: grid; grid-template-columns: 1.3fr .7fr; gap: 32px; align-items: end; min-height: 560px; }
 .hero-top { display: flex; align-items: center; gap: 14px; margin-bottom: 26px; }
 .hero-top img { height: 30px; width: auto; }
 .hero-top span { font-size: 11px; letter-spacing: .24em; text-transform: uppercase; font-weight: 700; opacity: .85; }
@@ -45,7 +45,8 @@ h1, h2, h3, h4, p { margin: 0; }
 .counter b { display: block; font-size: clamp(20px, 2vw, 28px); font-weight: 900; margin-top: 4px; }
 .counter span { font-size: 11.5px; opacity: .8; }
 .hero-cans { align-self: end; display: flex; justify-content: center; }
-.hero-cans img { width: min(360px, 100%); height: auto; filter: drop-shadow(0 30px 40px rgba(0,0,0,.4)); transform: rotate(-6deg) translateY(18px); }
+.hero-cans { align-self: center; padding: 10px 0 40px; }
+.hero-cans img.pic { width: min(440px, 100%); height: auto; border: 10px solid #fff; border-radius: 8px; box-shadow: 0 30px 60px rgba(0,0,0,.45); transform: rotate(3deg); }
 .wave { display: block; width: 100%; height: 70px; margin-top: -1px; position: relative; }
 
 /* ---------- Índice lateral ---------- */
@@ -107,6 +108,22 @@ h1, h2, h3, h4, p { margin: 0; }
   .pano-dots button { width: 10px; height: 10px; border-radius: 50%; border: 0; padding: 0; background: rgba(255,255,255,.55); cursor: pointer; transition: width .25s; }
   .pano-dots button[aria-pressed="true"] { width: 26px; border-radius: 6px; background: var(--orange); }
 }
+
+/* Tarjetas en azul de marca */
+.card, .kc, .find, .day, .cc, details.notes {
+  --ink: #ffffff; --muted: rgba(255,255,255,.74); --line: rgba(255,255,255,.16); --soft: rgba(255,255,255,.08); --paper: transparent;
+  background: linear-gradient(155deg, rgba(42,140,255,.30) 0%, rgba(20,64,184,.55) 45%, rgba(7,26,87,.75) 100%) !important; border-color: rgba(255,255,255,.18); color: var(--ink);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.18), 0 18px 40px rgba(4,16,60,.35); backdrop-filter: blur(6px); }
+.day, .cc { background: linear-gradient(160deg, rgba(255,255,255,.10), rgba(7,26,87,.35)) !important; }
+.card h3, .bh h3, .day-h b, .cc .bd b.n, details.notes summary { color: #fff !important; }
+.bh h3 img { background: #fff; border-radius: 8px; padding: 3px 5px; height: 26px !important; }
+.chip { background: rgba(255,255,255,.08) !important; color: #fff !important; border-color: rgba(255,255,255,.22) !important; }
+.chip[aria-pressed="true"] { background: color-mix(in srgb, var(--c) 38%, transparent) !important; border-color: var(--c) !important; }
+.seg button[aria-pressed="true"] { background: var(--yellow) !important; color: var(--blue-dd) !important; }
+.car-btn { background: var(--yellow) !important; color: var(--blue-dd) !important; }
+.st.up { background: rgba(156,211,59,.22) !important; color: #c8f07e !important; } .st.ok { background: rgba(255,210,26,.2) !important; color: #ffe27a !important; } .st.dn { background: rgba(242,102,28,.25) !important; color: #ffab7a !important; }
+.tile::after { opacity: .3 !important; }
+.kc-b { background: transparent; }
 
 /* Grupos Meta / Google */
 .kg { display: flex; align-items: center; gap: 12px; margin: 0 0 12px; color: #fff; }
@@ -267,7 +284,7 @@ details.notes ul { padding-left: 18px; line-height: 1.65; }
 .hero-cans { position: relative; }
 .hero-cans img { animation: float 5s ease-in-out infinite; position: relative; z-index: 1; }
 @keyframes float { 50% { translate: 0 -14px; } }
-.dotring { position: absolute; width: min(420px, 110%); aspect-ratio: 1; left: 50%; top: 46%; margin: calc(min(420px, 110%) / -2) 0 0 calc(min(420px, 110%) / -2); animation: spin 40s linear infinite; opacity: .9; }
+.dotring { position: absolute; width: min(520px, 125%); aspect-ratio: 1; left: 50%; top: 46%; margin: calc(min(520px, 125%) / -2) 0 0 calc(min(520px, 125%) / -2); animation: spin 40s linear infinite; opacity: .9; }
 @keyframes spin { to { rotate: 360deg; } }
 .card, .kc, .find, .day, .cc { transition: transform .25s ease, box-shadow .25s ease, opacity .7s ease var(--d, 0s), translate .7s cubic-bezier(.2,.8,.2,1) var(--d, 0s); }
 .card:hover, .kc:hover, .find:hover, .day:hover, .cc:hover { transform: translateY(-5px); box-shadow: 0 2px 0 rgba(13,27,69,.03), 0 26px 50px rgba(7,26,87,.35); }
@@ -317,7 +334,8 @@ details.notes ul { padding-left: 18px; line-height: 1.65; }
   .kpis.m3 .kc:first-child { grid-column: auto; }
   .wrap, .hero-in, .foot-in { padding-right: 16px; padding-left: 16px; }
   .hero-in { grid-template-columns: 1fr; min-height: 0; padding-top: 24px; }
-  .hero-cans img { width: 220px; transform: rotate(-6deg) translateY(10px); }
+  .hero-cans img.pic { width: min(320px, 86%); }
+  .hero-cans { display: flex; justify-content: center; padding: 6px 0 30px; }
   .kpis, .board { grid-template-columns: 1fr; }
   .card { padding: 16px; }
   .foot-in { grid-template-columns: 1fr; }
@@ -339,7 +357,7 @@ details.notes ul { padding-left: 18px; line-height: 1.65; }
       <div class="counters" id="counters"></div>
       <div class="pace" id="pace"></div>
     </div>
-    <div class="hero-cans"><svg class="dotring" viewBox="0 0 200 200" aria-hidden="true" id="dotring"></svg><img src="img/latas.webp?v=2" alt="Latas de LIT Hard Tea" width="471" height="704"></div>
+    <div class="hero-cans"><svg class="dotring" viewBox="0 0 200 200" aria-hidden="true" id="dotring"></svg><img class="pic" src="img/portada.webp" alt="LIT Hard Tea: té natural, sin gas, 5% alcohol. Atrévete a probarlo" width="900" height="900"></div>
   </div>
   <svg class="wave" viewBox="0 0 1440 70" preserveAspectRatio="none" aria-hidden="true"><defs><linearGradient id="wg" x1="0" x2="1"><stop offset="0" stop-color="#9cd33b"/><stop offset="1" stop-color="#ffd21a"/></linearGradient></defs><path d="M0 40 C 240 80 480 0 720 30 C 960 60 1200 10 1440 40 L1440 70 L0 70 Z" fill="url(#wg)"/></svg>
   <div class="ticker" aria-hidden="true"><div id="ticker"></div></div>
@@ -451,7 +469,7 @@ details.notes ul { padding-left: 18px; line-height: 1.65; }
   const by = (p) => R.filter((r) => r.red === p), T = (rs) => ({ imp: sum(rs, 'impresiones'), costo: sum(rs, 'costo'), inter: sum(rs, 'interacciones'), views: sum(rs, 'views'), clics: sum(rs, 'clics'), thru: sum(rs, 'thruplays') });
   const TP = Object.fromEntries(PL.map((p) => [p, T(by(p))])), TT = T(R), TMeta = T(R.filter((r) => r.canal === 'Meta'));
   TP.Meta = TMeta; K.Meta = { alcance: K.Facebook.alcance + K.Instagram.alcance, impresiones: K.Facebook.impresiones + K.Instagram.impresiones, frecuencia: 3 };
-  PC.Meta = 'var(--blue-dd)'; PT.Meta = '#fff';
+  PC.Meta = '#ffffff'; PT.Meta = 'var(--blue-dd)';
   const LC = { Meta: '#0866ff', Facebook: '#1877f2', Instagram: '#e1306c', YouTube: '#ff0000', Display: '#4285f4' };
   ICO.Meta = '<svg class="st0" viewBox="0 0 24 24"><path d="M4 16.2c-1.3-2.6.3-8.4 3.6-8.4 3.6 0 5.6 8.6 9 8.6 2.2 0 3.4-2 3.4-4.3 0-2.6-1.4-4.3-3.4-4.3-3.4 0-5.4 8.6-9 8.6-1.6 0-3-.2-3.6-.2z"/></svg>';
   const desde = R.reduce((a, r) => r.fecha < a ? r.fecha : a, '9999'), dias = [...new Set(R.map((r) => r.fecha))].sort();
@@ -476,7 +494,7 @@ details.notes ul { padding-left: 18px; line-height: 1.65; }
 
   // ---------- KPI: anillos ----------
   const ring = (frac, c, esp) => { const R0 = 30, C = 2 * Math.PI * R0, f = Math.max(0, Math.min(1, frac || 0)), a = esp == null ? 0 : (-90 + 360 * Math.min(1, esp)) * Math.PI / 180;
-    return `<svg viewBox="0 0 76 76" aria-hidden="true"><circle cx="38" cy="38" r="${R0}" fill="none" stroke="#e6ecfb" stroke-width="9"/><circle class="arc" cx="38" cy="38" r="${R0}" fill="none" stroke="${c}" stroke-width="9" stroke-linecap="round" stroke-dasharray="${C} ${C}" style="--c0:${C};--off:${C * (1 - f)}" transform="rotate(-90 38 38)"/>${esp == null ? '' : `<circle class="mk" cx="${38 + R0 * Math.cos(a)}" cy="${38 + R0 * Math.sin(a)}" r="4.5" fill="#f2661c" stroke="#fff" stroke-width="2"/>`}<text x="38" y="42" text-anchor="middle" style="font-size:13px;font-weight:900;fill:#0d1b45">${frac == null ? '—' : F.pct(frac)}</text></svg>`; };
+    return `<svg viewBox="0 0 76 76" aria-hidden="true"><circle cx="38" cy="38" r="${R0}" fill="none" stroke="rgba(255,255,255,.14)" stroke-width="9"/><circle class="arc" cx="38" cy="38" r="${R0}" fill="none" stroke="${c}" stroke-width="9" stroke-linecap="round" stroke-dasharray="${C} ${C}" style="--c0:${C};--off:${C * (1 - f)}" transform="rotate(-90 38 38)"/>${esp == null ? '' : `<circle class="mk" cx="${38 + R0 * Math.cos(a)}" cy="${38 + R0 * Math.sin(a)}" r="4.5" fill="#f2661c" stroke="#fff" stroke-width="2"/>`}<text x="38" y="42" text-anchor="middle" style="font-size:13px;font-weight:900;fill:#fff">${frac == null ? '—' : F.pct(frac)}</text></svg>`; };
   const kcard = (p) => { const k = K[p], t = TP[p], rs = RES[p], rows = [];
     if (k.alcance) rows.push(rs ? ['Alcance', rs.alcance / k.alcance, F.int(rs.alcance), 'de ' + F.int(k.alcance), 1] : ['Alcance', null, 'Sin dato', 'meta ' + F.int(k.alcance)]);
     if (k.views) rows.push(['Views', t.views / k.views, F.int(t.views), 'de ' + F.int(k.views), 1]);
@@ -501,9 +519,9 @@ details.notes ul { padding-left: 18px; line-height: 1.65; }
   // ---------- Gráficos ----------
   const donut = () => { const box = $('c-don'), S = 220, R0 = 96, r0 = 64, tot = TT.imp || 1; let a0 = -Math.PI / 2, o = '';
     PL.forEach((p, i) => { const v = TP[p].imp; if (!v) return; const a1 = a0 + v / tot * Math.PI * 2 - .0001, Lg = a1 - a0 > Math.PI ? 1 : 0, P = (a, rr) => (S / 2 + rr * Math.cos(a)) + ',' + (S / 2 + rr * Math.sin(a));
-      o += `<path class="dn-s" data-i="${i}" style="animation-delay:${i * .12}s" d="M${P(a0, R0)} A${R0},${R0} 0 ${Lg} 1 ${P(a1, R0)} L${P(a1, r0)} A${r0},${r0} 0 ${Lg} 0 ${P(a0, r0)} Z" fill="${PC[p]}" stroke="#fff" stroke-width="3"></path>`; a0 = a1; });
+      o += `<path class="dn-s" data-i="${i}" style="animation-delay:${i * .12}s" d="M${P(a0, R0)} A${R0},${R0} 0 ${Lg} 1 ${P(a1, R0)} L${P(a1, r0)} A${r0},${r0} 0 ${Lg} 0 ${P(a0, r0)} Z" fill="${PC[p]}" stroke="#0f2f8f" stroke-width="3"></path>`; a0 = a1; });
     const big = PL.reduce((a, p) => TP[p].imp > TP[a].imp ? p : a, PL[0]);
-    box.innerHTML = `<svg viewBox="0 0 ${S} ${S}" style="max-width:250px;margin:0 auto" role="img">${o}<text x="${S / 2}" y="${S / 2}" text-anchor="middle" style="font-size:22px;font-weight:900;fill:#0d1b45">${F.pct(TP[big].imp / tot)}</text><text x="${S / 2}" y="${S / 2 + 18}" text-anchor="middle" style="font-size:11px">${big}</text></svg>`;
+    box.innerHTML = `<svg viewBox="0 0 ${S} ${S}" style="max-width:250px;margin:0 auto" role="img">${o}<text x="${S / 2}" y="${S / 2}" text-anchor="middle" style="font-size:22px;font-weight:900;fill:#fff">${F.pct(TP[big].imp / tot)}</text><text x="${S / 2}" y="${S / 2 + 18}" text-anchor="middle" style="font-size:11px">${big}</text></svg>`;
     const tp = tipFor(box); box.querySelectorAll('path').forEach((pa) => { const p = PL[+pa.dataset.i], on = (ev) => tp.show(ev, [p, F.int(TP[p].imp) + ' impresiones', F.pct1(TP[p].imp / tot)]); pa.addEventListener('pointermove', on); pa.addEventListener('pointerdown', on); pa.addEventListener('pointerleave', () => tp.hide()); });
     $('k-don').innerHTML = PL.map((p) => `<span style="--c:${PC[p]}">${p} ${F.pct1(TP[p].imp / tot)}</span>`).join(''); };
   let ef = 'cpm';
@@ -561,7 +579,7 @@ details.notes ul { padding-left: 18px; line-height: 1.65; }
   const AUD = { meta: ['Meta · global', 'var(--c-fb)', 'alcance'], instagram: ['Instagram', 'var(--c-ig)', 'alcance'], youtube: ['YouTube', 'var(--c-yt)', 'views'], display: ['Display', 'var(--c-gdn)', 'impresiones'] };
   const hb = (id, rows, c) => { const mx = Math.max(...rows.map((r) => r[1])) || 1; $(id).innerHTML = rows.map(([k, v, t]) => `<div class="hb-r" style="--c:${c}"><span>${esc(k)}</span><div class="bar"><i style="width:${v / mx * 100}%"></i></div><b class="num">${t}</b></div>`).join(''); };
   const drawAud = () => { const A = D.audiencia[ap], c = AUD[ap][1], gt = A.genero.reduce((s, x) => s + x[1], 0), et = A.edad.reduce((s, x) => s + x[1], 0), rt = A.region.reduce((s, x) => s + x[1], 0);
-    $('gen').innerHTML = A.genero.map(([k, v]) => `<div style="--c:${k === 'Mujeres' ? 'var(--orange)' : 'var(--blue)'}"><small>${k}</small><b class="num">${F.pct(v / gt)}</b><span style="font-size:11px;opacity:.85">${F.int(v)} ${AUD[ap][2]}</span></div>`).join('');
+    $('gen').innerHTML = A.genero.map(([k, v]) => `<div style="--c:${k === 'Mujeres' ? 'var(--orange)' : 'var(--sky)'}"><small>${k}</small><b class="num">${F.pct(v / gt)}</b><span style="font-size:11px;opacity:.85">${F.int(v)} ${AUD[ap][2]}</span></div>`).join('');
     hb('edad', A.edad.map(([k, v]) => [k, v, F.pct1(v / et)]), c); hb('reg', A.region.slice(0, 8).map(([k, v]) => [k, v, F.pct1(v / rt)]), c); };
   chips('chips-aud', Object.entries(AUD).map(([k, [l, c]]) => [k, l, c]), ap, (v) => { ap = v; drawAud(); });
 
@@ -573,7 +591,7 @@ details.notes ul { padding-left: 18px; line-height: 1.65; }
     const yj = (a) => a.length > 1 ? a.slice(0, -1).join(', ') + ' y ' + a[a.length - 1] : a.join('');
     const ade = PL.filter((p) => TP[p].imp / K[p].impresiones >= ESP), atr = PL.filter((p) => TP[p].imp / K[p].impresiones < ESP * .8);
     const cards = [
-      ['Ritmo', 'var(--blue)', `Con <b>${TRANS} de ${DUR}</b> días transcurridos (${F.pct1(ESP)} del tiempo), la campaña lleva <b>${F.int(TT.imp)}</b> impresiones y <b>${F.usd(TT.costo)}</b> invertidos. ${ade.length ? `Van adelantadas en impresiones: <b>${yj(ade)}</b>` : 'Ninguna plataforma va adelantada en impresiones'}${atr.length ? `; por debajo del ritmo: <b>${yj(atr)}</b>.` : '.'}`, atr.length ? `Subir presupuesto diario o puja en ${yj(atr)} para cerrar la brecha antes de las fiestas de diciembre, la temporada de mayor consumo.` : 'Sostener la entrega diaria y reservar peso para las fiestas de diciembre, la temporada de mayor consumo.'],
+      ['Ritmo', 'var(--yellow)', `Con <b>${TRANS} de ${DUR}</b> días transcurridos (${F.pct1(ESP)} del tiempo), la campaña lleva <b>${F.int(TT.imp)}</b> impresiones y <b>${F.usd(TT.costo)}</b> invertidos. ${ade.length ? `Van adelantadas en impresiones: <b>${yj(ade)}</b>` : 'Ninguna plataforma va adelantada en impresiones'}${atr.length ? `; por debajo del ritmo: <b>${yj(atr)}</b>.` : '.'}`, atr.length ? `Subir presupuesto diario o puja en ${yj(atr)} para cerrar la brecha antes de las fiestas de diciembre, la temporada de mayor consumo.` : 'Sostener la entrega diaria y reservar peso para las fiestas de diciembre, la temporada de mayor consumo.'],
       ['Alcance', 'var(--orange)', `Instagram ya suma <b>${RS.instagram ? F.int(RS.instagram.alcance) : '—'}</b> personas alcanzadas, el <b>${RS.instagram ? F.pct1(RS.instagram.alcance / K.Instagram.alcance) : '—'}</b> de su KPI, con frecuencia de ${RS.instagram ? F.d2(RS.instagram.frecuencia) : '—'}; Facebook lleva ${RS.facebook ? F.pct1(RS.facebook.alcance / K.Facebook.alcance) : '—'} de su alcance.`, 'Con el alcance de Instagram encaminado, pasar a construir frecuencia (+3) con secuencias de historias y reels en los fines de semana.'],
       ['Creatividad', 'var(--c-fb)', best ? `<b>${esc(best.anuncio.replace(/_/g, ' '))}</b> es la pieza con mejor respuesta en Meta: ER de <b>${F.pct2(best.interacciones / best.impresiones)}</b> sobre ${F.int(best.impresiones)} impresiones.` : '', 'Sumar variaciones de la pieza ganadora (mismo formato, nuevo mensaje) para sostener la interacción sin saturar.'],
       ['Plataforma', 'var(--c-ig)', `Instagram compra impresiones a <b>${F.usd(cpm(ig))}</b> de CPM y Facebook a <b>${F.usd(cpm(fb))}</b>; Instagram concentra el <b>${F.pct(ig.imp / (ig.imp + fb.imp))}</b> de las impresiones de Meta.`, 'Usar Instagram para el contenido de marca más visual (reels, historias) y Facebook para frecuencia y alcance amplio.'],
