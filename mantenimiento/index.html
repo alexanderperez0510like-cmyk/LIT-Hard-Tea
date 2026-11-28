@@ -129,6 +129,18 @@ h1, h2, h3, h4, p { margin: 0; }
 .aviso p { margin: 0; background: #1f3c96; color: #fff; font-size: clamp(10px, 1.45vw, 19px); font-weight: 700; letter-spacing: .01em; text-transform: uppercase; line-height: 1.2; padding: 6px 14px; border-radius: 4px; text-align: center; }
 .aviso span { flex: none; display: grid; place-items: center; width: clamp(28px, 2.6vw, 38px); aspect-ratio: 1; margin-left: 8px; border-radius: 50%; background: #1f3c96; border: 2px solid #fff; color: #fff; font-size: clamp(10px, 1vw, 13px); font-weight: 800; }
 
+/* Validación de entrega */
+.vchart { overflow-x: auto; overflow-y: visible; padding-bottom: 4px; }
+.vchart svg { margin: 0 auto; }
+.vchart .hv { cursor: pointer; transition: opacity .2s, stroke-width .2s; }
+.vchart svg:hover .hv { opacity: .55; } .vchart svg .hv:hover { opacity: 1; stroke: #fff; stroke-width: 3; }
+.vchart .vl { font-size: 11px; font-weight: 800; fill: #fff !important; }
+.vchart .vs { font-size: 10px; fill: rgba(255,255,255,.7) !important; }
+.vnote { display: flex; flex-wrap: wrap; gap: 6px 16px; justify-content: center; font-size: 12px; color: var(--muted); margin-top: 10px; }
+.vnote b { color: #fff; }
+.vnote i { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 6px; vertical-align: -1px; background: var(--c); }
+.vnote i.o { background: transparent; border: 2px solid var(--c); }
+
 /* Grupos Meta / Google */
 .kg { display: flex; align-items: center; gap: 12px; margin: 0 0 12px; color: #fff; }
 .kg img { height: 30px; width: auto; background: #fff; border-radius: 10px; padding: 4px 6px; box-shadow: 0 4px 12px rgba(7,26,87,.3); }
@@ -406,6 +418,12 @@ details.notes ul { padding-left: 18px; line-height: 1.65; }
     </div>
   </section>
 
+  <section class="sec" id="validacion" data-t="Validación">
+    <div class="sec-h"><div><small>Día a día por plataforma</small><h2>Validación de entrega</h2></div><p>Burbujas, círculos y pétalos para contrastar volumen y costo de cada día. Pasa el cursor o toca un elemento para ver el detalle.</p></div>
+    <div class="chips" id="chips-val" style="margin-bottom:16px"></div>
+    <div class="grid" id="val"></div>
+  </section>
+
   <section class="sec brand" aria-label="Carrusel LIT">
     <div class="pano-wrap card"><div class="pano-in"><div class="pano" id="pano"><img src="img/carrusel_1.webp" alt="LIT Hard Tea: POV, te la estás pasando…" width="1200" height="1133" loading="lazy"><img src="img/carrusel_2.webp" alt="…bien. LIT Hard Tea sin gas, té natural, alcohol 5%" width="1200" height="1133" loading="lazy"></div>
       <div class="pano-dots" id="pano-dots"><button type="button" aria-label="Imagen 1" aria-pressed="true"></button><button type="button" aria-label="Imagen 2" aria-pressed="false"></button></div></div>
@@ -641,9 +659,61 @@ details.notes ul { padding-left: 18px; line-height: 1.65; }
     pn.addEventListener('scroll', () => { const i = Math.round(pn.scrollLeft / (pn.clientWidth || 1)); bt.forEach((b, j) => b.setAttribute('aria-pressed', String(i === j))); }, { passive: true });
     if (!matchMedia('(prefers-reduced-motion: reduce)').matches) setInterval(() => { if (pn.scrollWidth > pn.clientWidth + 5) go(Math.round(pn.scrollLeft / pn.clientWidth) ? 0 : 1); }, 4500); }
 
-  const drawAll = () => { drawBoard(); donut(); drawLol(); drawEv(); drawDays(); drawCar(); drawAud(); onScroll(); };
+
+  // ---------- Validación de entrega ----------
+  let vp = 'Facebook';
+  const dv = (p, k) => dias.map((f) => sum(by(p).filter((r) => r.fecha === f), k));
+  const META_V = [['alc', 'Alcance vs impresiones', 'Círculo exterior: impresiones del día; interior: alcance. Cuanto más se separan, mayor es la frecuencia diaria.'],
+    ['rose', 'Interacciones por día', 'Cada pétalo es un día y crece con las interacciones; los pétalos tenues son días por venir.'],
+    ['bub', 'Impresiones vs CPM', 'Altura: CPM del día. Tamaño de la burbuja: impresiones.', 'impresiones', 'cpm']];
+  const VCFG = { Facebook: META_V, Instagram: META_V,
+    YouTube: [['bub', 'Views vs costo por view', 'Altura: costo por view (CPV) del día. Tamaño de la burbuja: views.', 'views', 'cpv'], ['bub', 'Impresiones vs CPM', 'Altura: CPM del día. Tamaño de la burbuja: impresiones.', 'impresiones', 'cpm']],
+    Display: [['bub', 'Clics vs costo', 'Altura: inversión del día. Tamaño de la burbuja: clics.', 'clics', 'costo'], ['bub', 'Impresiones vs CPM', 'Altura: CPM del día. Tamaño de la burbuja: impresiones.', 'impresiones', 'cpm']] };
+  const bindTips = (box, tips) => { const tp = tipFor(box); box.querySelectorAll('[data-k]').forEach((el) => { const on = (e) => tp.show(e, tips[+el.dataset.k]); el.addEventListener('pointermove', on); el.addEventListener('pointerdown', on); el.addEventListener('pointerleave', () => tp.hide()); }); };
+  const dl = (i) => F.fecha(dias[i]) + (dias[i] === ult && enCurso ? ' (en curso)' : '');
+  const vBub = (box, c) => { const col = PC[vp], sz = dv(vp, c[3]), cost = dv(vp, 'costo'), imp = dv(vp, 'impresiones'), vw = dv(vp, 'views'), n = dias.length;
+    const yv = dias.map((_, i) => c[4] === 'cpm' ? (imp[i] ? cost[i] / imp[i] * 1000 : 0) : c[4] === 'cpv' ? (vw[i] ? cost[i] / vw[i] : 0) : cost[i]);
+    const yf = c[4] === 'cpv' ? (v) => '$' + nf(4).format(v) : F.usd, nm = { impresiones: 'Impresiones', views: 'Views', clics: 'Clics' }[c[3]], ym = { cpm: 'CPM', cpv: 'CPV', costo: 'Inversión' }[c[4]];
+    const cw = box.clientWidth || 300, W = Math.max(cw, n * 80), H = 280, m = { t: 26, r: 16, b: 30, l: 58 }, mxS = Math.max(1, ...sz), mxY = Math.max(1e-9, ...yv) * 1.45;
+    const Rm = Math.max(10, Math.min(44, (W - m.l - m.r) / n / 2.3)), x = (i) => m.l + (i + .5) * (W - m.l - m.r) / n, y = (v) => H - m.b - v / mxY * (H - m.t - m.b);
+    let g = ''; for (let k = 0; k <= 4; k++) { const v = mxY * k / 4; g += `<line x1="${m.l}" x2="${W - m.r}" y1="${y(v)}" y2="${y(v)}" style="stroke:var(--line);stroke-dasharray:3 4"></line><text x="${m.l - 8}" y="${y(v) + 3}" text-anchor="end">${yf(v)}</text>`; }
+    const tips = [];
+    dias.forEach((f, i) => { const r = Math.max(5, Math.sqrt(sz[i] / mxS) * Rm), cy = Math.max(m.t + r, y(yv[i]));
+      tips.push([dl(i), nm + ': ' + F.int(sz[i]), ym + ': ' + yf(yv[i])].concat(c[4] === 'costo' ? ['CPC: ' + (sz[i] ? F.usd(cost[i] / sz[i]) : '—')] : []));
+      g += `<text x="${x(i)}" y="${H - 8}" text-anchor="middle">${F.fecha(f)}</text><circle class="ln-c hv" data-k="${i}" cx="${x(i)}" cy="${cy}" r="${r}" style="fill:${col};fill-opacity:.82;stroke:rgba(255,255,255,.6);stroke-width:2;animation-delay:${.15 + i * .12}s"></circle>`
+        + `<text class="vl" x="${x(i)}" y="${cy - r - 7}" text-anchor="middle">${yf(yv[i])}</text>` + (r > 20 ? `<text class="vs" x="${x(i)}" y="${cy + 4}" text-anchor="middle" style="fill:${PT[vp]} !important;font-weight:800">${F.M(sz[i])}</text>` : ''); });
+    box.innerHTML = `<svg viewBox="0 0 ${W} ${H}" style="min-width:${W > cw ? W + 'px' : '0'}" role="img" aria-label="${c[1]}">${g}</svg><div class="vnote" style="--c:${col}"><span><i></i>${nm} (tamaño)</span><span>${ym} (altura)</span><span>Total ${nm.toLowerCase()}: <b>${F.int(sz.reduce((a, b) => a + b, 0))}</b></span></div>`;
+    bindTips(box, tips); };
+  const vAlc = (box) => { const col = PC[vp], imp = dv(vp, 'impresiones'), al = dv(vp, 'alcance'), n = dias.length, cw = box.clientWidth || 300, W = Math.max(cw, n * 120), H = 270;
+    const slot = W / n, Rm = Math.max(18, Math.min(92, slot / 2 - 10, (H - 70) / 2)), mx = Math.max(1, ...imp), cy = 16 + Rm, tips = []; let g = '';
+    dias.forEach((f, i) => { const cx = (i + .5) * slot, ro = Math.max(6, Math.sqrt(imp[i] / mx) * Rm), ri = Math.max(4, Math.sqrt(al[i] / mx) * Rm), fr = al[i] ? imp[i] / al[i] : 0;
+      tips.push([dl(i), 'Impresiones: ' + F.int(imp[i]), 'Alcance: ' + F.int(al[i]), 'Frecuencia del día: ' + F.d2(fr)]);
+      g += `<circle class="ln-c hv" data-k="${i}" cx="${cx}" cy="${cy}" r="${ro}" style="fill:${col};fill-opacity:.22;stroke:${col};stroke-width:2;animation-delay:${.1 + i * .15}s"></circle>`
+        + `<circle class="ln-c" cx="${cx}" cy="${cy}" r="${ri}" style="fill:${col};pointer-events:none;animation-delay:${.35 + i * .15}s"></circle>`
+        + (ri > 22 ? `<text class="vl" x="${cx}" y="${cy + 4}" text-anchor="middle" style="pointer-events:none">${F.M(al[i])}</text>` : '')
+        + `<text class="vl" x="${cx}" y="${cy + Rm + 22}" text-anchor="middle">${F.fecha(f)}</text><text class="vs" x="${cx}" y="${cy + Rm + 38}" text-anchor="middle">frec. ${F.d2(fr)} · ${F.M(imp[i])} imp.</text>`; });
+    box.innerHTML = `<svg viewBox="0 0 ${W} ${H}" style="min-width:${W > cw ? W + 'px' : '0'}" role="img" aria-label="Alcance vs impresiones por día">${g}</svg><div class="vnote" style="--c:${col}"><span><i class="o"></i>Impresiones</span><span><i></i>Alcance</span></div>`;
+    bindTips(box, tips); };
+  const vRose = (box) => { const col = PC[vp], it = dv(vp, 'interacciones'), imp = dv(vp, 'impresiones'), n = dias.length, N = Math.max(7, n), S = 280, C = S / 2, R0 = 26, R = 118, mx = Math.max(1, ...it), tips = []; let g = '';
+    const P = (a, r) => (C + r * Math.cos(a)).toFixed(2) + ',' + (C + r * Math.sin(a)).toFixed(2), gap = N > 1 ? .04 : 0;
+    for (let i = 0; i < N; i++) { const a0 = -Math.PI / 2 + i * 2 * Math.PI / N + gap / 2, a1 = a0 + 2 * Math.PI / N - gap, lg = a1 - a0 > Math.PI ? 1 : 0, on = i < n, r = on ? R0 + Math.sqrt(it[i] / mx) * (R - R0) : R;
+      const d = `M${P(a0, R0)} L${P(a0, r)} A${r},${r} 0 ${lg} 1 ${P(a1, r)} L${P(a1, R0)} A${R0},${R0} 0 ${lg} 0 ${P(a0, R0)} Z`;
+      if (on) { tips.push([dl(i), 'Interacciones: ' + F.int(it[i]), 'ER del día: ' + F.pct2(imp[i] ? it[i] / imp[i] : 0)]);
+        const am = (a0 + a1) / 2; g += `<path class="dn-s hv" data-k="${tips.length - 1}" d="${d}" style="fill:${col};fill-opacity:${.55 + .45 * it[i] / mx};stroke:rgba(255,255,255,.5);stroke-width:1.5;animation-delay:${.1 + i * .1}s"></path>`
+          + (N <= 14 ? `<text class="vs" x="${C + (r + 13) * Math.cos(am)}" y="${C + (r + 13) * Math.sin(am) + 3}" text-anchor="middle">${F.fecha(dias[i])}</text>` : ''); }
+      else g += `<path d="${d}" style="fill:rgba(255,255,255,.04);stroke:rgba(255,255,255,.14);stroke-dasharray:3 3"></path>`; }
+    const tot = it.reduce((a, b) => a + b, 0);
+    g += `<text class="vl" x="${C}" y="${C + 4}" text-anchor="middle" style="font-size:12px">${F.M(tot)}</text>`;
+    box.innerHTML = `<svg viewBox="-14 -14 ${S + 28} ${S + 28}" style="max-width:320px" role="img" aria-label="Interacciones por día">${g}</svg><div class="vnote" style="--c:${col}"><span>Total: <b>${F.int(tot)}</b></span><span>Promedio diario: <b>${F.int(tot / (n || 1))}</b></span><span>ER: <b>${F.pct2(TP[vp].inter / (TP[vp].imp || 1))}</b></span></div>`;
+    bindTips(box, tips); };
+  const drawVal = () => { const cfg = VCFG[vp], cls = cfg.length === 3 ? 's4' : 's6';
+    $('val').innerHTML = cfg.map((c, i) => `<section class="card ${cls} flex"><h3>${c[1]}</h3><p class="sub">${c[2]}</p><div class="grow"><div class="chart vchart" id="v${i}"></div></div></section>`).join('');
+    cfg.forEach((c, i) => ({ alc: vAlc, rose: vRose, bub: vBub })[c[0]]($('v' + i), c)); };
+  chips('chips-val', PL.map((p) => [p, p, PC[p]]), vp, (v) => { vp = v; drawVal(); });
+
+  const drawAll = () => { drawVal(); drawBoard(); donut(); drawLol(); drawEv(); drawDays(); drawCar(); drawAud(); onScroll(); };
   drawAll();
-  let w = innerWidth; addEventListener('resize', () => { if (Math.abs(innerWidth - w) < 40) return; w = innerWidth; drawEv(); arrows(); });
+  let w = innerWidth; addEventListener('resize', () => { if (Math.abs(innerWidth - w) < 40) return; w = innerWidth; drawEv(); drawVal(); arrows(); });
 })();
 </script>
 </body>
