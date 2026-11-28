@@ -71,6 +71,14 @@ for r in gd[1:]:
         o = ban.setdefault(r[d + 1], dict(img=r[d + 1], nombre=r[d + 2], impresiones=0, clics=0, desde=r[d], hasta=r[d]))
         o['impresiones'] += I(r[d + 3]); o['clics'] += I(r[d + 4]); o['desde'] = min(o['desde'], r[d]); o['hasta'] = max(o['hasta'], r[d])
 
+def cre_red(title):
+    o = collections.OrderedDict(); d = block(fb, title)
+    for r in sorted([r for r in fb[1:] if g(r, d)], key=lambda r: r[d]):
+        x = o.setdefault(r[d + 2], dict(anuncio=r[d + 2], url=r[d + 1], impresiones=0, interacciones=0, desde=r[d], hasta=r[d]))
+        x['impresiones'] += I(r[d + 4]); x['interacciones'] += I(r[d + 5]); x['hasta'] = r[d]; x['url'] = r[d + 1] or x['url']
+    return list(o.values())
+cre_fb, cre_ig = cre_red('LIT_Behaviour_MANT_FB_META_ADS'), cre_red('LIT_Behaviour_MANT_IG_META_ADS')
+
 aud = dict(meta=dem(fb, block(fb, 'LIT_MANT_DEM_FB'), block(fb, 'LIT_MANT_DEM_FB') + 3, block(fb, 'LIT_MANT_DEM_FB') + 6),
            instagram=dem(fb, block(fb, 'LIT_MANT_DEM_IG'), block(fb, 'LIT_MANT_DEM_IG') + 3, block(fb, 'LIT_MANT_DEM_IG') + 6),
            youtube=dem(yt, block(yt, 'LIT_MANT_VIDEO_DEM_GA'), block(yt, 'LIT_MANT_VIDEO_DEM_GA') + 4, block(yt, 'LIT_MANT_VIDEO_DEM_GA') + 8, 2),
@@ -79,7 +87,7 @@ aud = dict(meta=dem(fb, block(fb, 'LIT_MANT_DEM_FB'), block(fb, 'LIT_MANT_DEM_FB
 KPI = dict(Instagram=dict(alcance=400000, impresiones=2293650, frecuencia=3), Facebook=dict(alcance=594871, impresiones=6520067, frecuencia=3),
            YouTube=dict(views=239724, impresiones=2000000, frecuencia=3), Display=dict(impresiones=1666000))
 ult = max(x['fecha'] for x in diario)
-out = dict(actualizado=ult, diario=diario, resumen=res, kpi=KPI, cre_meta=list(cre.values()), cre_video=list(vid.values()), cre_display=list(ban.values()), audiencia=aud)
+out = dict(actualizado=ult, diario=diario, resumen=res, kpi=KPI, cre_meta=list(cre.values()), cre_fb=cre_fb, cre_ig=cre_ig, cre_video=list(vid.values()), cre_display=list(ban.values()), audiencia=aud)
 open(os.path.join(D0, '..', 'datos.js'), 'w', encoding='utf-8').write('window.LM_DATA = ' + json.dumps(out, ensure_ascii=False, separators=(',', ':')) + ';\n')
 t = collections.defaultdict(lambda: [0, 0.0])
 for r in diario: t[r['red']][0] += r['impresiones']; t[r['red']][1] += r['costo']
