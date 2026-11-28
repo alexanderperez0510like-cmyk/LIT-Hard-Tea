@@ -125,8 +125,9 @@ h1, h2, h3, h4, p { margin: 0; }
 .kc-b { background: transparent; }
 
 .pano-in { position: relative; }
-.aviso { display: flex; justify-content: center; padding: 8px 14px 10px; background: linear-gradient(90deg, #0b5bd3, #0a78e6); }
-.aviso img { display: block; width: min(840px, 100%); height: auto; }
+.aviso { display: flex; justify-content: center; align-items: center; padding: 8px 14px 10px; background: linear-gradient(90deg, #0b5bd3, #0a78e6); }
+.aviso p { margin: 0; background: #1f3c96; color: #fff; font-size: clamp(10px, 1.45vw, 19px); font-weight: 700; letter-spacing: .01em; text-transform: uppercase; line-height: 1.2; padding: 6px 14px; border-radius: 4px; text-align: center; }
+.aviso span { flex: none; display: grid; place-items: center; width: clamp(28px, 2.6vw, 38px); aspect-ratio: 1; margin-left: 8px; border-radius: 50%; background: #1f3c96; border: 2px solid #fff; color: #fff; font-size: clamp(10px, 1vw, 13px); font-weight: 800; }
 
 /* Grupos Meta / Google */
 .kg { display: flex; align-items: center; gap: 12px; margin: 0 0 12px; color: #fff; }
@@ -406,7 +407,7 @@ details.notes ul { padding-left: 18px; line-height: 1.65; }
   <section class="sec brand" aria-label="Carrusel LIT">
     <div class="pano-wrap card"><div class="pano-in"><div class="pano" id="pano"><img src="img/carrusel_1.webp" alt="LIT Hard Tea: POV, te la estás pasando…" width="1200" height="1133" loading="lazy"><img src="img/carrusel_2.webp" alt="…bien. LIT Hard Tea sin gas, té natural, alcohol 5%" width="1200" height="1133" loading="lazy"></div>
       <div class="pano-dots" id="pano-dots"><button type="button" aria-label="Imagen 1" aria-pressed="true"></button><button type="button" aria-label="Imagen 2" aria-pressed="false"></button></div></div>
-      <div class="aviso"><img src="img/aviso.png" alt="El consumo excesivo de este producto es perjudicial para la salud. +18" width="840" height="47"></div></div>
+      <div class="aviso"><p>El consumo excesivo de este producto es perjudicial para la salud.</p><span>+18</span></div></div>
   </section>
 
   <section class="sec" id="entrega" data-t="Entrega diaria">
