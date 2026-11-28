@@ -45,8 +45,7 @@ h1, h2, h3, h4, p { margin: 0; }
 .counter b { display: block; font-size: clamp(20px, 2vw, 28px); font-weight: 900; margin-top: 4px; }
 .counter span { font-size: 11.5px; opacity: .8; }
 .hero-cans { align-self: end; display: flex; justify-content: center; }
-.hero-cans { align-self: center; padding: 10px 0 40px; }
-.hero-cans img.pic { width: min(440px, 100%); height: auto; border: 10px solid #fff; border-radius: 8px; box-shadow: 0 30px 60px rgba(0,0,0,.45); transform: rotate(3deg); }
+.hero-cans img { width: min(360px, 100%); height: auto; filter: drop-shadow(0 30px 40px rgba(0,0,0,.4)); transform: rotate(-6deg) translateY(18px); }
 .wave { display: block; width: 100%; height: 70px; margin-top: -1px; position: relative; }
 
 /* ---------- Índice lateral ---------- */
@@ -125,6 +124,10 @@ h1, h2, h3, h4, p { margin: 0; }
 .tile::after { opacity: .3 !important; }
 .kc-b { background: transparent; }
 
+.pano-in { position: relative; }
+.aviso { display: flex; justify-content: center; padding: 8px 14px 10px; background: linear-gradient(90deg, #0b5bd3, #0a78e6); }
+.aviso img { display: block; width: min(900px, 100%); height: auto; }
+
 /* Grupos Meta / Google */
 .kg { display: flex; align-items: center; gap: 12px; margin: 0 0 12px; color: #fff; }
 .kg img { height: 30px; width: auto; background: #fff; border-radius: 10px; padding: 4px 6px; box-shadow: 0 4px 12px rgba(7,26,87,.3); }
@@ -141,6 +144,8 @@ h1, h2, h3, h4, p { margin: 0; }
 .kpis.g2 .kc-f.n4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
 .kpis.g2 .kc-f.n6 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 .kc-h .lg { width: 34px; height: 34px; border-radius: 50%; background: #fff; display: grid; place-items: center; flex: none; box-shadow: 0 3px 10px rgba(7,26,87,.25); }
+.kc-h .lg img { width: 26px; height: 26px; display: block; }
+.kc-h .lg img[src*='logo_ig'] { border-radius: 7px; }
 .kc-h .lg svg { width: 20px; height: 20px; fill: var(--lc); }
 .kc-h .lg svg.st0 { fill: none; stroke: var(--lc); stroke-width: 2.6; }
 .bh { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
@@ -255,7 +260,9 @@ details.notes ul { padding-left: 18px; line-height: 1.65; }
 @keyframes zap { 0%, 70%, 100% { transform: none; } 75% { transform: rotate(-12deg) scale(1.2); } 85% { transform: rotate(10deg) scale(1.1); } }
 .foot p { margin-top: 10px; opacity: .85; max-width: 620px; }
 .foot img.um { height: 34px; margin-top: 20px; }
-.foot img.cans { height: 220px; width: auto; filter: drop-shadow(0 20px 30px rgba(0,0,0,.4)); }
+.foot-pic { position: relative; width: 250px; aspect-ratio: 1; justify-self: end; margin: 10px 30px; }
+.foot-pic img { position: relative; z-index: 1; display: block; width: 100%; height: 100%; object-fit: cover; border-radius: 50%; border: 8px solid #fff; box-shadow: 0 24px 50px rgba(0,0,0,.45); animation: float 5s ease-in-out infinite; }
+.dotring2 { position: absolute; inset: -22%; width: 144%; height: 144%; animation: spin 40s linear infinite reverse; }
 .conf { position: relative; background: var(--blue-dd); color: rgba(255,255,255,.75); font-size: 11.5px; text-align: center; padding: 14px 20px; }
 
 /* Ritmo de campaña (hero) */
@@ -284,7 +291,7 @@ details.notes ul { padding-left: 18px; line-height: 1.65; }
 .hero-cans { position: relative; }
 .hero-cans img { animation: float 5s ease-in-out infinite; position: relative; z-index: 1; }
 @keyframes float { 50% { translate: 0 -14px; } }
-.dotring { position: absolute; width: min(520px, 125%); aspect-ratio: 1; left: 50%; top: 46%; margin: calc(min(520px, 125%) / -2) 0 0 calc(min(520px, 125%) / -2); animation: spin 40s linear infinite; opacity: .9; }
+.dotring { position: absolute; width: min(420px, 110%); aspect-ratio: 1; left: 50%; top: 46%; margin: calc(min(420px, 110%) / -2) 0 0 calc(min(420px, 110%) / -2); animation: spin 40s linear infinite; opacity: .9; }
 @keyframes spin { to { rotate: 360deg; } }
 .card, .kc, .find, .day, .cc { transition: transform .25s ease, box-shadow .25s ease, opacity .7s ease var(--d, 0s), translate .7s cubic-bezier(.2,.8,.2,1) var(--d, 0s); }
 .card:hover, .kc:hover, .find:hover, .day:hover, .cc:hover { transform: translateY(-5px); box-shadow: 0 2px 0 rgba(13,27,69,.03), 0 26px 50px rgba(7,26,87,.35); }
@@ -334,12 +341,11 @@ details.notes ul { padding-left: 18px; line-height: 1.65; }
   .kpis.m3 .kc:first-child { grid-column: auto; }
   .wrap, .hero-in, .foot-in { padding-right: 16px; padding-left: 16px; }
   .hero-in { grid-template-columns: 1fr; min-height: 0; padding-top: 24px; }
-  .hero-cans img.pic { width: min(320px, 86%); }
-  .hero-cans { display: flex; justify-content: center; padding: 6px 0 30px; }
+  .hero-cans img { width: 220px; transform: rotate(-6deg) translateY(10px); }
   .kpis, .board { grid-template-columns: 1fr; }
   .card { padding: 16px; }
   .foot-in { grid-template-columns: 1fr; }
-  .foot img.cans { height: 160px; }
+  .foot-pic { width: 190px; justify-self: center; }
   .car-btn { display: none; }
   .cc { flex-basis: 78%; }
 }
@@ -357,7 +363,7 @@ details.notes ul { padding-left: 18px; line-height: 1.65; }
       <div class="counters" id="counters"></div>
       <div class="pace" id="pace"></div>
     </div>
-    <div class="hero-cans"><svg class="dotring" viewBox="0 0 200 200" aria-hidden="true" id="dotring"></svg><img class="pic" src="img/portada.webp" alt="LIT Hard Tea: té natural, sin gas, 5% alcohol. Atrévete a probarlo" width="900" height="900"></div>
+    <div class="hero-cans"><svg class="dotring" viewBox="0 0 200 200" aria-hidden="true" id="dotring"></svg><img src="img/latas.webp?v=2" alt="Latas de LIT Hard Tea" width="471" height="704"></div>
   </div>
   <svg class="wave" viewBox="0 0 1440 70" preserveAspectRatio="none" aria-hidden="true"><defs><linearGradient id="wg" x1="0" x2="1"><stop offset="0" stop-color="#9cd33b"/><stop offset="1" stop-color="#ffd21a"/></linearGradient></defs><path d="M0 40 C 240 80 480 0 720 30 C 960 60 1200 10 1440 40 L1440 70 L0 70 Z" fill="url(#wg)"/></svg>
   <div class="ticker" aria-hidden="true"><div id="ticker"></div></div>
@@ -393,8 +399,9 @@ details.notes ul { padding-left: 18px; line-height: 1.65; }
   </section>
 
   <section class="sec brand" aria-label="Carrusel LIT">
-    <div class="pano-wrap card"><div class="pano" id="pano"><img src="img/carrusel_1.webp" alt="LIT Hard Tea: POV, te la estás pasando…" width="1200" height="1200" loading="lazy"><img src="img/carrusel_2.webp" alt="…bien. LIT Hard Tea sin gas, té natural, alcohol 5%" width="1200" height="1200" loading="lazy"></div>
+    <div class="pano-wrap card"><div class="pano-in"><div class="pano" id="pano"><img src="img/carrusel_1.webp" alt="LIT Hard Tea: POV, te la estás pasando…" width="1200" height="1133" loading="lazy"><img src="img/carrusel_2.webp" alt="…bien. LIT Hard Tea sin gas, té natural, alcohol 5%" width="1200" height="1133" loading="lazy"></div>
       <div class="pano-dots" id="pano-dots"><button type="button" aria-label="Imagen 1" aria-pressed="true"></button><button type="button" aria-label="Imagen 2" aria-pressed="false"></button></div></div>
+      <div class="aviso"><img src="img/aviso.webp" alt="El consumo excesivo de este producto es perjudicial para la salud. +18" width="1200" height="69"></div></div>
   </section>
 
   <section class="sec" id="entrega" data-t="Entrega diaria">
@@ -441,7 +448,7 @@ details.notes ul { padding-left: 18px; line-height: 1.65; }
 <footer class="foot" id="cierre">
   <div class="foot-in">
     <div><h2>Dale un <b>giro</b> a la rutina. <span class="bolt">⚡</span></h2><p id="foot-p"></p><img class="um" src="img/logo_um.png" alt="CCCP UM"></div>
-    <img class="cans" src="img/latas.webp?v=2" alt="">
+    <div class="foot-pic"><svg class="dotring2" viewBox="0 0 200 200" aria-hidden="true" id="dotring2"></svg><img src="img/circulo.webp" alt="LIT Hard Tea: atrévete a probarlo" width="640" height="640" loading="lazy"></div>
   </div>
   <div class="conf">Documento confidencial · Elaborado por CCCP UM Nicaragua para LIT Hard Tea. Prohibida su distribución sin autorización.</div>
 </footer>
@@ -470,6 +477,7 @@ details.notes ul { padding-left: 18px; line-height: 1.65; }
   const TP = Object.fromEntries(PL.map((p) => [p, T(by(p))])), TT = T(R), TMeta = T(R.filter((r) => r.canal === 'Meta'));
   TP.Meta = TMeta; K.Meta = { alcance: K.Facebook.alcance + K.Instagram.alcance, impresiones: K.Facebook.impresiones + K.Instagram.impresiones, frecuencia: 3 };
   PC.Meta = '#ffffff'; PT.Meta = 'var(--blue-dd)';
+  const LOGO = { Facebook: 'img/logo_fb.png', Instagram: 'img/logo_ig.png' };
   const LC = { Meta: '#0866ff', Facebook: '#1877f2', Instagram: '#e1306c', YouTube: '#ff0000', Display: '#4285f4' };
   ICO.Meta = '<svg class="st0" viewBox="0 0 24 24"><path d="M4 16.2c-1.3-2.6.3-8.4 3.6-8.4 3.6 0 5.6 8.6 9 8.6 2.2 0 3.4-2 3.4-4.3 0-2.6-1.4-4.3-3.4-4.3-3.4 0-5.4 8.6-9 8.6-1.6 0-3-.2-3.6-.2z"/></svg>';
   const desde = R.reduce((a, r) => r.fecha < a ? r.fecha : a, '9999'), dias = [...new Set(R.map((r) => r.fecha))].sort();
@@ -481,7 +489,7 @@ details.notes ul { padding-left: 18px; line-height: 1.65; }
   $('hero-tag').textContent = (enCurso ? 'Campaña en curso · ' : '') + 'Día ' + TRANS + ' de ' + DUR + ' · datos al ' + F.fecha(ult);
   $('hero-lead').textContent = 'Mantenimiento de marca en Meta (Facebook e Instagram) y Google (YouTube y Display), del 27 de noviembre de 2026 al 31 de enero de 2027.';
   $('pace').innerHTML = `<div class="pace-h"><span>Ritmo de campaña · día <b>${TRANS}</b> de ${DUR}</span><span><b>${F.pct1(ESP)}</b> del tiempo · faltan ${FALTAN} días</span></div><div class="pace-bar"><i style="width:${Math.max(1.5, ESP * 100)}%"></i></div><div class="pace-l"><span>27 nov 2026</span><span>31 ene 2027</span></div>`;
-  $('dotring').innerHTML = Array.from({ length: 48 }, (_, i) => { const a = i / 48 * Math.PI * 2, rr = i % 2 ? 92 : 84; return `<circle cx="${100 + rr * Math.cos(a)}" cy="${100 + rr * Math.sin(a)}" r="${i % 2 ? 2.2 : 3.2}" fill="${i % 3 ? '#f2661c' : '#ffd21a'}"/>`; }).join('');
+  $('dotring').innerHTML = $('dotring2').innerHTML = Array.from({ length: 48 }, (_, i) => { const a = i / 48 * Math.PI * 2, rr = i % 2 ? 92 : 84; return `<circle cx="${100 + rr * Math.cos(a)}" cy="${100 + rr * Math.sin(a)}" r="${i % 2 ? 2.2 : 3.2}" fill="${i % 3 ? '#f2661c' : '#ffd21a'}"/>`; }).join('');
   const cnt = [['Alcance Meta', RS.meta ? RS.meta.alcance : 0, F.int, RS.meta ? 'frecuencia ' + F.d2(RS.meta.frecuencia) : ''], ['Views YouTube', TP.YouTube.views, F.int, 'VTR ' + F.pct1(TP.YouTube.views / TP.YouTube.imp)], ['Alcance Display', RS.display ? RS.display.alcance : 0, F.int, RS.display ? 'frecuencia ' + F.d2(RS.display.frecuencia) : ''], ['Impresiones', TT.imp, F.int, 'CPM ' + F.usd(TT.costo / TT.imp * 1000)], ['Inversión', TT.costo, F.usd, '4 plataformas']];
   $('counters').innerHTML = cnt.map(([a, v, f, s], i) => `<div class="counter"><small>${a}</small><b class="num" data-v="${v}" data-i="${i}">${f(0)}</b><span>${s}</span></div>`).join('');
   const countUp = () => { const els = [...document.querySelectorAll('.counter b')], t0 = performance.now(), dur = 1200;
@@ -501,7 +509,7 @@ details.notes ul { padding-left: 18px; line-height: 1.65; }
     rows.push(['Impresiones', t.imp / k.impresiones, F.int(t.imp), 'de ' + F.int(k.impresiones), 1]);
     if (k.frecuencia) rows.push(rs ? ['Frecuencia', rs.frecuencia / k.frecuencia, F.d2(rs.frecuencia), 'objetivo ' + (p === 'YouTube' ? '' : '+') + k.frecuencia] : ['Frecuencia', null, 'Sin dato', 'objetivo +' + k.frecuencia]);
     const foot = [['Inversión', F.usd(t.costo)], ['CPM', F.usd(t.costo / t.imp * 1000)]].concat(p === 'Display' ? [['Usuarios únicos', rs ? F.int(rs.alcance) : '—'], ['Clics', F.int(t.clics)], ['CTR', F.pct2(t.clics / t.imp)], ['Frecuencia', rs ? F.d2(rs.frecuencia) : '—']] : p === 'YouTube' ? [['Usuarios únicos', rs ? F.int(rs.alcance) : '—'], ['VTR', F.pct1(t.views / t.imp)]] : [['Interacciones', F.int(t.inter)], ['ER', F.pct2(t.inter / t.imp)]]);
-    return `<article class="kc" style="--c:${PC[p]};--ct:${PT[p]}"><div class="kc-h"><em class="lg" style="--lc:${LC[p]}">${ICO[p]}</em><b>${p === 'Meta' ? 'Meta global' : p}</b><span>${p === 'Meta' ? 'Facebook + Instagram' : p === 'Display' ? 'Banners' : p === 'YouTube' ? 'Video' : 'Video + imagen'}</span></div><div class="kc-b"><div class="kc-r${rows.length === 1 ? ' one' : ''}">${rows.map(([a, f, v, s, pc]) => `<div class="ring${f == null ? ' na' : ''}">${ring(f, PC[p], pc && f != null ? ESP : null)}<div><small>${a}</small><b class="num">${v}</b><span>${s}</span>${pc && f != null ? `<br><i class="st ${ST(f)[0]}">${ST(f)[1]}</i>` : ''}</div></div>`).join('')}</div><div class="kc-f n${foot.length}">${foot.map(([a, b]) => `<div><small>${a}</small><b class="num">${b}</b></div>`).join('')}</div></div></article>`; };
+    return `<article class="kc" style="--c:${PC[p]};--ct:${PT[p]}"><div class="kc-h"><em class="lg" style="--lc:${LC[p]}">${LOGO[p] ? `<img src="${LOGO[p]}" alt="">` : ICO[p]}</em><b>${p === 'Meta' ? 'Meta global' : p}</b><span>${p === 'Meta' ? 'Facebook + Instagram' : p === 'Display' ? 'Banners' : p === 'YouTube' ? 'Video' : 'Video + imagen'}</span></div><div class="kc-b"><div class="kc-r${rows.length === 1 ? ' one' : ''}">${rows.map(([a, f, v, s, pc]) => `<div class="ring${f == null ? ' na' : ''}">${ring(f, PC[p], pc && f != null ? ESP : null)}<div><small>${a}</small><b class="num">${v}</b><span>${s}</span>${pc && f != null ? `<br><i class="st ${ST(f)[0]}">${ST(f)[1]}</i>` : ''}</div></div>`).join('')}</div><div class="kc-f n${foot.length}">${foot.map(([a, b]) => `<div><small>${a}</small><b class="num">${b}</b></div>`).join('')}</div></div></article>`; };
   $('kpi-meta').innerHTML = ['Facebook', 'Instagram'].map(kcard).join(''); $('kpi-goog').innerHTML = ['YouTube', 'Display'].map(kcard).join('');
 
   // ---------- Marcador por plataforma ----------
