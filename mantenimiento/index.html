@@ -130,7 +130,25 @@ h1, h2, h3, h4, p { margin: 0; }
 .aviso span { flex: none; display: grid; place-items: center; width: clamp(28px, 2.6vw, 38px); aspect-ratio: 1; margin-left: 8px; border-radius: 50%; background: #1f3c96; border: 2px solid #fff; color: #fff; font-size: clamp(10px, 1vw, 13px); font-weight: 800; }
 
 /* Validación de entrega */
-.vchart { overflow-x: auto; overflow-y: visible; padding-bottom: 4px; }
+.vchart { overflow-x: auto; overflow-y: hidden; padding-bottom: 4px; }
+.card .grow { position: relative; }
+.ptw { display: flex; justify-content: center; gap: 12px; overflow-x: auto; overflow-y: hidden; scroll-snap-type: x mandatory; padding: 4px 2px 8px; }
+.pt { flex: 1 0 210px; max-width: 280px; scroll-snap-align: start; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.14); border-radius: 18px; padding: 14px; display: flex; flex-direction: column; align-items: center; gap: 8px; transition: transform .25s, background .25s; }
+.pt:hover { transform: translateY(-4px); background: rgba(255,255,255,.1); }
+.pt.cur { border-color: var(--orange); }
+.pt-h { width: 100%; display: flex; justify-content: space-between; align-items: baseline; }
+.pt-h b { font-size: 16px; font-weight: 900; color: #fff; }
+.pt-h span { font-size: 10.5px; letter-spacing: .1em; text-transform: uppercase; font-weight: 800; color: var(--muted); }
+.pt svg { width: 150px !important; height: 150px !important; display: block; }
+.pt-l { width: 100%; display: grid; gap: 4px; font-size: 12px; color: var(--muted); }
+.pt-l span { display: flex; align-items: center; gap: 7px; }
+.pt-l span b { margin-left: auto; color: #fff; font-weight: 800; }
+.pt-l i { width: 10px; height: 10px; border-radius: 50%; background: var(--c); flex: none; }
+.pt-b { font-style: normal; font-size: 11px; font-weight: 800; padding: 4px 10px; border-radius: 999px; text-align: center; }
+.pt-b.up { background: rgba(156,211,59,.2); color: #c8f07e; } .pt-b.ok { background: rgba(255,210,26,.18); color: #ffe27a; } .pt-b.dn { background: rgba(242,102,28,.22); color: #ffab7a; }
+.rg { animation: ringIn 1.4s cubic-bezier(.2,.8,.2,1) both; }
+@keyframes ringIn { from { stroke-dashoffset: var(--c0); } }
+.anim .sec:not(.in) .rg { animation-play-state: paused; }
 .vchart svg { margin: 0 auto; }
 .vchart .hv { cursor: pointer; transition: opacity .2s, stroke-width .2s; }
 .vchart svg:hover .hv { opacity: .55; } .vchart svg .hv:hover { opacity: 1; stroke: #fff; stroke-width: 3; }
@@ -423,7 +441,7 @@ details.notes ul { padding-left: 18px; line-height: 1.65; }
   </section>
 
   <section class="sec" id="validacion" data-t="Validación">
-    <div class="sec-h"><div><small>Día a día por plataforma</small><h2>Validación de entrega</h2></div><p>Burbujas, círculos y pétalos para contrastar volumen y costo de cada día. Pasa el cursor o toca un elemento para ver el detalle.</p></div>
+    <div class="sec-h"><div><small>Día a día por plataforma</small><h2>Validación de entrega</h2></div><p>Cada día, cuánto se entregó y cuánto costó. Pasa el cursor o toca un elemento para ver el detalle.</p></div>
     <div class="chips" id="chips-val" style="margin-bottom:16px"></div>
     <div class="grid" id="val"></div>
   </section>
@@ -669,24 +687,23 @@ details.notes ul { padding-left: 18px; line-height: 1.65; }
   const dv = (p, k) => dias.map((f) => sum(by(p).filter((r) => r.fecha === f), k));
   const META_V = [['alc', 'Alcance vs impresiones', 'Círculo exterior: impresiones del día; interior: alcance. Cuanto más se separan, mayor es la frecuencia diaria.'],
     ['rose', 'Interacciones por día', 'Cada pétalo es un día y crece con las interacciones; los pétalos tenues son días por venir.'],
-    ['bub', 'Impresiones vs CPM', 'Altura: CPM del día. Tamaño de la burbuja: impresiones.', 'impresiones', 'cpm']];
+    ['pair', 'Impresiones vs CPM', '', 'impresiones', 'cpm']];
   const VCFG = { Facebook: META_V, Instagram: META_V,
-    YouTube: [['bub', 'Views vs costo por view', 'Altura: costo por view (CPV) del día. Tamaño de la burbuja: views.', 'views', 'cpv'], ['bub', 'Impresiones vs CPM', 'Altura: CPM del día. Tamaño de la burbuja: impresiones.', 'impresiones', 'cpm']],
-    Display: [['bub', 'Clics vs costo', 'Altura: inversión del día. Tamaño de la burbuja: clics.', 'clics', 'costo'], ['bub', 'Impresiones vs CPM', 'Altura: CPM del día. Tamaño de la burbuja: impresiones.', 'impresiones', 'cpm']] };
-  const bindTips = (box, tips) => { const tp = tipFor(box); box.querySelectorAll('[data-k]').forEach((el) => { const on = (e) => tp.show(e, tips[+el.dataset.k]); el.addEventListener('pointermove', on); el.addEventListener('pointerdown', on); el.addEventListener('pointerleave', () => tp.hide()); }); };
+    YouTube: [['pair', 'Views vs costo por view', '', 'views', 'cpv'], ['pair', 'Impresiones vs CPM', '', 'impresiones', 'cpm']],
+    Display: [['pair', 'Clics vs costo', '', 'clics', 'cpc'], ['pair', 'Impresiones vs CPM', '', 'impresiones', 'cpm']] };
+  const bindTips = (box, tips) => { const tp = tipFor(box.parentElement); box.querySelectorAll('[data-k]').forEach((el) => { const on = (e) => tp.show(e, tips[+el.dataset.k]); el.addEventListener('pointermove', on); el.addEventListener('pointerdown', on); el.addEventListener('pointerleave', () => tp.hide()); }); };
   const dl = (i) => F.fecha(dias[i]) + (dias[i] === ult && enCurso ? ' (en curso)' : '');
-  const vBub = (box, c) => { const col = PC[vp], sz = dv(vp, c[3]), cost = dv(vp, 'costo'), imp = dv(vp, 'impresiones'), vw = dv(vp, 'views'), n = dias.length;
-    const yv = dias.map((_, i) => c[4] === 'cpm' ? (imp[i] ? cost[i] / imp[i] * 1000 : 0) : c[4] === 'cpv' ? (vw[i] ? cost[i] / vw[i] : 0) : cost[i]);
-    const yf = c[4] === 'cpv' ? (v) => '$' + nf(4).format(v) : F.usd, nm = { impresiones: 'Impresiones', views: 'Views', clics: 'Clics' }[c[3]], ym = { cpm: 'CPM', cpv: 'CPV', costo: 'Inversión' }[c[4]];
-    const cw = box.clientWidth || 300, W = Math.max(cw, n * 80), H = 280, m = { t: 26, r: 16, b: 30, l: 58 }, mxS = Math.max(1, ...sz), mxY = Math.max(1e-9, ...yv) * 1.45;
-    const Rm = Math.max(10, Math.min(44, (W - m.l - m.r) / n / 2.3)), x = (i) => m.l + (i + .5) * (W - m.l - m.r) / n, y = (v) => H - m.b - v / mxY * (H - m.t - m.b);
-    let g = ''; for (let k = 0; k <= 4; k++) { const v = mxY * k / 4; g += `<line x1="${m.l}" x2="${W - m.r}" y1="${y(v)}" y2="${y(v)}" style="stroke:var(--line);stroke-dasharray:3 4"></line><text x="${m.l - 8}" y="${y(v) + 3}" text-anchor="end">${yf(v)}</text>`; }
-    const tips = [];
-    dias.forEach((f, i) => { const r = Math.max(5, Math.sqrt(sz[i] / mxS) * Rm), cy = Math.max(m.t + r, y(yv[i]));
-      tips.push([dl(i), nm + ': ' + F.int(sz[i]), ym + ': ' + yf(yv[i])].concat(c[4] === 'costo' ? ['CPC: ' + (sz[i] ? F.usd(cost[i] / sz[i]) : '—')] : []));
-      g += `<text x="${x(i)}" y="${H - 8}" text-anchor="middle">${F.fecha(f)}</text><circle class="ln-c hv" data-k="${i}" cx="${x(i)}" cy="${cy}" r="${r}" style="fill:${col};fill-opacity:.82;stroke:rgba(255,255,255,.6);stroke-width:2;animation-delay:${.15 + i * .12}s"></circle>`
-        + `<text class="vl" x="${x(i)}" y="${cy - r - 7}" text-anchor="middle">${yf(yv[i])}</text>` + (r > 20 ? `<text class="vs" x="${x(i)}" y="${cy + 4}" text-anchor="middle" style="fill:${PT[vp]} !important;font-weight:800">${F.M(sz[i])}</text>` : ''); });
-    box.innerHTML = `<svg viewBox="0 0 ${W} ${H}" style="min-width:${W > cw ? W + 'px' : '0'}" role="img" aria-label="${c[1]}">${g}</svg><div class="vnote" style="--c:${col}"><span><i></i>${nm} (tamaño)</span><span>${ym} (altura)</span><span>Total ${nm.toLowerCase()}: <b>${F.int(sz.reduce((a, b) => a + b, 0))}</b></span></div>`;
+  const PAIR = { cpm: ['Inversión', 'CPM', 'costo por mil impresiones', F.usd], cpv: ['Inversión', 'CPV', 'costo por view', (v) => '$' + nf(4).format(v)], cpc: ['Inversión', 'CPC', 'costo por clic', (v) => '$' + nf(3).format(v)] };
+  const vPair = (box, c) => { const col = PC[vp], cc = vp === 'Instagram' ? 'var(--yellow)' : 'var(--orange)', vol = dv(vp, c[3]), cost = dv(vp, 'costo'), [cn, rn, rl, rf] = PAIR[c[4]];
+    const nm = { impresiones: 'Impresiones', views: 'Views', clics: 'Clics' }[c[3]], k = c[4] === 'cpm' ? 1000 : 1, rat = vol.map((v, i) => v ? cost[i] / v * k : 0), tv = vol.reduce((a, b) => a + b, 0), avg = tv ? cost.reduce((a, b) => a + b, 0) / tv * k : 0;
+    const mxV = Math.max(1, ...vol), mxC = Math.max(1e-9, ...cost), ring = (r, f, color, d) => { const C = 2 * Math.PI * r; return `<circle cx="75" cy="75" r="${r}" fill="none" stroke="rgba(255,255,255,.1)" stroke-width="13"/><circle class="rg" cx="75" cy="75" r="${r}" fill="none" stroke="${color}" stroke-width="13" stroke-linecap="round" stroke-dasharray="${C} ${C}" stroke-dashoffset="${C * (1 - Math.max(.02, f))}" style="--c0:${C};animation-delay:${d}s" transform="rotate(-90 75 75)"/>`; };
+    const tips = [], tiles = [...dias.keys()].reverse().map((i, j) => { const df = avg ? (rat[i] - avg) / avg : 0, st = df <= -.05 ? ['up', F.pct(-df) + ' más eficiente que el promedio'] : df >= .05 ? ['dn', F.pct(df) + ' más caro que el promedio'] : ['ok', 'En el promedio de la campaña'];
+      const wd = new Date(dias[i] + 'T12:00:00Z').toLocaleDateString('es', { weekday: 'long', timeZone: 'UTC' }), cur = dias[i] === ult && enCurso;
+      tips.push([dl(i), nm + ': ' + F.int(vol[i]), cn + ': ' + F.usd(cost[i]), rn + ': ' + rf(rat[i]), 'Promedio de la campaña: ' + rf(avg)]);
+      return `<div class="pt${cur ? ' cur' : ''}" data-k="${tips.length - 1}"><div class="pt-h"><b>${F.fecha(dias[i])}</b><span>${cur ? 'en curso' : wd}</span></div>
+        <svg viewBox="0 0 150 150" aria-hidden="true">${ring(62, vol[i] / mxV, col, .1 + j * .12)}${ring(44, cost[i] / mxC, cc, .3 + j * .12)}<text x="75" y="72" text-anchor="middle" style="font-size:17px;font-weight:900;fill:#fff">${rf(rat[i])}</text><text x="75" y="90" text-anchor="middle" style="font-size:10px;font-weight:800;fill:rgba(255,255,255,.7);letter-spacing:.1em">${rn}</text></svg>
+        <div class="pt-l"><span style="--c:${col}"><i></i>${nm}<b class="num">${F.int(vol[i])}</b></span><span style="--c:${cc}"><i></i>${cn}<b class="num">${F.usd(cost[i])}</b></span></div><em class="pt-b ${st[0]}">${st[1]}</em></div>`; });
+    box.innerHTML = `<div class="ptw">${tiles.join('')}</div><div class="vnote"><span style="--c:${col}"><i></i>Anillo exterior: ${nm.toLowerCase()}</span><span style="--c:${cc}"><i></i>Anillo interior: ${cn.toLowerCase()}</span><span>Centro: <b>${rn}</b> (${rl}) · promedio <b>${rf(avg)}</b></span></div>`;
     bindTips(box, tips); };
   const vAlc = (box) => { const col = PC[vp], imp = dv(vp, 'impresiones'), al = dv(vp, 'alcance'), n = dias.length, cw = box.clientWidth || 300, W = Math.max(cw, n * 120), H = 270;
     const slot = W / n, Rm = Math.max(18, Math.min(92, slot / 2 - 10, (H - 70) / 2)), mx = Math.max(1, ...imp), cy = 16 + Rm, tips = []; let g = '';
@@ -710,9 +727,9 @@ details.notes ul { padding-left: 18px; line-height: 1.65; }
     g += `<text class="vl" x="${C}" y="${C + 4}" text-anchor="middle" style="font-size:12px">${F.M(tot)}</text>`;
     box.innerHTML = `<svg viewBox="-14 -14 ${S + 28} ${S + 28}" style="max-width:320px" role="img" aria-label="Interacciones por día">${g}</svg><div class="vnote" style="--c:${col}"><span>Total: <b>${F.int(tot)}</b></span><span>Promedio diario: <b>${F.int(tot / (n || 1))}</b></span><span>ER: <b>${F.pct2(TP[vp].inter / (TP[vp].imp || 1))}</b></span></div>`;
     bindTips(box, tips); };
-  const drawVal = () => { const cfg = VCFG[vp], cls = cfg.length === 3 ? 's4' : 's6';
-    $('val').innerHTML = cfg.map((c, i) => `<section class="card ${cls} flex"><h3>${c[1]}</h3><p class="sub">${c[2]}</p><div class="grow"><div class="chart vchart" id="v${i}"></div></div></section>`).join('');
-    cfg.forEach((c, i) => ({ alc: vAlc, rose: vRose, bub: vBub })[c[0]]($('v' + i), c)); };
+  const drawVal = () => { const cfg = VCFG[vp], cls = (i) => cfg.length === 3 ? (i === 2 ? 's12' : 's6') : 's6';
+    $('val').innerHTML = cfg.map((c, i) => `<section class="card ${cls(i)} flex"><h3>${c[1]}</h3><p class="sub">${c[2] || 'Un anillo doble por día: el anillo completo es el día más alto de la campaña. Al centro, cuánto costó cada resultado.'}</p><div class="grow"><div class="chart vchart" id="v${i}"></div></div></section>`).join('');
+    cfg.forEach((c, i) => ({ alc: vAlc, rose: vRose, pair: vPair })[c[0]]($('v' + i), c)); };
   chips('chips-val', PL.map((p) => [p, p, PC[p]]), vp, (v) => { vp = v; drawVal(); });
 
   const drawAll = () => { drawVal(); drawBoard(); donut(); drawLol(); drawEv(); drawDays(); drawCar(); drawAud(); onScroll(); };
